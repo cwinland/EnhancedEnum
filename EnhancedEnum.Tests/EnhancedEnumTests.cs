@@ -1,8 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 
 namespace EnhancedEnum.Tests
 {
@@ -19,6 +17,7 @@ namespace EnhancedEnum.Tests
         [TestInitialize]
         public void Init()
         {
+            var test = StatusTest.Running.Name;
             t = StatusTest.Running;
             t2 = StatusTest.Stopped;
             t3 = StatusTest.Error;
@@ -49,7 +48,7 @@ namespace EnhancedEnum.Tests
             t5.Name.Should()
               .Be(t5.ToString());
             t5.Name.Should()
-              .Be(t5.StringValue);
+              .Be(t5.NameValue);
             vals.Should()
                 .HaveCount(StatusTest.Count);
             t3.Should()
@@ -138,6 +137,17 @@ namespace EnhancedEnum.Tests
             StatusTest.Parse(2)
                       .Should()
                       .Be(StatusTest.Stopped);
+        }
+
+        [TestMethod]
+        public void Loop_TestNames()
+        {
+            StatusTest.Values.Should()
+                      .Contain(StatusTest.Running);
+            StatusTest.Values.Should()
+                      .Contain(StatusTest.Error);
+            StatusTest.Values.Should()
+                      .Contain(StatusTest.Stopped);
         }
     }
 }

@@ -6,19 +6,17 @@ using System.Reflection;
 
 namespace EnhancedEnum
 {
-    public abstract class EnhancedEnum<TValue, TValue2, TDerived>
+    public abstract class EnhancedEnum<TValue, TDerived>
                 : IEquatable<TDerived>,
                   IComparable<TDerived>,
                   IComparable, IComparer<TDerived>
         where TValue : IComparable<TValue>, IEquatable<TValue>
-        where TValue2 : IComparable<TValue2>, IEquatable<TValue2>
-        where TDerived : EnhancedEnum<TValue, TValue2, TDerived>
+        where TDerived : EnhancedEnum<TValue, TDerived>
     {
         #region Fields
 
         private static bool isInitialized;
-        private static SortedList<TValue, TDerived> stringValues;
-        private static SortedList<TValue2, TDerived> intValues;
+        private static SortedList<TValue, TDerived> values;
         private DescriptionAttribute descriptionAttribute;
         private string name;
 
@@ -26,24 +24,23 @@ namespace EnhancedEnum
 
         #region Constructors
 
-        protected EnhancedEnum(TValue stringValue, TValue2 intValue)
+        protected EnhancedEnum(TValue value)
         {
-            stringValues ??= new SortedList<TValue, TDerived>();
-            this.StringValue = stringValue;
-            stringValues.Add(stringValue, (TDerived)this);
-
-            intValues ??= new SortedList<TValue2, TDerived>();
-            this.Value = intValue;
-            intValues.Add(intValue, (TDerived)this);
+            values ??= new SortedList<TValue, TDerived>();
+            this.Value = value;
+            values.Add(value, (TDerived)this);
         }
 
         #endregion Constructors
 
         #region Properties
 
-        public static int Count => stringValues.Count;
+        public static int Count => values.Count;
 
-        public static IEnumerable<TDerived> Values => stringValues.Values;
+        /// <summary>
+        ///   Enumerable list of all possible values.
+        /// </summary>
+        public static IEnumerable<TDerived> Values => values.Values;
 
         public string Description
         {
@@ -65,40 +62,45 @@ namespace EnhancedEnum
         }
 
         /// <summary>
-        ///   The stringValue of the enum item
+        ///   The nameValue of the enum item
         /// </summary>
-        public TValue StringValue { get; }
+        public string NameValue => this.Name;
 
-        public TValue2 Value { get; }
+        public TValue Value { get; }
 
         #endregion Properties
 
         #region Methods
 
-        public static implicit operator EnhancedEnum<TValue, TValue2, TDerived>(TValue value) => stringValues[value];
+        public static implicit operator EnhancedEnum<TValue, TDerived>(string value) => values.Values.FirstOrDefault(x => x.Name == value);
 
-        public static implicit operator EnhancedEnum<TValue, TValue2, TDerived>(TValue2 value2) => intValues[value2];
+        public static implicit operator EnhancedEnum<TValue, TDerived>(TValue value2) => values[value2];
 
-        public static implicit operator TValue(EnhancedEnum<TValue, TValue2, TDerived> value) => value.StringValue;
+        public static implicit operator string(EnhancedEnum<TValue, TDerived> value) => value.NameValue;
 
-        public static implicit operator TValue2(EnhancedEnum<TValue, TValue2, TDerived> value2) => value2.Value;
+        public static implicit operator TValue(EnhancedEnum<TValue, TDerived> value2) => value2.Value;
 
-        public static TDerived Parse(TValue name) =>
-            stringValues.Values.FirstOrDefault(value => value.Equals(name));
+        public static TDerived Parse(string name) =>
+            values.Values.FirstOrDefault(x => x.Name == name);
 
-        public static TDerived Parse(TValue2 intValue) =>
-            stringValues.Values.FirstOrDefault(value => value.Value.Equals(intValue));
+        public static TDerived Parse(TValue intValue) =>
+            values.Values.FirstOrDefault(value => value.Value.Equals(intValue));
 
-        public static bool TryConvert(TValue value, out TDerived result) => stringValues.TryGetValue(value, out result);
+        public static bool TryConvert(string value, out TDerived result)
+        {
+            result = values.Values.FirstOrDefault(x => x.Name == value);
 
-        public static bool TryConvert(TValue2 value, out TDerived result) => intValues.TryGetValue(value, out result);
+            return result != null;
+        }
+
+        public static bool TryConvert(TValue value, out TDerived result) => values.TryGetValue(value, out result);
 
         int IComparer<TDerived>.Compare(TDerived x, TDerived y) =>
             x == null
                 ? -1
                 : y == null
                     ? 1
-                    : x.StringValue.CompareTo(y.StringValue);
+                    : x.NameValue.CompareTo(y.NameValue);
 
         int IComparable<TDerived>.CompareTo(TDerived other) => this.Value.CompareTo(other.Value);
 
@@ -109,14 +111,14 @@ namespace EnhancedEnum
                 return -1;
             }
 
-            if (obj is TValue value)
+            if (obj is string value)
             {
-                return this.StringValue.CompareTo(value);
+                return this.NameValue.CompareTo(value);
             }
 
             if (obj is TDerived @enum)
             {
-                return this.StringValue.CompareTo(@enum.StringValue);
+                return this.NameValue.CompareTo(@enum.NameValue);
             }
             return -1;
         }
@@ -130,21 +132,21 @@ namespace EnhancedEnum
 
             return obj switch
             {
-                TValue value => this.StringValue.Equals(value),
-                TDerived @enum => this.StringValue.Equals(@enum.StringValue),
+                string value => this.NameValue.Equals(value),
+                TDerived @enum => this.NameValue.Equals(@enum.NameValue),
                 _ => false,
             };
         }
 
-        bool IEquatable<TDerived>.Equals(TDerived other) => other is { } && this.StringValue.Equals(other.StringValue);
+        bool IEquatable<TDerived>.Equals(TDerived other) => other is { } && this.NameValue.Equals(other.NameValue);
 
-        public override int GetHashCode() => this.StringValue.GetHashCode();
+        public override int GetHashCode() => this.NameValue.GetHashCode();
 
-        public override string ToString() => this.StringValue.ToString();
+        public override string ToString() => this.Name;
 
-        protected static TDerived Convert(TValue value) => stringValues[value];
+        protected static TDerived Convert(string value) => values.Values.FirstOrDefault(x => x.Name == value);
 
-        protected static TDerived Convert(TValue2 value) => intValues[value];
+        protected static TDerived Convert(TValue value) => values[value];
 
         private static void CheckInitialized()
         {
@@ -175,17 +177,17 @@ namespace EnhancedEnum
             isInitialized = true;
         }
 
-        public static bool operator ==(EnhancedEnum<TValue, TValue2, TDerived> left, EnhancedEnum<TValue, TValue2, TDerived> right) => left?.Equals(right) ?? right is null;
+        public static bool operator ==(EnhancedEnum<TValue, TDerived> left, EnhancedEnum<TValue, TDerived> right) => left?.Equals(right) ?? right is null;
 
-        public static bool operator !=(EnhancedEnum<TValue, TValue2, TDerived> left, EnhancedEnum<TValue, TValue2, TDerived> right) => !(left == right);
+        public static bool operator !=(EnhancedEnum<TValue, TDerived> left, EnhancedEnum<TValue, TDerived> right) => !(left == right);
 
-        public static bool operator <(EnhancedEnum<TValue, TValue2, TDerived> left, EnhancedEnum<TValue, TValue2, TDerived> right) => left.Value == null ? right.Value is object : left.Value.CompareTo(right.Value) < 0;
+        public static bool operator <(EnhancedEnum<TValue, TDerived> left, EnhancedEnum<TValue, TDerived> right) => left.Value == null ? right.Value is object : left.Value.CompareTo(right.Value) < 0;
 
-        public static bool operator <=(EnhancedEnum<TValue, TValue2, TDerived> left, EnhancedEnum<TValue, TValue2, TDerived> right) => left.Value == null || left.Value.CompareTo(right.Value) <= 0;
+        public static bool operator <=(EnhancedEnum<TValue, TDerived> left, EnhancedEnum<TValue, TDerived> right) => left.Value == null || left.Value.CompareTo(right.Value) <= 0;
 
-        public static bool operator >(EnhancedEnum<TValue, TValue2, TDerived> left, EnhancedEnum<TValue, TValue2, TDerived> right) => left.Value is object && left.Value.CompareTo(right.Value) > 0;
+        public static bool operator >(EnhancedEnum<TValue, TDerived> left, EnhancedEnum<TValue, TDerived> right) => left.Value is object && left.Value.CompareTo(right.Value) > 0;
 
-        public static bool operator >=(EnhancedEnum<TValue, TValue2, TDerived> left, EnhancedEnum<TValue, TValue2, TDerived> right) => left.Value == null ? right.Value == null : left.Value.CompareTo(right.Value) >= 0;
+        public static bool operator >=(EnhancedEnum<TValue, TDerived> left, EnhancedEnum<TValue, TDerived> right) => left.Value == null ? right.Value == null : left.Value.CompareTo(right.Value) >= 0;
 
         #endregion Methods
     }
