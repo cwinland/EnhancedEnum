@@ -68,11 +68,6 @@ namespace EnhancedEnum
             }
         }
 
-        /// <summary>
-        ///   The nameValue of the enum item
-        /// </summary>
-        public string NameValue => this.Name;
-
         public TValue Value { get; }
 
         #endregion Properties
@@ -83,7 +78,7 @@ namespace EnhancedEnum
 
         public static implicit operator EnhancedEnum<TValue, TDerived>(TValue value2) => values[value2];
 
-        public static implicit operator string(EnhancedEnum<TValue, TDerived> value) => value.NameValue;
+        public static implicit operator string(EnhancedEnum<TValue, TDerived> value) => value.Name;
 
         public static implicit operator TValue(EnhancedEnum<TValue, TDerived> value2) => value2.Value;
 
@@ -119,7 +114,7 @@ namespace EnhancedEnum
                 ? -1
                 : y == null
                     ? 1
-                    : string.Compare(x.NameValue, y.NameValue, StringComparison.Ordinal);
+                    : string.Compare(x.Name, y.Name, StringComparison.Ordinal);
 
         int IComparable<TDerived>.CompareTo(TDerived other) => this.Value.CompareTo(other.Value);
 
@@ -128,8 +123,8 @@ namespace EnhancedEnum
             return obj switch
             {
                 null => -1,
-                string value => string.Compare(this.NameValue, value, StringComparison.Ordinal),
-                TDerived @enum => string.Compare(this.NameValue, @enum.NameValue, StringComparison.Ordinal),
+                string value => string.Compare(this.Name, value, StringComparison.Ordinal),
+                TDerived @enum => string.Compare(this.Name, @enum.Name, StringComparison.Ordinal),
                 _ => -1,
             };
         }
@@ -143,15 +138,15 @@ namespace EnhancedEnum
 
             return obj switch
             {
-                string value => this.NameValue.Equals(value),
-                TDerived @enum => this.NameValue.Equals(@enum.NameValue),
+                string value => this.Name.Equals(value),
+                TDerived @enum => this.Name.Equals(@enum.Name),
                 _ => false,
             };
         }
 
-        bool IEquatable<TDerived>.Equals(TDerived other) => other is { } && this.NameValue.Equals(other.NameValue);
+        bool IEquatable<TDerived>.Equals(TDerived other) => other is { } && this.Name.Equals(other.Name);
 
-        public override int GetHashCode() => this.NameValue.GetHashCode();
+        public override int GetHashCode() => this.Name.GetHashCode();
 
         public override string ToString() => this.Name;
 

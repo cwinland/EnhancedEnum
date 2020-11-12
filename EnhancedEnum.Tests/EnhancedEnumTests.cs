@@ -47,7 +47,7 @@ namespace EnhancedEnum.Tests
             t5.Name.Should()
               .Be(t5.ToString());
             t5.Name.Should()
-              .Be(t5.NameValue);
+              .Be("Running");
             vals.Should()
                 .HaveCount(StatusTest.Count);
             t3.Should()
