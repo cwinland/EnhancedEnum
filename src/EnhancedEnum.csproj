@@ -21,9 +21,9 @@
 	</PropertyGroup>
 	<PropertyGroup>
 		<EnableDefaultCompileItems>false</EnableDefaultCompileItems>
-		<AssemblyVersion>1.$([System.DateTime]::Now.ToString("1.MM.dd"))</AssemblyVersion>
-		<FileVersion>1.$([System.DateTime]::Now.ToString("1.MM.dd"))</FileVersion>
-		<Version>1.$([System.DateTime]::Now.ToString("1.MM.dd"))</Version>
+		<AssemblyVersion>1.1.11.121</AssemblyVersion>
+		<FileVersion>1.1.11.121</FileVersion>
+		<Version>1.1.11.121</Version>
 	</PropertyGroup>
 	<PropertyGroup>
 		<GenerateNuspecDependsOn>$(GenerateNuspecDependsOn);SetPackageVersion</GenerateNuspecDependsOn>
