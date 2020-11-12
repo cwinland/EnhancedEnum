@@ -1,0 +1,49 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<LangVersion>8.0</LangVersion>
+		<SignAssembly>true</SignAssembly>
+		<AssemblyOriginatorKeyFile>EnhancedEnum.snk</AssemblyOriginatorKeyFile>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+		<PackageId>EnhancedEnum-StrongNamed</PackageId>
+		<Authors>Christopher Winland</Authors>
+		<Company>Microsoft Corporation</Company>
+		<Product>EnhancedEnum-StrongNamed</Product>
+		<Description>Enumeration class extending Enum functionality to allow auto converts to string, integer and provides additional functionality such as looping.</Description>
+		<Copyright>copyright(c) 2020 Christopher Winland</Copyright>
+		<PackageLicenseFile>LICENSE</PackageLicenseFile>
+		<PackageProjectUrl>https://github.com/cwinland/EnhancedEnum</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/cwinland/EnhancedEnum</RepositoryUrl>
+		<RepositoryType>GitHub</RepositoryType>
+		<PackageTags>Enumerations Auto convert String Int Description Rich Enhanced</PackageTags>
+	</PropertyGroup>
+	<PropertyGroup>
+		<EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+		<AssemblyVersion>1.$([System.DateTime]::Now.ToString("1.MM.dd"))</AssemblyVersion>
+		<FileVersion>1.$([System.DateTime]::Now.ToString("1.MM.dd"))</FileVersion>
+		<Version>1.$([System.DateTime]::Now.ToString("1.MM.dd"))</Version>
+	</PropertyGroup>
+	<PropertyGroup>
+		<GenerateNuspecDependsOn>$(GenerateNuspecDependsOn);SetPackageVersion</GenerateNuspecDependsOn>
+	</PropertyGroup>
+
+	<Target Name="SetPackageVersion">
+		<PropertyGroup>
+			<!-- <PackageVersion>$([System.DateTime]::Now.ToString(&quot;yyyy.MM.dd.HHmmss&quot;))</PackageVersion> -->
+			<!-- You can customize the format and the rule about how version increases here. -->
+			<PackageVersion>1.$([System.DateTime]::Now.ToString("1.MM.dd"))</PackageVersion>
+		</PropertyGroup>
+	</Target>
+
+	<ItemGroup>
+	  <Compile Include="EnhancedEnum.cs" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Include="..\LICENSE">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+	</ItemGroup>
+</Project>
