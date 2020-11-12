@@ -17,7 +17,6 @@ namespace EnhancedEnum.Tests
         [TestInitialize]
         public void Init()
         {
-            var test = StatusTest.Running.Name;
             t = StatusTest.Running;
             t2 = StatusTest.Stopped;
             t3 = StatusTest.Error;

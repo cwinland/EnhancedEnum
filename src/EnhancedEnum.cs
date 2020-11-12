@@ -15,7 +15,7 @@ namespace EnhancedEnum
     {
         #region Fields
 
-        private static bool isInitialized;
+        private static bool isSetup;
         private static SortedList<TValue, TDerived> values;
         private DescriptionAttribute descriptionAttribute;
         private string name;
@@ -27,6 +27,11 @@ namespace EnhancedEnum
         protected EnhancedEnum(TValue value)
         {
             values ??= new SortedList<TValue, TDerived>();
+
+            if (values.ContainsKey(value))
+            {
+                throw new ArgumentException("Value already exists. Value parameter must be unique.", nameof(value));
+            }
             this.Value = value;
             values.Add(value, (TDerived)this);
         }
@@ -48,7 +53,9 @@ namespace EnhancedEnum
             {
                 CheckInitialized();
 
-                return this.descriptionAttribute != null ? this.descriptionAttribute.Description : this.name;
+                return this.descriptionAttribute != null
+                    ? this.descriptionAttribute.Description
+                    : this.name;
             }
         }
 
@@ -80,8 +87,20 @@ namespace EnhancedEnum
 
         public static implicit operator TValue(EnhancedEnum<TValue, TDerived> value2) => value2.Value;
 
+        public static bool operator !=(EnhancedEnum<TValue, TDerived> left, EnhancedEnum<TValue, TDerived> right) => !(left == right);
+
+        public static bool operator <(EnhancedEnum<TValue, TDerived> left, EnhancedEnum<TValue, TDerived> right) => left.Value == null ? right.Value is object : left.Value.CompareTo(right.Value) < 0;
+
+        public static bool operator <=(EnhancedEnum<TValue, TDerived> left, EnhancedEnum<TValue, TDerived> right) => left.Value == null || left.Value.CompareTo(right.Value) <= 0;
+
+        public static bool operator ==(EnhancedEnum<TValue, TDerived> left, EnhancedEnum<TValue, TDerived> right) => left?.Equals(right) ?? right is null;
+
+        public static bool operator >(EnhancedEnum<TValue, TDerived> left, EnhancedEnum<TValue, TDerived> right) => left.Value is object && left.Value.CompareTo(right.Value) > 0;
+
+        public static bool operator >=(EnhancedEnum<TValue, TDerived> left, EnhancedEnum<TValue, TDerived> right) => left.Value == null ? right.Value == null : left.Value.CompareTo(right.Value) >= 0;
+
         public static TDerived Parse(string name) =>
-            values.Values.FirstOrDefault(x => x.Name == name);
+                                                            values.Values.FirstOrDefault(x => x.Name == name);
 
         public static TDerived Parse(TValue intValue) =>
             values.Values.FirstOrDefault(value => value.Value.Equals(intValue));
@@ -100,27 +119,19 @@ namespace EnhancedEnum
                 ? -1
                 : y == null
                     ? 1
-                    : x.NameValue.CompareTo(y.NameValue);
+                    : string.Compare(x.NameValue, y.NameValue, StringComparison.Ordinal);
 
         int IComparable<TDerived>.CompareTo(TDerived other) => this.Value.CompareTo(other.Value);
 
         int IComparable.CompareTo(object obj)
         {
-            if (obj == null)
+            return obj switch
             {
-                return -1;
-            }
-
-            if (obj is string value)
-            {
-                return this.NameValue.CompareTo(value);
-            }
-
-            if (obj is TDerived @enum)
-            {
-                return this.NameValue.CompareTo(@enum.NameValue);
-            }
-            return -1;
+                null => -1,
+                string value => string.Compare(this.NameValue, value, StringComparison.Ordinal),
+                TDerived @enum => string.Compare(this.NameValue, @enum.NameValue, StringComparison.Ordinal),
+                _ => -1,
+            };
         }
 
         public override bool Equals(object obj)
@@ -150,12 +161,10 @@ namespace EnhancedEnum
 
         private static void CheckInitialized()
         {
-            if (isInitialized)
+            if (isSetup)
             {
                 return;
             }
-
-            //var resources = new ResourceManager(typeof(TDerived).Name, typeof(TDerived).Assembly);
 
             var fields = typeof(TDerived)
                          .GetFields(BindingFlags.Static | BindingFlags.GetField | BindingFlags.Public)
@@ -174,20 +183,8 @@ namespace EnhancedEnum
                 instance.descriptionAttribute = field.GetCustomAttribute<DescriptionAttribute>();
             }
 
-            isInitialized = true;
+            isSetup = true;
         }
-
-        public static bool operator ==(EnhancedEnum<TValue, TDerived> left, EnhancedEnum<TValue, TDerived> right) => left?.Equals(right) ?? right is null;
-
-        public static bool operator !=(EnhancedEnum<TValue, TDerived> left, EnhancedEnum<TValue, TDerived> right) => !(left == right);
-
-        public static bool operator <(EnhancedEnum<TValue, TDerived> left, EnhancedEnum<TValue, TDerived> right) => left.Value == null ? right.Value is object : left.Value.CompareTo(right.Value) < 0;
-
-        public static bool operator <=(EnhancedEnum<TValue, TDerived> left, EnhancedEnum<TValue, TDerived> right) => left.Value == null || left.Value.CompareTo(right.Value) <= 0;
-
-        public static bool operator >(EnhancedEnum<TValue, TDerived> left, EnhancedEnum<TValue, TDerived> right) => left.Value is object && left.Value.CompareTo(right.Value) > 0;
-
-        public static bool operator >=(EnhancedEnum<TValue, TDerived> left, EnhancedEnum<TValue, TDerived> right) => left.Value == null ? right.Value == null : left.Value.CompareTo(right.Value) >= 0;
 
         #endregion Methods
     }
