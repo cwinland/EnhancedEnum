@@ -1,45 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 
 namespace EnhancedEnum
 {
     public abstract class EnhancedEnum<TValue, TDerived>
-                : IEquatable<TDerived>,
-                  IComparable<TDerived>,
-                  IComparable, IComparer<TDerived>
-        where TValue : IComparable<TValue>, IEquatable<TValue>
-        where TDerived : EnhancedEnum<TValue, TDerived>
+                        : IEnhancedEnum<TValue, TDerived>
+                        where TValue : IComparable<TValue>, IEquatable<TValue>
+                        where TDerived : EnhancedEnum<TValue, TDerived>
     {
         #region Fields
 
         private static bool isSetup;
-        private static SortedList<TValue, TDerived> values;
+        private static SortedList<long, TDerived> values;
         private DescriptionAttribute descriptionAttribute;
+        private DisplayNameAttribute displayNameAttribute;
         private string name;
+        private ValueAttribute valueAttribute;
 
         #endregion Fields
 
         #region Constructors
 
-        protected EnhancedEnum(TValue value)
+        protected EnhancedEnum()
         {
-            values ??= new SortedList<TValue, TDerived>();
-
-            if (values.ContainsKey(value))
+            values ??= new SortedList<long, TDerived>();
+            var autoValue = DateTime.Now.Ticks;
+            if (values.ContainsKey(autoValue))
             {
-                throw new ArgumentException("Value already exists. Value parameter must be unique.", nameof(value));
+                throw new ArgumentException("Value already exists. Value parameter must be unique.", nameof(autoValue));
             }
-            this.Value = value;
-            values.Add(value, (TDerived)this);
+            //Value = value;
+            values.Add(autoValue, (TDerived)this);
         }
 
         #endregion Constructors
 
         #region Properties
 
+        /// <summary>
+        ///   Count of enumerations.
+        /// </summary>
         public static int Count => values.Count;
 
         /// <summary>
@@ -47,36 +49,57 @@ namespace EnhancedEnum
         /// </summary>
         public static IEnumerable<TDerived> Values => values.Values;
 
+        /// <summary>
+        ///   Description of enumeration as described in <see cref="DescriptionAttribute" />
+        /// </summary>
         public string Description
         {
             get
             {
-                CheckInitialized();
+                EnsureSetup();
 
-                return this.descriptionAttribute != null
-                    ? this.descriptionAttribute.Description
-                    : this.name;
+                return descriptionAttribute?.Description ?? name;
             }
         }
 
+        /// <summary>
+        ///   Name of enumeration as described in <see cref="DisplayNameAttribute" />
+        /// </summary>
         public string Name
         {
             get
             {
-                CheckInitialized();
-                return this.name;
+                EnsureSetup();
+                return displayNameAttribute?.Name ?? name;
             }
         }
 
-        public TValue Value { get; }
+        /// <summary>
+        ///   Value of enumeration as described in <see cref="ValueAttribute" />
+        /// </summary>
+        public TValue Value
+        {
+            get
+            {
+                EnsureSetup();
+
+                return (TValue)valueAttribute?.Value;
+            }
+        }
 
         #endregion Properties
 
         #region Methods
 
-        public static implicit operator EnhancedEnum<TValue, TDerived>(string value) => values.Values.FirstOrDefault(x => x.Name == value);
+        public static TDerived Convert(string value) => Values.FirstOrDefault(x => x.Name == value);
 
-        public static implicit operator EnhancedEnum<TValue, TDerived>(TValue value2) => values[value2];
+        public static TDerived Convert(TValue value) => Values.FirstOrDefault(x => x.Value.Equals(value));
+
+        public static implicit operator EnhancedEnum<TValue, TDerived>(string value) =>
+                            Values.FirstOrDefault(x => x.Name == value);
+
+        public static implicit operator EnhancedEnum<TValue, TDerived>(TValue value2) =>
+            Values.FirstOrDefault(x => x.Value.Equals(value2));
 
         public static implicit operator string(EnhancedEnum<TValue, TDerived> value) => value.Name;
 
@@ -84,46 +107,50 @@ namespace EnhancedEnum
 
         public static bool operator !=(EnhancedEnum<TValue, TDerived> left, EnhancedEnum<TValue, TDerived> right) => !(left == right);
 
-        public static bool operator <(EnhancedEnum<TValue, TDerived> left, EnhancedEnum<TValue, TDerived> right) => left.Value == null ? right.Value is object : left.Value.CompareTo(right.Value) < 0;
+        public static bool operator <(EnhancedEnum<TValue, TDerived> left, EnhancedEnum<TValue, TDerived> right) =>
+            left.Value == null ? right.Value is object : left.Value.CompareTo(right.Value) < 0;
 
-        public static bool operator <=(EnhancedEnum<TValue, TDerived> left, EnhancedEnum<TValue, TDerived> right) => left.Value == null || left.Value.CompareTo(right.Value) <= 0;
+        public static bool operator <=(EnhancedEnum<TValue, TDerived> left, EnhancedEnum<TValue, TDerived> right) =>
+            left.Value == null || left.Value.CompareTo(right.Value) <= 0;
 
-        public static bool operator ==(EnhancedEnum<TValue, TDerived> left, EnhancedEnum<TValue, TDerived> right) => left?.Equals(right) ?? right is null;
+        public static bool operator ==(EnhancedEnum<TValue, TDerived> left, EnhancedEnum<TValue, TDerived> right) =>
+            left?.Equals(right) ?? right is null;
 
-        public static bool operator >(EnhancedEnum<TValue, TDerived> left, EnhancedEnum<TValue, TDerived> right) => left.Value is object && left.Value.CompareTo(right.Value) > 0;
+        public static bool operator >(EnhancedEnum<TValue, TDerived> left, EnhancedEnum<TValue, TDerived> right) =>
+            left.Value is object && left.Value.CompareTo(right.Value) > 0;
 
-        public static bool operator >=(EnhancedEnum<TValue, TDerived> left, EnhancedEnum<TValue, TDerived> right) => left.Value == null ? right.Value == null : left.Value.CompareTo(right.Value) >= 0;
-
-        public static TDerived Parse(string name) => values.Values.FirstOrDefault(x => x.Name == name);
-
-        public static TDerived Parse(TValue intValue) =>
-            values.Values.FirstOrDefault(value => value.Value.Equals(intValue));
+        public static bool operator >=(EnhancedEnum<TValue, TDerived> left, EnhancedEnum<TValue, TDerived> right) =>
+            left.Value == null ? right.Value == null : left.Value.CompareTo(right.Value) >= 0;
 
         public static bool TryConvert(string value, out TDerived result)
         {
-            result = values.Values.FirstOrDefault(x => x.Name == value);
+            result = Values.FirstOrDefault(x => x.Name == value);
 
             return result != null;
         }
 
-        public static bool TryConvert(TValue value, out TDerived result) => values.TryGetValue(value, out result);
+        public static bool TryConvert(TValue value, out TDerived result)
+        {
+            result = Values.FirstOrDefault(x => x.Value.Equals(value));
+            return result != null;
+        }
 
         int IComparer<TDerived>.Compare(TDerived x, TDerived y) =>
-            x == null
+                            x == null
                 ? -1
                 : y == null
                     ? 1
                     : string.Compare(x.Name, y.Name, StringComparison.Ordinal);
 
-        int IComparable<TDerived>.CompareTo(TDerived other) => this.Value.CompareTo(other.Value);
+        int IComparable<TDerived>.CompareTo(TDerived other) => Value.CompareTo(other.Value);
 
         int IComparable.CompareTo(object obj)
         {
             return obj switch
             {
                 null => -1,
-                string value => string.Compare(this.Name, value, StringComparison.Ordinal),
-                TDerived @enum => string.Compare(this.Name, @enum.Name, StringComparison.Ordinal),
+                string localValue => string.Compare(Name, localValue, StringComparison.Ordinal),
+                TDerived @enum => string.Compare(Name, @enum.Name, StringComparison.Ordinal),
                 _ => -1,
             };
         }
@@ -137,23 +164,19 @@ namespace EnhancedEnum
 
             return obj switch
             {
-                string value => this.Name.Equals(value),
-                TDerived @enum => this.Name.Equals(@enum.Name),
+                string checkName => Name.Equals(checkName),
+                TDerived @enum => Name.Equals(@enum.Name),
                 _ => false,
             };
         }
 
-        bool IEquatable<TDerived>.Equals(TDerived other) => other is { } && this.Name.Equals(other.Name);
+        bool IEquatable<TDerived>.Equals(TDerived other) => other is { } && Name.Equals(other.Name);
 
-        public override int GetHashCode() => this.Name.GetHashCode();
+        public override int GetHashCode() => Name.GetHashCode();
 
-        public override string ToString() => this.Name;
+        public override string ToString() => Name;
 
-        protected static TDerived Convert(string value) => values.Values.FirstOrDefault(x => x.Name == value);
-
-        protected static TDerived Convert(TValue value) => values[value];
-
-        private static void CheckInitialized()
+        private static void EnsureSetup()
         {
             if (isSetup)
             {
@@ -164,6 +187,7 @@ namespace EnhancedEnum
                          .GetFields(BindingFlags.Static | BindingFlags.GetField | BindingFlags.Public)
                          .Where(t => t.FieldType == typeof(TDerived));
 
+            var valCount = 0;
             foreach (var field in fields)
             {
                 var instance = (TDerived)field.GetValue(null);
@@ -173,8 +197,16 @@ namespace EnhancedEnum
                     continue;
                 }
 
+                valCount++;
                 instance.name = field.Name;
                 instance.descriptionAttribute = field.GetCustomAttribute<DescriptionAttribute>();
+                instance.displayNameAttribute = field.GetCustomAttribute<DisplayNameAttribute>();
+                instance.valueAttribute = field.GetCustomAttribute<ValueAttribute>() ?? new ValueAttribute(valCount);
+
+                if (!(instance.valueAttribute?.Value is TValue))
+                {
+                    throw new ArgumentException("Provided value must be of type 'TValue'", nameof(TValue));
+                }
             }
 
             isSetup = true;

@@ -1,19 +1,18 @@
-﻿using System.ComponentModel;
-
-namespace EnhancedEnum.Tests
+﻿namespace EnhancedEnum.Tests
 {
     public sealed class StatusTest : EnhancedEnum<int, StatusTest>
     {
         [Description("Indicates Running")]
-        public static readonly StatusTest Running = new StatusTest(1);
+        [DisplayName("In Process")]
+        [Value(5)]
+        // DisplayName is 'In Process' (because of the DisplayName attribute). Value is 5 (because of the Value attribute).
+        public static readonly StatusTest Running = new StatusTest();
 
-        public static readonly StatusTest Stopped = new StatusTest(2);
+        // DisplayName is Stopped. Value is 2 (because it is the second one in the list).
+        public static readonly StatusTest Stopped = new StatusTest();
 
-        public static readonly StatusTest Error = new StatusTest(3);
-
-        private StatusTest(int val) : base(val)
-        {
-        }
+        // DisplayName is Error. Value is 3 (because it is the third one in the list).
+        public static readonly StatusTest Error = new StatusTest();
 
         // This allows us to assign back to this class.
         public static implicit operator StatusTest(string value) => Convert(value);

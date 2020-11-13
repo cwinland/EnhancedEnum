@@ -29,7 +29,7 @@ namespace EnhancedEnum.Tests
         public void Enum_Assignments()
         {
             t.Should()
-             .Be("Running");
+             .Be("In Process");
 
             t2.Should()
               .Be(StatusTest.Stopped);
@@ -47,7 +47,7 @@ namespace EnhancedEnum.Tests
             t5.Name.Should()
               .Be(t5.ToString());
             t5.Name.Should()
-              .Be("Running");
+              .Be("In Process");
             vals.Should()
                 .HaveCount(StatusTest.Count);
             t3.Should()
@@ -97,29 +97,29 @@ namespace EnhancedEnum.Tests
         public void Name_Equality()
         {
             StatusTest.Running.Should()
-                      .BeLessThan(StatusTest.Error);
+                      .BeGreaterThan(StatusTest.Error);
             StatusTest.Stopped.Should()
                       .BeLessThan(StatusTest.Error);
             StatusTest.Error.Should()
-                      .BeGreaterThan(StatusTest.Running);
+                      .BeLessThan(StatusTest.Running);
             StatusTest.Running.Should()
-                      .BeLessOrEqualTo(StatusTest.Error);
+                      .BeGreaterOrEqualTo(StatusTest.Error);
             StatusTest.Stopped.Should()
                       .BeLessOrEqualTo(StatusTest.Error);
             StatusTest.Error.Should()
-                      .BeGreaterOrEqualTo(StatusTest.Running);
+                      .BeLessOrEqualTo(StatusTest.Running);
         }
 
         [TestMethod]
         public void Name_ParseStrings()
         {
-            StatusTest.Parse("Running")
+            StatusTest.Convert("In Process")
                       .Should()
                       .Be(StatusTest.Running);
-            StatusTest.Parse("Error")
+            StatusTest.Convert("Error")
                       .Should()
                       .Be(StatusTest.Error);
-            StatusTest.Parse("Stopped")
+            StatusTest.Convert("Stopped")
                       .Should()
                       .Be(StatusTest.Stopped);
         }
@@ -127,13 +127,13 @@ namespace EnhancedEnum.Tests
         [TestMethod]
         public void Name_ParseNumbers()
         {
-            StatusTest.Parse(1)
+            StatusTest.Convert(5)
                       .Should()
                       .Be(StatusTest.Running);
-            StatusTest.Parse(3)
+            StatusTest.Convert(3)
                       .Should()
                       .Be(StatusTest.Error);
-            StatusTest.Parse(2)
+            StatusTest.Convert(2)
                       .Should()
                       .Be(StatusTest.Stopped);
         }

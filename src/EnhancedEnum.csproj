@@ -38,7 +38,11 @@
 	</Target>
 
 	<ItemGroup>
+	  <Compile Include="DescriptionAttribute.cs" />
+	  <Compile Include="DisplayNameAttribute.cs" />
 	  <Compile Include="EnhancedEnum.cs" />
+	  <Compile Include="IEnhancedEnum.cs" />
+	  <Compile Include="ValueAttribute.cs" />
 	</ItemGroup>
 	<ItemGroup>
 		<None Include="..\LICENSE">
