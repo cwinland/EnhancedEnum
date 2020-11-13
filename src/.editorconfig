@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# CS1723: XML comment has cref attribute that refers to a type parameter
+dotnet_diagnostic.CS1723.severity = silent

@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<HelpKI>
+  <HelpKINode Title=" to EnhancedEnum(Of TValue, TDerived) conversion" Url="html/M-EnhancedEnum.EnhancedEnum-2.op_Implicit.htm" />
+  <HelpKINode Title=" to EnhancedEnum&lt;TValue, TDerived&gt; conversion" Url="html/M-EnhancedEnum.EnhancedEnum-2.op_Implicit.htm" />
+  <HelpKINode Title=" to StatusTest conversion">
+    <HelpKINode Title="Implicit Conversion (Int32 to StatusTest)" Url="html/M-EnhancedEnum.Tests.StatusTest.op_Implicit_1.htm" />
+    <HelpKINode Title="Implicit Conversion (String to StatusTest)" Url="html/M-EnhancedEnum.Tests.StatusTest.op_Implicit.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Assignments_ShouldBeSuccessful method" Url="html/M-EnhancedEnum.Tests.EnhancedEnumTests.Assignments_ShouldBeSuccessful.htm" />
+  <HelpKINode Title="Convert method" Url="html/Overload-EnhancedEnum.EnhancedEnum-2.Convert.htm" />
+  <HelpKINode Title="Count property" Url="html/P-EnhancedEnum.EnhancedEnum-2.Count.htm" />
+  <HelpKINode Title="Description property">
+    <HelpKINode Title="Description Property " Url="html/P-EnhancedEnum.EnhancedEnum-2.Description.htm" />
+    <HelpKINode Title="Description Property " Url="html/P-EnhancedEnum.IEnhancedEnum-2.Description.htm" />
+    <HelpKINode Title="Description Property " Url="html/P-EnhancedEnum.DescriptionAttribute.Description.htm" />
+  </HelpKINode>
+  <HelpKINode Title="DescriptionAttribute class">
+    <HelpKINode Title="DescriptionAttribute Class" Url="html/T-EnhancedEnum.DescriptionAttribute.htm" />
+    <HelpKINode Title="DescriptionAttribute Members" Url="html/AllMembers.T-EnhancedEnum.DescriptionAttribute.htm" />
+    <HelpKINode Title="about DescriptionAttribute class" Url="html/T-EnhancedEnum.DescriptionAttribute.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-EnhancedEnum.DescriptionAttribute.htm" />
+    <HelpKINode Title="constructor" Url="html/M-EnhancedEnum.DescriptionAttribute.-ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-EnhancedEnum.DescriptionAttribute.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-EnhancedEnum.DescriptionAttribute.htm" />
+  </HelpKINode>
+  <HelpKINode Title="DescriptionAttribute.Description property" Url="html/P-EnhancedEnum.DescriptionAttribute.Description.htm" />
+  <HelpKINode Title="DescriptionAttribute.DescriptionAttribute constructor" Url="html/M-EnhancedEnum.DescriptionAttribute.-ctor.htm" />
+  <HelpKINode Title="DisplayNameAttribute class">
+    <HelpKINode Title="DisplayNameAttribute Class" Url="html/T-EnhancedEnum.DisplayNameAttribute.htm" />
+    <HelpKINode Title="DisplayNameAttribute Members" Url="html/AllMembers.T-EnhancedEnum.DisplayNameAttribute.htm" />
+    <HelpKINode Title="about DisplayNameAttribute class" Url="html/T-EnhancedEnum.DisplayNameAttribute.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-EnhancedEnum.DisplayNameAttribute.htm" />
+    <HelpKINode Title="constructor" Url="html/M-EnhancedEnum.DisplayNameAttribute.-ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-EnhancedEnum.DisplayNameAttribute.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-EnhancedEnum.DisplayNameAttribute.htm" />
+  </HelpKINode>
+  <HelpKINode Title="DisplayNameAttribute.DisplayNameAttribute constructor" Url="html/M-EnhancedEnum.DisplayNameAttribute.-ctor.htm" />
+  <HelpKINode Title="DisplayNameAttribute.Name property" Url="html/P-EnhancedEnum.DisplayNameAttribute.Name.htm" />
+  <HelpKINode Title="EnhancedEnum namespace" Url="html/N-EnhancedEnum.htm" />
+  <HelpKINode Title="EnhancedEnum(Of TValue, TDerived) class">
+    <HelpKINode Title="EnhancedEnum(TValue, TDerived) Class" Url="html/T-EnhancedEnum.EnhancedEnum-2.htm" />
+    <HelpKINode Title="EnhancedEnum(TValue, TDerived) Members" Url="html/AllMembers.T-EnhancedEnum.EnhancedEnum-2.htm" />
+    <HelpKINode Title="about EnhancedEnum(Of TValue, TDerived) class" Url="html/T-EnhancedEnum.EnhancedEnum-2.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-EnhancedEnum.EnhancedEnum-2.htm" />
+    <HelpKINode Title="constructor" Url="html/M-EnhancedEnum.EnhancedEnum-2.-ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-EnhancedEnum.EnhancedEnum-2.htm" />
+    <HelpKINode Title="operators and type conversions" Url="html/Operators.T-EnhancedEnum.EnhancedEnum-2.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-EnhancedEnum.EnhancedEnum-2.htm" />
+  </HelpKINode>
+  <HelpKINode Title="EnhancedEnum(Of TValue, TDerived) to  conversion" Url="html/M-EnhancedEnum.EnhancedEnum-2.op_Implicit_2.htm" />
+  <HelpKINode Title="EnhancedEnum(Of TValue, TDerived) to TValue conversion" Url="html/M-EnhancedEnum.EnhancedEnum-2.op_Implicit_3.htm" />
+  <HelpKINode Title="EnhancedEnum(Of TValue, TDerived).Convert method" Url="html/Overload-EnhancedEnum.EnhancedEnum-2.Convert.htm" />
+  <HelpKINode Title="EnhancedEnum(Of TValue, TDerived).Count property" Url="html/P-EnhancedEnum.EnhancedEnum-2.Count.htm" />
+  <HelpKINode Title="EnhancedEnum(Of TValue, TDerived).Description property" Url="html/P-EnhancedEnum.EnhancedEnum-2.Description.htm" />
+  <HelpKINode Title="EnhancedEnum(Of TValue, TDerived).EnhancedEnum constructor" Url="html/M-EnhancedEnum.EnhancedEnum-2.-ctor.htm" />
+  <HelpKINode Title="EnhancedEnum(Of TValue, TDerived).Equality operator" Url="html/M-EnhancedEnum.EnhancedEnum-2.op_Equality.htm" />
+  <HelpKINode Title="EnhancedEnum(Of TValue, TDerived).Equals method" Url="html/M-EnhancedEnum.EnhancedEnum-2.Equals.htm" />
+  <HelpKINode Title="EnhancedEnum(Of TValue, TDerived).GetHashCode method" Url="html/M-EnhancedEnum.EnhancedEnum-2.GetHashCode.htm" />
+  <HelpKINode Title="EnhancedEnum(Of TValue, TDerived).GreaterThan operator" Url="html/M-EnhancedEnum.EnhancedEnum-2.op_GreaterThan.htm" />
+  <HelpKINode Title="EnhancedEnum(Of TValue, TDerived).GreaterThanOrEqual operator" Url="html/M-EnhancedEnum.EnhancedEnum-2.op_GreaterThanOrEqual.htm" />
+  <HelpKINode Title="EnhancedEnum(Of TValue, TDerived).Inequality operator" Url="html/M-EnhancedEnum.EnhancedEnum-2.op_Inequality.htm" />
+  <HelpKINode Title="EnhancedEnum(Of TValue, TDerived).LessThan operator" Url="html/M-EnhancedEnum.EnhancedEnum-2.op_LessThan.htm" />
+  <HelpKINode Title="EnhancedEnum(Of TValue, TDerived).LessThanOrEqual operator" Url="html/M-EnhancedEnum.EnhancedEnum-2.op_LessThanOrEqual.htm" />
+  <HelpKINode Title="EnhancedEnum(Of TValue, TDerived).Name property" Url="html/P-EnhancedEnum.EnhancedEnum-2.Name.htm" />
+  <HelpKINode Title="EnhancedEnum(Of TValue, TDerived).ToString method" Url="html/M-EnhancedEnum.EnhancedEnum-2.ToString.htm" />
+  <HelpKINode Title="EnhancedEnum(Of TValue, TDerived).TryConvert method" Url="html/Overload-EnhancedEnum.EnhancedEnum-2.TryConvert.htm" />
+  <HelpKINode Title="EnhancedEnum(Of TValue, TDerived).Value property" Url="html/P-EnhancedEnum.EnhancedEnum-2.Value.htm" />
+  <HelpKINode Title="EnhancedEnum(Of TValue, TDerived).Values property" Url="html/P-EnhancedEnum.EnhancedEnum-2.Values.htm" />
+  <HelpKINode Title="EnhancedEnum.DescriptionAttribute class">
+    <HelpKINode Title="DescriptionAttribute Class" Url="html/T-EnhancedEnum.DescriptionAttribute.htm" />
+    <HelpKINode Title="DescriptionAttribute Members" Url="html/AllMembers.T-EnhancedEnum.DescriptionAttribute.htm" />
+  </HelpKINode>
+  <HelpKINode Title="EnhancedEnum.DisplayNameAttribute class">
+    <HelpKINode Title="DisplayNameAttribute Class" Url="html/T-EnhancedEnum.DisplayNameAttribute.htm" />
+    <HelpKINode Title="DisplayNameAttribute Members" Url="html/AllMembers.T-EnhancedEnum.DisplayNameAttribute.htm" />
+  </HelpKINode>
+  <HelpKINode Title="EnhancedEnum.EnhancedEnum(Of TValue, TDerived) class">
+    <HelpKINode Title="EnhancedEnum(TValue, TDerived) Class" Url="html/T-EnhancedEnum.EnhancedEnum-2.htm" />
+    <HelpKINode Title="EnhancedEnum(TValue, TDerived) Members" Url="html/AllMembers.T-EnhancedEnum.EnhancedEnum-2.htm" />
+  </HelpKINode>
+  <HelpKINode Title="EnhancedEnum.EnhancedEnum&lt;TValue, TDerived&gt; class">
+    <HelpKINode Title="EnhancedEnum(TValue, TDerived) Class" Url="html/T-EnhancedEnum.EnhancedEnum-2.htm" />
+    <HelpKINode Title="EnhancedEnum(TValue, TDerived) Members" Url="html/AllMembers.T-EnhancedEnum.EnhancedEnum-2.htm" />
+  </HelpKINode>
+  <HelpKINode Title="EnhancedEnum.IEnhancedEnum interface" Url="html/AllMembers.T-EnhancedEnum.IEnhancedEnum-2.htm" />
+  <HelpKINode Title="EnhancedEnum.IEnhancedEnum(Of TValue, TDerived) interface" Url="html/T-EnhancedEnum.IEnhancedEnum-2.htm" />
+  <HelpKINode Title="EnhancedEnum.IEnhancedEnum&lt;TValue, TDerived&gt; interface" Url="html/T-EnhancedEnum.IEnhancedEnum-2.htm" />
+  <HelpKINode Title="EnhancedEnum.Tests namespace" Url="html/N-EnhancedEnum.Tests.htm" />
+  <HelpKINode Title="EnhancedEnum.Tests.EnhancedEnumTests class">
+    <HelpKINode Title="EnhancedEnumTests Class" Url="html/T-EnhancedEnum.Tests.EnhancedEnumTests.htm" />
+    <HelpKINode Title="EnhancedEnumTests Members" Url="html/AllMembers.T-EnhancedEnum.Tests.EnhancedEnumTests.htm" />
+  </HelpKINode>
+  <HelpKINode Title="EnhancedEnum.Tests.StatusTest class">
+    <HelpKINode Title="StatusTest Class" Url="html/T-EnhancedEnum.Tests.StatusTest.htm" />
+    <HelpKINode Title="StatusTest Members" Url="html/AllMembers.T-EnhancedEnum.Tests.StatusTest.htm" />
+  </HelpKINode>
+  <HelpKINode Title="EnhancedEnum.ValueAttribute class">
+    <HelpKINode Title="ValueAttribute Class" Url="html/T-EnhancedEnum.ValueAttribute.htm" />
+    <HelpKINode Title="ValueAttribute Members" Url="html/AllMembers.T-EnhancedEnum.ValueAttribute.htm" />
+  </HelpKINode>
+  <HelpKINode Title="EnhancedEnum&lt;TValue, TDerived&gt; class">
+    <HelpKINode Title="EnhancedEnum(TValue, TDerived) Class" Url="html/T-EnhancedEnum.EnhancedEnum-2.htm" />
+    <HelpKINode Title="EnhancedEnum(TValue, TDerived) Members" Url="html/AllMembers.T-EnhancedEnum.EnhancedEnum-2.htm" />
+    <HelpKINode Title="about EnhancedEnum&lt;TValue, TDerived&gt; class" Url="html/T-EnhancedEnum.EnhancedEnum-2.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-EnhancedEnum.EnhancedEnum-2.htm" />
+    <HelpKINode Title="constructor" Url="html/M-EnhancedEnum.EnhancedEnum-2.-ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-EnhancedEnum.EnhancedEnum-2.htm" />
+    <HelpKINode Title="operators and type conversions" Url="html/Operators.T-EnhancedEnum.EnhancedEnum-2.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-EnhancedEnum.EnhancedEnum-2.htm" />
+  </HelpKINode>
+  <HelpKINode Title="EnhancedEnum&lt;TValue, TDerived&gt; to  conversion" Url="html/M-EnhancedEnum.EnhancedEnum-2.op_Implicit_2.htm" />
+  <HelpKINode Title="EnhancedEnum&lt;TValue, TDerived&gt; to TValue conversion" Url="html/M-EnhancedEnum.EnhancedEnum-2.op_Implicit_3.htm" />
+  <HelpKINode Title="EnhancedEnum&lt;TValue, TDerived&gt;.Convert method" Url="html/Overload-EnhancedEnum.EnhancedEnum-2.Convert.htm" />
+  <HelpKINode Title="EnhancedEnum&lt;TValue, TDerived&gt;.Count property" Url="html/P-EnhancedEnum.EnhancedEnum-2.Count.htm" />
+  <HelpKINode Title="EnhancedEnum&lt;TValue, TDerived&gt;.Description property" Url="html/P-EnhancedEnum.EnhancedEnum-2.Description.htm" />
+  <HelpKINode Title="EnhancedEnum&lt;TValue, TDerived&gt;.EnhancedEnum constructor" Url="html/M-EnhancedEnum.EnhancedEnum-2.-ctor.htm" />
+  <HelpKINode Title="EnhancedEnum&lt;TValue, TDerived&gt;.Equality operator" Url="html/M-EnhancedEnum.EnhancedEnum-2.op_Equality.htm" />
+  <HelpKINode Title="EnhancedEnum&lt;TValue, TDerived&gt;.Equals method" Url="html/M-EnhancedEnum.EnhancedEnum-2.Equals.htm" />
+  <HelpKINode Title="EnhancedEnum&lt;TValue, TDerived&gt;.GetHashCode method" Url="html/M-EnhancedEnum.EnhancedEnum-2.GetHashCode.htm" />
+  <HelpKINode Title="EnhancedEnum&lt;TValue, TDerived&gt;.GreaterThan operator" Url="html/M-EnhancedEnum.EnhancedEnum-2.op_GreaterThan.htm" />
+  <HelpKINode Title="EnhancedEnum&lt;TValue, TDerived&gt;.GreaterThanOrEqual operator" Url="html/M-EnhancedEnum.EnhancedEnum-2.op_GreaterThanOrEqual.htm" />
+  <HelpKINode Title="EnhancedEnum&lt;TValue, TDerived&gt;.Inequality operator" Url="html/M-EnhancedEnum.EnhancedEnum-2.op_Inequality.htm" />
+  <HelpKINode Title="EnhancedEnum&lt;TValue, TDerived&gt;.LessThan operator" Url="html/M-EnhancedEnum.EnhancedEnum-2.op_LessThan.htm" />
+  <HelpKINode Title="EnhancedEnum&lt;TValue, TDerived&gt;.LessThanOrEqual operator" Url="html/M-EnhancedEnum.EnhancedEnum-2.op_LessThanOrEqual.htm" />
+  <HelpKINode Title="EnhancedEnum&lt;TValue, TDerived&gt;.Name property" Url="html/P-EnhancedEnum.EnhancedEnum-2.Name.htm" />
+  <HelpKINode Title="EnhancedEnum&lt;TValue, TDerived&gt;.ToString method" Url="html/M-EnhancedEnum.EnhancedEnum-2.ToString.htm" />
+  <HelpKINode Title="EnhancedEnum&lt;TValue, TDerived&gt;.TryConvert method" Url="html/Overload-EnhancedEnum.EnhancedEnum-2.TryConvert.htm" />
+  <HelpKINode Title="EnhancedEnum&lt;TValue, TDerived&gt;.Value property" Url="html/P-EnhancedEnum.EnhancedEnum-2.Value.htm" />
+  <HelpKINode Title="EnhancedEnum&lt;TValue, TDerived&gt;.Values property" Url="html/P-EnhancedEnum.EnhancedEnum-2.Values.htm" />
+  <HelpKINode Title="EnhancedEnumTests class">
+    <HelpKINode Title="EnhancedEnumTests Class" Url="html/T-EnhancedEnum.Tests.EnhancedEnumTests.htm" />
+    <HelpKINode Title="EnhancedEnumTests Members" Url="html/AllMembers.T-EnhancedEnum.Tests.EnhancedEnumTests.htm" />
+    <HelpKINode Title="about EnhancedEnumTests class" Url="html/T-EnhancedEnum.Tests.EnhancedEnumTests.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-EnhancedEnum.Tests.EnhancedEnumTests.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-EnhancedEnum.Tests.EnhancedEnumTests.htm" />
+  </HelpKINode>
+  <HelpKINode Title="EnhancedEnumTests.Assignments_ShouldBeSuccessful method" Url="html/M-EnhancedEnum.Tests.EnhancedEnumTests.Assignments_ShouldBeSuccessful.htm" />
+  <HelpKINode Title="EnhancedEnumTests.Equality_NamesShouldMatch method" Url="html/M-EnhancedEnum.Tests.EnhancedEnumTests.Equality_NamesShouldMatch.htm" />
+  <HelpKINode Title="EnhancedEnumTests.Equality_ValuesShouldMatch method" Url="html/M-EnhancedEnum.Tests.EnhancedEnumTests.Equality_ValuesShouldMatch.htm" />
+  <HelpKINode Title="EnhancedEnumTests.Init method" Url="html/M-EnhancedEnum.Tests.EnhancedEnumTests.Init.htm" />
+  <HelpKINode Title="EnhancedEnumTests.Loop_TestNames method" Url="html/M-EnhancedEnum.Tests.EnhancedEnumTests.Loop_TestNames.htm" />
+  <HelpKINode Title="EnhancedEnumTests.Name_ParseNumbers method" Url="html/M-EnhancedEnum.Tests.EnhancedEnumTests.Name_ParseNumbers.htm" />
+  <HelpKINode Title="EnhancedEnumTests.Name_ParseStrings method" Url="html/M-EnhancedEnum.Tests.EnhancedEnumTests.Name_ParseStrings.htm" />
+  <HelpKINode Title="Equality operator" Url="html/M-EnhancedEnum.EnhancedEnum-2.op_Equality.htm" />
+  <HelpKINode Title="Equality_NamesShouldMatch method" Url="html/M-EnhancedEnum.Tests.EnhancedEnumTests.Equality_NamesShouldMatch.htm" />
+  <HelpKINode Title="Equality_ValuesShouldMatch method" Url="html/M-EnhancedEnum.Tests.EnhancedEnumTests.Equality_ValuesShouldMatch.htm" />
+  <HelpKINode Title="Equals method" Url="html/M-EnhancedEnum.EnhancedEnum-2.Equals.htm" />
+  <HelpKINode Title="Error field" Url="html/F-EnhancedEnum.Tests.StatusTest.Error.htm" />
+  <HelpKINode Title="GetHashCode method" Url="html/M-EnhancedEnum.EnhancedEnum-2.GetHashCode.htm" />
+  <HelpKINode Title="GreaterThan operator" Url="html/M-EnhancedEnum.EnhancedEnum-2.op_GreaterThan.htm" />
+  <HelpKINode Title="GreaterThanOrEqual operator" Url="html/M-EnhancedEnum.EnhancedEnum-2.op_GreaterThanOrEqual.htm" />
+  <HelpKINode Title="IEnhancedEnum interface">
+    <HelpKINode Title="IEnhancedEnum Members" Url="html/AllMembers.T-EnhancedEnum.IEnhancedEnum-2.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-EnhancedEnum.IEnhancedEnum-2.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-EnhancedEnum.IEnhancedEnum-2.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-EnhancedEnum.IEnhancedEnum-2.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IEnhancedEnum(Of TValue, TDerived) interface">
+    <HelpKINode Title="IEnhancedEnum(TValue, TDerived) Interface" Url="html/T-EnhancedEnum.IEnhancedEnum-2.htm" />
+    <HelpKINode Title="about IEnhancedEnum(Of TValue, TDerived) interface" Url="html/T-EnhancedEnum.IEnhancedEnum-2.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IEnhancedEnum(Of TValue, TDerived).Description property" Url="html/P-EnhancedEnum.IEnhancedEnum-2.Description.htm" />
+  <HelpKINode Title="IEnhancedEnum(Of TValue, TDerived).Name property" Url="html/P-EnhancedEnum.IEnhancedEnum-2.Name.htm" />
+  <HelpKINode Title="IEnhancedEnum(Of TValue, TDerived).Value property" Url="html/P-EnhancedEnum.IEnhancedEnum-2.Value.htm" />
+  <HelpKINode Title="IEnhancedEnum&lt;TValue, TDerived&gt; interface">
+    <HelpKINode Title="IEnhancedEnum(TValue, TDerived) Interface" Url="html/T-EnhancedEnum.IEnhancedEnum-2.htm" />
+    <HelpKINode Title="about IEnhancedEnum&lt;TValue, TDerived&gt; interface" Url="html/T-EnhancedEnum.IEnhancedEnum-2.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IEnhancedEnum&lt;TValue, TDerived&gt;.Description property" Url="html/P-EnhancedEnum.IEnhancedEnum-2.Description.htm" />
+  <HelpKINode Title="IEnhancedEnum&lt;TValue, TDerived&gt;.Name property" Url="html/P-EnhancedEnum.IEnhancedEnum-2.Name.htm" />
+  <HelpKINode Title="IEnhancedEnum&lt;TValue, TDerived&gt;.Value property" Url="html/P-EnhancedEnum.IEnhancedEnum-2.Value.htm" />
+  <HelpKINode Title="Inequality operator" Url="html/M-EnhancedEnum.EnhancedEnum-2.op_Inequality.htm" />
+  <HelpKINode Title="Init method" Url="html/M-EnhancedEnum.Tests.EnhancedEnumTests.Init.htm" />
+  <HelpKINode Title="LessThan operator" Url="html/M-EnhancedEnum.EnhancedEnum-2.op_LessThan.htm" />
+  <HelpKINode Title="LessThanOrEqual operator" Url="html/M-EnhancedEnum.EnhancedEnum-2.op_LessThanOrEqual.htm" />
+  <HelpKINode Title="Loop_TestNames method" Url="html/M-EnhancedEnum.Tests.EnhancedEnumTests.Loop_TestNames.htm" />
+  <HelpKINode Title="Name property">
+    <HelpKINode Title="Name Property " Url="html/P-EnhancedEnum.IEnhancedEnum-2.Name.htm" />
+    <HelpKINode Title="Name Property " Url="html/P-EnhancedEnum.EnhancedEnum-2.Name.htm" />
+    <HelpKINode Title="Name Property " Url="html/P-EnhancedEnum.DisplayNameAttribute.Name.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Name_ParseNumbers method" Url="html/M-EnhancedEnum.Tests.EnhancedEnumTests.Name_ParseNumbers.htm" />
+  <HelpKINode Title="Name_ParseStrings method" Url="html/M-EnhancedEnum.Tests.EnhancedEnumTests.Name_ParseStrings.htm" />
+  <HelpKINode Title="Running field" Url="html/F-EnhancedEnum.Tests.StatusTest.Running.htm" />
+  <HelpKINode Title="StatusTest class">
+    <HelpKINode Title="StatusTest Class" Url="html/T-EnhancedEnum.Tests.StatusTest.htm" />
+    <HelpKINode Title="StatusTest Members" Url="html/AllMembers.T-EnhancedEnum.Tests.StatusTest.htm" />
+    <HelpKINode Title="about StatusTest class" Url="html/T-EnhancedEnum.Tests.StatusTest.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-EnhancedEnum.Tests.StatusTest.htm" />
+    <HelpKINode Title="fields" Url="html/Fields.T-EnhancedEnum.Tests.StatusTest.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-EnhancedEnum.Tests.StatusTest.htm" />
+    <HelpKINode Title="type conversions" Url="html/Operators.T-EnhancedEnum.Tests.StatusTest.htm" />
+  </HelpKINode>
+  <HelpKINode Title="StatusTest.Error field" Url="html/F-EnhancedEnum.Tests.StatusTest.Error.htm" />
+  <HelpKINode Title="StatusTest.Running field" Url="html/F-EnhancedEnum.Tests.StatusTest.Running.htm" />
+  <HelpKINode Title="StatusTest.Stopped field" Url="html/F-EnhancedEnum.Tests.StatusTest.Stopped.htm" />
+  <HelpKINode Title="Stopped field" Url="html/F-EnhancedEnum.Tests.StatusTest.Stopped.htm" />
+  <HelpKINode Title="ToString method" Url="html/M-EnhancedEnum.EnhancedEnum-2.ToString.htm" />
+  <HelpKINode Title="TryConvert method" Url="html/Overload-EnhancedEnum.EnhancedEnum-2.TryConvert.htm" />
+  <HelpKINode Title="TValue to EnhancedEnum(Of TValue, TDerived) conversion" Url="html/M-EnhancedEnum.EnhancedEnum-2.op_Implicit_1.htm" />
+  <HelpKINode Title="TValue to EnhancedEnum&lt;TValue, TDerived&gt; conversion" Url="html/M-EnhancedEnum.EnhancedEnum-2.op_Implicit_1.htm" />
+  <HelpKINode Title="Value property">
+    <HelpKINode Title="Value Property " Url="html/P-EnhancedEnum.IEnhancedEnum-2.Value.htm" />
+    <HelpKINode Title="Value Property " Url="html/P-EnhancedEnum.EnhancedEnum-2.Value.htm" />
+    <HelpKINode Title="Value Property " Url="html/P-EnhancedEnum.ValueAttribute.Value.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ValueAttribute class">
+    <HelpKINode Title="ValueAttribute Class" Url="html/T-EnhancedEnum.ValueAttribute.htm" />
+    <HelpKINode Title="ValueAttribute Members" Url="html/AllMembers.T-EnhancedEnum.ValueAttribute.htm" />
+    <HelpKINode Title="about ValueAttribute class" Url="html/T-EnhancedEnum.ValueAttribute.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-EnhancedEnum.ValueAttribute.htm" />
+    <HelpKINode Title="constructor" Url="html/M-EnhancedEnum.ValueAttribute.-ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-EnhancedEnum.ValueAttribute.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-EnhancedEnum.ValueAttribute.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ValueAttribute.Value property" Url="html/P-EnhancedEnum.ValueAttribute.Value.htm" />
+  <HelpKINode Title="ValueAttribute.ValueAttribute constructor" Url="html/M-EnhancedEnum.ValueAttribute.-ctor.htm" />
+  <HelpKINode Title="Values property" Url="html/P-EnhancedEnum.EnhancedEnum-2.Values.htm" />
+</HelpKI>

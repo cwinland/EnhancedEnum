@@ -1,9 +1,25 @@
+// ***********************************************************************
+// Assembly         : EnhancedEnum.Tests
+// Author           : chris
+// Created          : 11-12-2020
+//
+// Last Modified By : chris
+// Last Modified On : 11-13-2020
+// ***********************************************************************
+// <copyright file="EnhancedEnumTests.cs" company="EnhancedEnum.Tests">
+//     Copyright (c) . All rights reserved.
+// </copyright>
+// <summary>Tests for EnhancedNum class.</summary>
+// ***********************************************************************
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 
 namespace EnhancedEnum.Tests
 {
+    /// <summary>
+    /// Defines test class EnhancedEnumTests.
+    /// </summary>
     [TestClass]
     public class EnhancedEnumTests
     {
@@ -14,6 +30,9 @@ namespace EnhancedEnum.Tests
         private StatusTest t4;
         private StatusTest t5;
 
+        /// <summary>
+        /// Initializes this instance.
+        /// </summary>
         [TestInitialize]
         public void Init()
         {
@@ -25,8 +44,11 @@ namespace EnhancedEnum.Tests
             t5 = t;
         }
 
+        /// <summary>
+        /// Defines assignment tests.
+        /// </summary>
         [TestMethod]
-        public void Enum_Assignments()
+        public void Assignments_ShouldBeSuccessful()
         {
             t.Should()
              .Be("In Process");
@@ -52,10 +74,30 @@ namespace EnhancedEnum.Tests
                 .HaveCount(StatusTest.Count);
             t3.Should()
               .Be(t4);
+
+            StatusTest val = "Error1";
+
+            val.Should()
+               .BeNull();
+
+            val = 12;
+            val.Should()
+               .BeNull();
+
+            val = "In Process";
+            val.Should()
+               .Be(StatusTest.Running);
+
+            val = 5;
+            val.Should()
+               .Be(StatusTest.Running);
         }
 
+        /// <summary>
+        /// Defines value equality tests.
+        /// </summary>
         [TestMethod]
-        public void Enum_Equality()
+        public void Equality_ValuesShouldMatch()
         {
             (t3 == t4).Should()
                       .BeTrue();
@@ -82,6 +124,7 @@ namespace EnhancedEnum.Tests
             t.Equals(t5)
              .Should()
              .BeTrue();
+            // ReSharper disable once SuspiciousTypeConversion.Global
             t5.Equals(t)
               .Should()
               .BeTrue();
@@ -93,8 +136,11 @@ namespace EnhancedEnum.Tests
              .Be(t5);
         }
 
+        /// <summary>
+        /// Defines naming equality tests.
+        /// </summary>
         [TestMethod]
-        public void Name_Equality()
+        public void Equality_NamesShouldMatch()
         {
             StatusTest.Running.Should()
                       .BeGreaterThan(StatusTest.Error);
@@ -110,6 +156,9 @@ namespace EnhancedEnum.Tests
                       .BeLessOrEqualTo(StatusTest.Running);
         }
 
+        /// <summary>
+        /// Defines the test method Name_ParseStrings.
+        /// </summary>
         [TestMethod]
         public void Name_ParseStrings()
         {
@@ -124,6 +173,9 @@ namespace EnhancedEnum.Tests
                       .Be(StatusTest.Stopped);
         }
 
+        /// <summary>
+        /// Defines the test method Name_ParseNumbers.
+        /// </summary>
         [TestMethod]
         public void Name_ParseNumbers()
         {
@@ -138,6 +190,9 @@ namespace EnhancedEnum.Tests
                       .Be(StatusTest.Stopped);
         }
 
+        /// <summary>
+        /// Defines the test method Loop_TestNames.
+        /// </summary>
         [TestMethod]
         public void Loop_TestNames()
         {

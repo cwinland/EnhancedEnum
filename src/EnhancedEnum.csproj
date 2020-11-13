@@ -28,6 +28,9 @@
 	<PropertyGroup>
 		<GenerateNuspecDependsOn>$(GenerateNuspecDependsOn);SetPackageVersion</GenerateNuspecDependsOn>
 	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+	  <DocumentationFile>C:\Users\chris\source\repos\EnhancedEnum\src\EnhancedEnum.xml</DocumentationFile>
+	</PropertyGroup>
 
 	<Target Name="SetPackageVersion">
 		<PropertyGroup>

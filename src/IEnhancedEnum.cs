@@ -1,16 +1,53 @@
-﻿using System;
+﻿// ***********************************************************************
+// Assembly         : EnhancedEnum Author : chris Created : 11-13-2020
+// Author           : chris Created : 11-13-2020
+// Created          : 11-13-2020
+//
+// Last Modified By : chris Last Modified On : 11-13-2020 ***********************************************************************
+// Last Modified On : 11-13-2020
+// ***********************************************************************
+// <copyright file="IEnhancedEnum.cs" company="Microsoft Corporation">
+//     copyright(c) 2020 Christopher Winland
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace EnhancedEnum
 {
+    /// <summary>
+    /// Interface IEnhancedEnum Implements the <see cref="System.IEquatable{TDerived}" /> Implements the <see cref="System.IComparable{TDerived}" />
+    /// Implements the <see cref="System.IComparable" /> Implements the <see cref="System.Collections.Generic.IComparer{TDerived}" />
+    /// </summary>
+    /// <typeparam name="TValue">The type of the t value.</typeparam>
+    /// <typeparam name="TDerived">The type of the t derived.</typeparam>
+    /// <seealso cref="System.IEquatable{TDerived}" />
+    /// <seealso cref="System.IComparable{TDerived}" />
+    /// <seealso cref="System.IComparable" />
+    /// <seealso cref="System.Collections.Generic.IComparer{TDerived}" />
     public interface IEnhancedEnum<TValue, TDerived> : IEquatable<TDerived>,
                                                        IComparable<TDerived>,
                                                        IComparable, IComparer<TDerived>
 
     {
+        /// <summary>
+        /// Gets the description using the associated <see cref="DescriptionAttribute" />.
+        /// </summary>
+        /// <value>The description.</value>
         string Description { get; }
+
+        /// <summary>
+        /// Gets the name using the associated <see cref="DisplayNameAttribute" />.
+        /// </summary>
+        /// <value>The name.</value>
         string Name { get; }
+
+        /// <summary>
+        /// Gets the value using the associated <see cref="ValueAttribute" />.
+        /// </summary>
+        /// <value>The value.</value>
         TValue Value { get; }
     }
 }
