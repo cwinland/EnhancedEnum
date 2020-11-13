@@ -21,9 +21,9 @@
 	</PropertyGroup>
 	<PropertyGroup>
 		<EnableDefaultCompileItems>false</EnableDefaultCompileItems>
-		<AssemblyVersion>1.1.11.121</AssemblyVersion>
-		<FileVersion>1.1.11.121</FileVersion>
-		<Version>1.1.11.121</Version>
+		<AssemblyVersion>1.1.11.13</AssemblyVersion>
+		<FileVersion>1.1.11.13</FileVersion>
+		<Version>1.1.11.13</Version>
 	</PropertyGroup>
 	<PropertyGroup>
 		<GenerateNuspecDependsOn>$(GenerateNuspecDependsOn);SetPackageVersion</GenerateNuspecDependsOn>

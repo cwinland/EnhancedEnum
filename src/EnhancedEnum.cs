@@ -94,8 +94,7 @@ namespace EnhancedEnum
 
         public static bool operator >=(EnhancedEnum<TValue, TDerived> left, EnhancedEnum<TValue, TDerived> right) => left.Value == null ? right.Value == null : left.Value.CompareTo(right.Value) >= 0;
 
-        public static TDerived Parse(string name) =>
-                                                            values.Values.FirstOrDefault(x => x.Name == name);
+        public static TDerived Parse(string name) => values.Values.FirstOrDefault(x => x.Name == name);
 
         public static TDerived Parse(TValue intValue) =>
             values.Values.FirstOrDefault(value => value.Value.Equals(intValue));
