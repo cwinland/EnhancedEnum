@@ -26,24 +26,21 @@ namespace EnhancedEnum
     /// <typeparam name="TDerived">The type of the t derived.</typeparam>
     /// <seealso cref="EnhancedEnum.IEnhancedEnum{TValue, TDerived}" />
     /// <example>
-    /// <code>
+    ///   <code>
     /// public sealed class StatusTest : EnhancedEnum&lt;int, StatusTest&gt;
-    ///{
-    ///     [Description("Indicates Running")] // Description Property.
-    ///     [DisplayName("In Process")]        // Displays this text when converted to a string.
-    ///     [Value(5)]                         // Underlying value.
-    ///     public static readonly StatusTest Running = new StatusTest();
-    ///
-    ///     // Gets the default value of 1. This can be overridden with the Value Attribute.
-    ///     public static readonly StatusTest Stopped = new StatusTest();
-
-    ///     // Gets the default value of 2. This can be overridden with the Value Attribute.
-    ///     public static readonly StatusTest Error = new StatusTest();
-    ///
-    ///     // Operators allow conversion to this class from other values.
-    ///     public static implicit operator StatusTest(string value) => Convert(value);
-    ///     public static implicit operator StatusTest(int value) => Convert(value);
-    ///}</code>
+    /// {
+    /// [Description("Indicates Running")] // Description Property.
+    /// [DisplayName("In Process")]        // Displays this text when converted to a string.
+    /// [Value(5)]                         // Underlying value.
+    /// public static readonly StatusTest Running = new StatusTest();
+    /// // Gets the default value of 1. This can be overridden with the Value Attribute.
+    /// public static readonly StatusTest Stopped = new StatusTest();
+    /// // Gets the default value of 2. This can be overridden with the Value Attribute.
+    /// public static readonly StatusTest Error = new StatusTest();
+    /// // Operators allow conversion to this class from other values.
+    /// public static implicit operator StatusTest(string value) =&gt; Convert(value);
+    /// public static implicit operator StatusTest(int value) =&gt; Convert(value);
+    /// }</code>
     /// </example>
     public abstract class EnhancedEnum<TValue, TDerived>
                         : IEnhancedEnum<TValue, TDerived>

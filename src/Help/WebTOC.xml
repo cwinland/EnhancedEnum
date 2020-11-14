@@ -1,44 +1,44 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <HelpTOC>
 
-  <HelpTOCNode Id="0afa8b87-b4f8-42b6-be00-db62068784b5" Title="EnhancedEnum Namespace" Url="html/N-EnhancedEnum.htm">
-    <HelpTOCNode Id="09d48c7d-8dba-49d3-9431-b7c0c3907927" Title="DescriptionAttribute Class" Url="html/T-EnhancedEnum.DescriptionAttribute.htm">
+  <HelpTOCNode Id="64cb3a96-ab63-4b1a-9e3e-85453b2eff71" Title="EnhancedEnum Namespace" Url="html/N-EnhancedEnum.htm">
+    <HelpTOCNode Id="6d0a31a0-38a0-4c3e-9949-2c4a9d16fa19" Title="DescriptionAttribute Class" Url="html/T-EnhancedEnum.DescriptionAttribute.htm">
       <HelpTOCNode Title="DescriptionAttribute Members" Url="html/AllMembers.T-EnhancedEnum.DescriptionAttribute.htm" />
       <HelpTOCNode Title="DescriptionAttribute Constructor " Url="html/M-EnhancedEnum.DescriptionAttribute.-ctor.htm" />
       <HelpTOCNode Title="DescriptionAttribute Methods" Url="html/Methods.T-EnhancedEnum.DescriptionAttribute.htm" />
-      <HelpTOCNode Id="b76b6694-164d-41d5-8bc8-bee828077d23" Title="DescriptionAttribute Properties" Url="html/Properties.T-EnhancedEnum.DescriptionAttribute.htm">
+      <HelpTOCNode Id="e0045cf6-19a0-4c2e-a36f-597468734339" Title="DescriptionAttribute Properties" Url="html/Properties.T-EnhancedEnum.DescriptionAttribute.htm">
         <HelpTOCNode Title="Description Property " Url="html/P-EnhancedEnum.DescriptionAttribute.Description.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="00d4f56d-f927-4e4f-8cef-536037a6c20e" Title="DisplayNameAttribute Class" Url="html/T-EnhancedEnum.DisplayNameAttribute.htm">
+    <HelpTOCNode Id="95720548-60c9-4c48-8b4c-748a61c7b512" Title="DisplayNameAttribute Class" Url="html/T-EnhancedEnum.DisplayNameAttribute.htm">
       <HelpTOCNode Title="DisplayNameAttribute Members" Url="html/AllMembers.T-EnhancedEnum.DisplayNameAttribute.htm" />
       <HelpTOCNode Title="DisplayNameAttribute Constructor " Url="html/M-EnhancedEnum.DisplayNameAttribute.-ctor.htm" />
       <HelpTOCNode Title="DisplayNameAttribute Methods" Url="html/Methods.T-EnhancedEnum.DisplayNameAttribute.htm" />
-      <HelpTOCNode Id="63780fdf-0562-4190-87bb-7afb0c4a47a6" Title="DisplayNameAttribute Properties" Url="html/Properties.T-EnhancedEnum.DisplayNameAttribute.htm">
+      <HelpTOCNode Id="3a964d81-2232-497d-b7f7-46c2a28efacc" Title="DisplayNameAttribute Properties" Url="html/Properties.T-EnhancedEnum.DisplayNameAttribute.htm">
         <HelpTOCNode Title="Name Property " Url="html/P-EnhancedEnum.DisplayNameAttribute.Name.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="04ca2d06-d130-4a7b-80eb-9f68e57bf448" Title="EnhancedEnum(TValue, TDerived) Class" Url="html/T-EnhancedEnum.EnhancedEnum-2.htm">
+    <HelpTOCNode Id="a6259619-b5f7-4786-9733-93a0bfa7486d" Title="EnhancedEnum(TValue, TDerived) Class" Url="html/T-EnhancedEnum.EnhancedEnum-2.htm">
       <HelpTOCNode Title="EnhancedEnum(TValue, TDerived) Members" Url="html/AllMembers.T-EnhancedEnum.EnhancedEnum-2.htm" />
       <HelpTOCNode Title="EnhancedEnum(TValue, TDerived) Constructor " Url="html/M-EnhancedEnum.EnhancedEnum-2.-ctor.htm" />
-      <HelpTOCNode Id="bf7c130b-a1ed-4510-9adf-73af05c275ee" Title="EnhancedEnum(TValue, TDerived) Methods" Url="html/Methods.T-EnhancedEnum.EnhancedEnum-2.htm">
-        <HelpTOCNode Id="100a76c8-ccfe-465f-9da2-f30ce158411f" Title="Convert Method " Url="html/Overload-EnhancedEnum.EnhancedEnum-2.Convert.htm">
+      <HelpTOCNode Id="cd0f83c9-d0a2-4c49-b503-474dac2a1fe4" Title="EnhancedEnum(TValue, TDerived) Methods" Url="html/Methods.T-EnhancedEnum.EnhancedEnum-2.htm">
+        <HelpTOCNode Id="78bd82c8-68ed-4a8c-ba01-a348f9ee4198" Title="Convert Method " Url="html/Overload-EnhancedEnum.EnhancedEnum-2.Convert.htm">
           <HelpTOCNode Title="Convert Method (String)" Url="html/M-EnhancedEnum.EnhancedEnum-2.Convert.htm" />
           <HelpTOCNode Title="Convert Method (TValue)" Url="html/M-EnhancedEnum.EnhancedEnum-2.Convert_1.htm" />
         </HelpTOCNode>
         <HelpTOCNode Title="Equals Method " Url="html/M-EnhancedEnum.EnhancedEnum-2.Equals.htm" />
         <HelpTOCNode Title="GetHashCode Method " Url="html/M-EnhancedEnum.EnhancedEnum-2.GetHashCode.htm" />
         <HelpTOCNode Title="ToString Method " Url="html/M-EnhancedEnum.EnhancedEnum-2.ToString.htm" />
-        <HelpTOCNode Id="f852fe8d-9068-4f0a-8e02-ef6be7f4c443" Title="TryConvert Method " Url="html/Overload-EnhancedEnum.EnhancedEnum-2.TryConvert.htm">
+        <HelpTOCNode Id="0d941d40-5877-4c2c-8295-860aa1ac66e1" Title="TryConvert Method " Url="html/Overload-EnhancedEnum.EnhancedEnum-2.TryConvert.htm">
           <HelpTOCNode Title="TryConvert Method (String, TDerived)" Url="html/M-EnhancedEnum.EnhancedEnum-2.TryConvert.htm" />
           <HelpTOCNode Title="TryConvert Method (TValue, TDerived)" Url="html/M-EnhancedEnum.EnhancedEnum-2.TryConvert_1.htm" />
         </HelpTOCNode>
       </HelpTOCNode>
-      <HelpTOCNode Id="efad6fae-e97f-4bb6-8d2c-17e27c91967f" Title="EnhancedEnum(TValue, TDerived) Operators and Type Conversions" Url="html/Operators.T-EnhancedEnum.EnhancedEnum-2.htm">
+      <HelpTOCNode Id="a5779660-a6d2-44e9-9211-16a39c621ae0" Title="EnhancedEnum(TValue, TDerived) Operators and Type Conversions" Url="html/Operators.T-EnhancedEnum.EnhancedEnum-2.htm">
         <HelpTOCNode Title="Equality Operator " Url="html/M-EnhancedEnum.EnhancedEnum-2.op_Equality.htm" />
         <HelpTOCNode Title="GreaterThan Operator " Url="html/M-EnhancedEnum.EnhancedEnum-2.op_GreaterThan.htm" />
         <HelpTOCNode Title="GreaterThanOrEqual Operator " Url="html/M-EnhancedEnum.EnhancedEnum-2.op_GreaterThanOrEqual.htm" />
-        <HelpTOCNode Id="a87633e2-7d4d-4ca9-9495-653b7dea45a9" Title="Implicit Conversion Operators" Url="html/Overload-EnhancedEnum.EnhancedEnum-2.op_Implicit.htm">
+        <HelpTOCNode Id="652bac4d-3b51-463e-8d89-42bd5e1d8478" Title="Implicit Conversion Operators" Url="html/Overload-EnhancedEnum.EnhancedEnum-2.op_Implicit.htm">
           <HelpTOCNode Title="Implicit Conversion (String to EnhancedEnum)" Url="html/M-EnhancedEnum.EnhancedEnum-2.op_Implicit.htm" />
           <HelpTOCNode Title="Implicit Conversion (TValue to EnhancedEnum)" Url="html/M-EnhancedEnum.EnhancedEnum-2.op_Implicit_1.htm" />
           <HelpTOCNode Title="Implicit Conversion (EnhancedEnum to String)" Url="html/M-EnhancedEnum.EnhancedEnum-2.op_Implicit_2.htm" />
@@ -48,7 +48,7 @@
         <HelpTOCNode Title="LessThan Operator " Url="html/M-EnhancedEnum.EnhancedEnum-2.op_LessThan.htm" />
         <HelpTOCNode Title="LessThanOrEqual Operator " Url="html/M-EnhancedEnum.EnhancedEnum-2.op_LessThanOrEqual.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="39db53f5-9dee-4e44-8d74-e51082c66cb3" Title="EnhancedEnum(TValue, TDerived) Properties" Url="html/Properties.T-EnhancedEnum.EnhancedEnum-2.htm">
+      <HelpTOCNode Id="b5f90fed-47be-4331-80ea-93518016e050" Title="EnhancedEnum(TValue, TDerived) Properties" Url="html/Properties.T-EnhancedEnum.EnhancedEnum-2.htm">
         <HelpTOCNode Title="Count Property " Url="html/P-EnhancedEnum.EnhancedEnum-2.Count.htm" />
         <HelpTOCNode Title="Description Property " Url="html/P-EnhancedEnum.EnhancedEnum-2.Description.htm" />
         <HelpTOCNode Title="Name Property " Url="html/P-EnhancedEnum.EnhancedEnum-2.Name.htm" />
@@ -56,28 +56,19 @@
         <HelpTOCNode Title="Values Property " Url="html/P-EnhancedEnum.EnhancedEnum-2.Values.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="ee4df392-608d-4b72-a359-aab4f96d8eea" Title="IEnhancedEnum(TValue, TDerived) Interface" Url="html/T-EnhancedEnum.IEnhancedEnum-2.htm">
-      <HelpTOCNode Title="IEnhancedEnum Members" Url="html/AllMembers.T-EnhancedEnum.IEnhancedEnum-2.htm" />
-      <HelpTOCNode Title="IEnhancedEnum Methods" Url="html/Methods.T-EnhancedEnum.IEnhancedEnum-2.htm" />
-      <HelpTOCNode Id="91580c2e-2570-457f-96b2-1c7168c21b3b" Title="IEnhancedEnum Properties" Url="html/Properties.T-EnhancedEnum.IEnhancedEnum-2.htm">
-        <HelpTOCNode Title="Description Property " Url="html/P-EnhancedEnum.IEnhancedEnum-2.Description.htm" />
-        <HelpTOCNode Title="Name Property " Url="html/P-EnhancedEnum.IEnhancedEnum-2.Name.htm" />
-        <HelpTOCNode Title="Value Property " Url="html/P-EnhancedEnum.IEnhancedEnum-2.Value.htm" />
-      </HelpTOCNode>
-    </HelpTOCNode>
-    <HelpTOCNode Id="1fe26286-3377-4c11-afcd-66796cfa2243" Title="ValueAttribute Class" Url="html/T-EnhancedEnum.ValueAttribute.htm">
+    <HelpTOCNode Id="5be97105-424a-4b80-a409-61b5e065fd10" Title="ValueAttribute Class" Url="html/T-EnhancedEnum.ValueAttribute.htm">
       <HelpTOCNode Title="ValueAttribute Members" Url="html/AllMembers.T-EnhancedEnum.ValueAttribute.htm" />
       <HelpTOCNode Title="ValueAttribute Constructor " Url="html/M-EnhancedEnum.ValueAttribute.-ctor.htm" />
       <HelpTOCNode Title="ValueAttribute Methods" Url="html/Methods.T-EnhancedEnum.ValueAttribute.htm" />
-      <HelpTOCNode Id="f0276b82-e8e5-43b5-a38f-bf51aa94ef67" Title="ValueAttribute Properties" Url="html/Properties.T-EnhancedEnum.ValueAttribute.htm">
+      <HelpTOCNode Id="55652bd3-d79c-4a1d-b1f3-c8b606d06152" Title="ValueAttribute Properties" Url="html/Properties.T-EnhancedEnum.ValueAttribute.htm">
         <HelpTOCNode Title="Value Property " Url="html/P-EnhancedEnum.ValueAttribute.Value.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
   </HelpTOCNode>
-  <HelpTOCNode Id="ab7caa6f-7f39-44dd-8ff1-5fc8e8c51bac" Title="EnhancedEnum.Tests Namespace" Url="html/N-EnhancedEnum.Tests.htm">
-    <HelpTOCNode Id="fef1f1af-cc34-412f-9041-0d86c9db4062" Title="EnhancedEnumTests Class" Url="html/T-EnhancedEnum.Tests.EnhancedEnumTests.htm">
+  <HelpTOCNode Id="daf6ad1d-53d7-4886-8a76-1293b3f72ecc" Title="EnhancedEnum.Tests Namespace" Url="html/N-EnhancedEnum.Tests.htm">
+    <HelpTOCNode Id="36ea38a0-7541-43e4-97d0-913563fc46e1" Title="EnhancedEnumTests Class" Url="html/T-EnhancedEnum.Tests.EnhancedEnumTests.htm">
       <HelpTOCNode Title="EnhancedEnumTests Members" Url="html/AllMembers.T-EnhancedEnum.Tests.EnhancedEnumTests.htm" />
-      <HelpTOCNode Id="f4383190-07c8-485c-9878-d372ff26a7df" Title="EnhancedEnumTests Methods" Url="html/Methods.T-EnhancedEnum.Tests.EnhancedEnumTests.htm">
+      <HelpTOCNode Id="3478a6de-6317-483e-80b2-44b60a5c5aba" Title="EnhancedEnumTests Methods" Url="html/Methods.T-EnhancedEnum.Tests.EnhancedEnumTests.htm">
         <HelpTOCNode Title="Assignments_ShouldBeSuccessful Method " Url="html/M-EnhancedEnum.Tests.EnhancedEnumTests.Assignments_ShouldBeSuccessful.htm" />
         <HelpTOCNode Title="Equality_NamesShouldMatch Method " Url="html/M-EnhancedEnum.Tests.EnhancedEnumTests.Equality_NamesShouldMatch.htm" />
         <HelpTOCNode Title="Equality_ValuesShouldMatch Method " Url="html/M-EnhancedEnum.Tests.EnhancedEnumTests.Equality_ValuesShouldMatch.htm" />
@@ -87,16 +78,16 @@
         <HelpTOCNode Title="Name_ParseStrings Method " Url="html/M-EnhancedEnum.Tests.EnhancedEnumTests.Name_ParseStrings.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="81ce4549-40a5-4e12-8902-665105db06dd" Title="StatusTest Class" Url="html/T-EnhancedEnum.Tests.StatusTest.htm">
+    <HelpTOCNode Id="ca3e5ffa-0405-4bc3-bb42-da0cd150bf2e" Title="StatusTest Class" Url="html/T-EnhancedEnum.Tests.StatusTest.htm">
       <HelpTOCNode Title="StatusTest Members" Url="html/AllMembers.T-EnhancedEnum.Tests.StatusTest.htm" />
-      <HelpTOCNode Id="58c71ac5-5758-43a7-9d19-c60e2be25e73" Title="StatusTest Fields" Url="html/Fields.T-EnhancedEnum.Tests.StatusTest.htm">
+      <HelpTOCNode Id="75854ba7-0681-4fe7-8d11-3d45bda2d43c" Title="StatusTest Fields" Url="html/Fields.T-EnhancedEnum.Tests.StatusTest.htm">
         <HelpTOCNode Title="Error Field" Url="html/F-EnhancedEnum.Tests.StatusTest.Error.htm" />
         <HelpTOCNode Title="Running Field" Url="html/F-EnhancedEnum.Tests.StatusTest.Running.htm" />
         <HelpTOCNode Title="Stopped Field" Url="html/F-EnhancedEnum.Tests.StatusTest.Stopped.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="StatusTest Methods" Url="html/Methods.T-EnhancedEnum.Tests.StatusTest.htm" />
-      <HelpTOCNode Id="9fc70854-8009-49da-be04-fbf7fa5ce780" Title="StatusTest Type Conversions" Url="html/Operators.T-EnhancedEnum.Tests.StatusTest.htm">
-        <HelpTOCNode Id="a0313780-d87b-47a8-a85f-ebb3497ba21c" Title="Implicit Conversion Operators" Url="html/Overload-EnhancedEnum.Tests.StatusTest.op_Implicit.htm">
+      <HelpTOCNode Id="44890203-0c1d-41d3-8af7-a7184afca282" Title="StatusTest Type Conversions" Url="html/Operators.T-EnhancedEnum.Tests.StatusTest.htm">
+        <HelpTOCNode Id="6b5e26cb-44b3-4d47-8ce5-f2be4ebb5120" Title="Implicit Conversion Operators" Url="html/Overload-EnhancedEnum.Tests.StatusTest.op_Implicit.htm">
           <HelpTOCNode Title="Implicit Conversion (String to StatusTest)" Url="html/M-EnhancedEnum.Tests.StatusTest.op_Implicit.htm" />
           <HelpTOCNode Title="Implicit Conversion (Int32 to StatusTest)" Url="html/M-EnhancedEnum.Tests.StatusTest.op_Implicit_1.htm" />
         </HelpTOCNode>

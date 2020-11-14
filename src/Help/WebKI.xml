@@ -11,8 +11,8 @@
   <HelpKINode Title="Count property" Url="html/P-EnhancedEnum.EnhancedEnum-2.Count.htm" />
   <HelpKINode Title="Description property">
     <HelpKINode Title="Description Property " Url="html/P-EnhancedEnum.EnhancedEnum-2.Description.htm" />
-    <HelpKINode Title="Description Property " Url="html/P-EnhancedEnum.IEnhancedEnum-2.Description.htm" />
     <HelpKINode Title="Description Property " Url="html/P-EnhancedEnum.DescriptionAttribute.Description.htm" />
+    <HelpKINode Title="Description Property " Url="html/P-EnhancedEnum.IEnhancedEnum-2.Description.htm" />
   </HelpKINode>
   <HelpKINode Title="DescriptionAttribute class">
     <HelpKINode Title="DescriptionAttribute Class" Url="html/T-EnhancedEnum.DescriptionAttribute.htm" />
@@ -175,9 +175,9 @@
   <HelpKINode Title="LessThanOrEqual operator" Url="html/M-EnhancedEnum.EnhancedEnum-2.op_LessThanOrEqual.htm" />
   <HelpKINode Title="Loop_TestNames method" Url="html/M-EnhancedEnum.Tests.EnhancedEnumTests.Loop_TestNames.htm" />
   <HelpKINode Title="Name property">
+    <HelpKINode Title="Name Property " Url="html/P-EnhancedEnum.DisplayNameAttribute.Name.htm" />
     <HelpKINode Title="Name Property " Url="html/P-EnhancedEnum.IEnhancedEnum-2.Name.htm" />
     <HelpKINode Title="Name Property " Url="html/P-EnhancedEnum.EnhancedEnum-2.Name.htm" />
-    <HelpKINode Title="Name Property " Url="html/P-EnhancedEnum.DisplayNameAttribute.Name.htm" />
   </HelpKINode>
   <HelpKINode Title="Name_ParseNumbers method" Url="html/M-EnhancedEnum.Tests.EnhancedEnumTests.Name_ParseNumbers.htm" />
   <HelpKINode Title="Name_ParseStrings method" Url="html/M-EnhancedEnum.Tests.EnhancedEnumTests.Name_ParseStrings.htm" />
@@ -200,9 +200,9 @@
   <HelpKINode Title="TValue to EnhancedEnum(Of TValue, TDerived) conversion" Url="html/M-EnhancedEnum.EnhancedEnum-2.op_Implicit_1.htm" />
   <HelpKINode Title="TValue to EnhancedEnum&lt;TValue, TDerived&gt; conversion" Url="html/M-EnhancedEnum.EnhancedEnum-2.op_Implicit_1.htm" />
   <HelpKINode Title="Value property">
-    <HelpKINode Title="Value Property " Url="html/P-EnhancedEnum.IEnhancedEnum-2.Value.htm" />
-    <HelpKINode Title="Value Property " Url="html/P-EnhancedEnum.EnhancedEnum-2.Value.htm" />
     <HelpKINode Title="Value Property " Url="html/P-EnhancedEnum.ValueAttribute.Value.htm" />
+    <HelpKINode Title="Value Property " Url="html/P-EnhancedEnum.EnhancedEnum-2.Value.htm" />
+    <HelpKINode Title="Value Property " Url="html/P-EnhancedEnum.IEnhancedEnum-2.Value.htm" />
   </HelpKINode>
   <HelpKINode Title="ValueAttribute class">
     <HelpKINode Title="ValueAttribute Class" Url="html/T-EnhancedEnum.ValueAttribute.htm" />

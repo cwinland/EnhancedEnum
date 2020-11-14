@@ -21,9 +21,9 @@
 	</PropertyGroup>
 	<PropertyGroup>
 		<EnableDefaultCompileItems>false</EnableDefaultCompileItems>
-		<AssemblyVersion>1.1.11.13</AssemblyVersion>
-		<FileVersion>1.1.11.13</FileVersion>
-		<Version>1.1.11.13</Version>
+		<AssemblyVersion>1.$([System.DateTime]::Now.ToString("1.MM.dd"))</AssemblyVersion>
+		<FileVersion>1.$([System.DateTime]::Now.ToString("1.MM.dd"))</FileVersion>
+		<Version>1.$([System.DateTime]::Now.ToString("1.MM.dd"))</Version>
 	</PropertyGroup>
 	<PropertyGroup>
 		<GenerateNuspecDependsOn>$(GenerateNuspecDependsOn);SetPackageVersion</GenerateNuspecDependsOn>
@@ -39,6 +39,13 @@
 			<PackageVersion>1.$([System.DateTime]::Now.ToString("1.MM.dd"))</PackageVersion>
 		</PropertyGroup>
 	</Target>
+
+	<ItemGroup>
+	  <EmbeddedResource Remove="Help\**" />
+	  <EmbeddedResource Remove="TestResults\**" />
+	  <None Remove="Help\**" />
+	  <None Remove="TestResults\**" />
+	</ItemGroup>
 
 	<ItemGroup>
 	  <Compile Include="DescriptionAttribute.cs" />
