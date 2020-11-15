@@ -4,13 +4,14 @@
 // Created          : 11-12-2020
 //
 // Last Modified By : chris
-// Last Modified On : 11-13-2020
+// Last Modified On : 11-15-2020
 // ***********************************************************************
-// <copyright file="EnhancedEnumTests.cs" company="EnhancedEnum.Tests">
+// <copyright file="StatusTests.cs" company="EnhancedEnum.Tests">
 //     Copyright (c) . All rights reserved.
 // </copyright>
 // <summary>Tests for EnhancedNum class.</summary>
 // ***********************************************************************
+using EnhancedEnum.Tests.Enums;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
@@ -21,14 +22,14 @@ namespace EnhancedEnum.Tests
     /// Defines test class EnhancedEnumTests.
     /// </summary>
     [TestClass]
-    public class EnhancedEnumTests
+    public class StatusTests
     {
         private string t;
-        private StatusTest t2;
+        private StatusEnum t2;
         private int t3;
-        private IEnumerable<StatusTest> vals;
-        private StatusTest t4;
-        private StatusTest t5;
+        private IEnumerable<StatusEnum> vals;
+        private StatusEnum t4;
+        private StatusEnum t5;
 
         /// <summary>
         /// Initializes this instance.
@@ -36,10 +37,10 @@ namespace EnhancedEnum.Tests
         [TestInitialize]
         public void Init()
         {
-            t = StatusTest.Running;
-            t2 = StatusTest.Stopped;
-            t3 = StatusTest.Error;
-            vals = StatusTest.Values;
+            t = StatusEnum.Running;
+            t2 = StatusEnum.Stopped;
+            t3 = StatusEnum.Error;
+            vals = StatusEnum.Values;
             t4 = t3;
             t5 = t;
         }
@@ -54,12 +55,12 @@ namespace EnhancedEnum.Tests
              .Be("In Process");
 
             t2.Should()
-              .Be(StatusTest.Stopped);
+              .Be(StatusEnum.Stopped);
 
             t3.Should()
-              .Be(StatusTest.Error.Value);
+              .Be(StatusEnum.Error.Value);
             t4.Description.Should()
-              .Be(StatusTest.Error.ToString());
+              .Be(StatusEnum.Error.ToString());
             t5.Description.Should()
               .Be("Indicates Running");
             t5.Name.Should()
@@ -71,11 +72,11 @@ namespace EnhancedEnum.Tests
             t5.Name.Should()
               .Be("In Process");
             vals.Should()
-                .HaveCount(StatusTest.Count);
+                .HaveCount(StatusEnum.Count);
             t3.Should()
               .Be(t4);
 
-            StatusTest val = "Error1";
+            StatusEnum val = "Error1";
 
             val.Should()
                .BeNull();
@@ -86,11 +87,11 @@ namespace EnhancedEnum.Tests
 
             val = "In Process";
             val.Should()
-               .Be(StatusTest.Running);
+               .Be(StatusEnum.Running);
 
             val = 5;
             val.Should()
-               .Be(StatusTest.Running);
+               .Be(StatusEnum.Running);
         }
 
         /// <summary>
@@ -134,6 +135,11 @@ namespace EnhancedEnum.Tests
               .Be(t);
             t.Should()
              .Be(t5);
+
+            t2 = StatusEnum.Error;
+            t2.HasFlag(StatusEnum.Error)
+              .Should()
+              .BeFalse();
         }
 
         /// <summary>
@@ -142,18 +148,18 @@ namespace EnhancedEnum.Tests
         [TestMethod]
         public void Equality_NamesShouldMatch()
         {
-            StatusTest.Running.Should()
-                      .BeGreaterThan(StatusTest.Error);
-            StatusTest.Stopped.Should()
-                      .BeLessThan(StatusTest.Error);
-            StatusTest.Error.Should()
-                      .BeLessThan(StatusTest.Running);
-            StatusTest.Running.Should()
-                      .BeGreaterOrEqualTo(StatusTest.Error);
-            StatusTest.Stopped.Should()
-                      .BeLessOrEqualTo(StatusTest.Error);
-            StatusTest.Error.Should()
-                      .BeLessOrEqualTo(StatusTest.Running);
+            StatusEnum.Running.Should()
+                      .BeGreaterThan(StatusEnum.Error);
+            StatusEnum.Stopped.Should()
+                      .BeLessThan(StatusEnum.Error);
+            StatusEnum.Error.Should()
+                      .BeLessThan(StatusEnum.Running);
+            StatusEnum.Running.Should()
+                      .BeGreaterOrEqualTo(StatusEnum.Error);
+            StatusEnum.Stopped.Should()
+                      .BeLessOrEqualTo(StatusEnum.Error);
+            StatusEnum.Error.Should()
+                      .BeLessOrEqualTo(StatusEnum.Running);
         }
 
         /// <summary>
@@ -162,15 +168,15 @@ namespace EnhancedEnum.Tests
         [TestMethod]
         public void Name_ParseStrings()
         {
-            StatusTest.Convert("In Process")
+            StatusEnum.Convert("In Process")
                       .Should()
-                      .Be(StatusTest.Running);
-            StatusTest.Convert("Error")
+                      .Be(StatusEnum.Running);
+            StatusEnum.Convert("Error")
                       .Should()
-                      .Be(StatusTest.Error);
-            StatusTest.Convert("Stopped")
+                      .Be(StatusEnum.Error);
+            StatusEnum.Convert("Stopped")
                       .Should()
-                      .Be(StatusTest.Stopped);
+                      .Be(StatusEnum.Stopped);
         }
 
         /// <summary>
@@ -179,15 +185,15 @@ namespace EnhancedEnum.Tests
         [TestMethod]
         public void Name_ParseNumbers()
         {
-            StatusTest.Convert(5)
+            StatusEnum.Convert(5)
                       .Should()
-                      .Be(StatusTest.Running);
-            StatusTest.Convert(3)
+                      .Be(StatusEnum.Running);
+            StatusEnum.Convert(3)
                       .Should()
-                      .Be(StatusTest.Error);
-            StatusTest.Convert(2)
+                      .Be(StatusEnum.Error);
+            StatusEnum.Convert(2)
                       .Should()
-                      .Be(StatusTest.Stopped);
+                      .Be(StatusEnum.Stopped);
         }
 
         /// <summary>
@@ -196,12 +202,12 @@ namespace EnhancedEnum.Tests
         [TestMethod]
         public void Loop_TestNames()
         {
-            StatusTest.Values.Should()
-                      .Contain(StatusTest.Running);
-            StatusTest.Values.Should()
-                      .Contain(StatusTest.Error);
-            StatusTest.Values.Should()
-                      .Contain(StatusTest.Stopped);
+            StatusEnum.Values.Should()
+                      .Contain(StatusEnum.Running);
+            StatusEnum.Values.Should()
+                      .Contain(StatusEnum.Error);
+            StatusEnum.Values.Should()
+                      .Contain(StatusEnum.Stopped);
         }
     }
 }

@@ -4,7 +4,7 @@
 // Created          : 11-12-2020
 //
 // Last Modified By : chris
-// Last Modified On : 11-13-2020
+// Last Modified On : 11-15-2020
 // ***********************************************************************
 // <copyright file="EnhancedEnum.cs" company="Microsoft Corporation">
 //     copyright(c) 2020 Christopher Winland
@@ -15,16 +15,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using EnhancedEnum.Attributes;
 
 namespace EnhancedEnum
 {
     /// <summary>
     /// Inherit to enable Enum behavior object with auto string and value conversion.
-    /// Implements the <see cref="EnhancedEnum.IEnhancedEnum{TValue, TDerived}" />
+    /// Implements the <see cref="IEnhancedEnum{TValue,TDerived}" />
     /// </summary>
     /// <typeparam name="TValue">The type of the t value.</typeparam>
     /// <typeparam name="TDerived">The type of the t derived.</typeparam>
-    /// <seealso cref="EnhancedEnum.IEnhancedEnum{TValue, TDerived}" />
+    /// <seealso cref="IEnhancedEnum{TValue,TDerived}" />
     /// <example>
     ///   <code>
     /// public sealed class StatusTest : EnhancedEnum&lt;int, StatusTest&gt;
@@ -47,8 +48,10 @@ namespace EnhancedEnum
                         where TValue : IComparable<TValue>, IEquatable<TValue>
                         where TDerived : EnhancedEnum<TValue, TDerived>
     {
+
         #region Fields
 
+        private static TDerived defaultDerived;
         private static bool isSetup;
         private static SortedList<long, TDerived> values;
         private DescriptionAttribute descriptionAttribute;
@@ -86,11 +89,13 @@ namespace EnhancedEnum
         /// <value>The count.</value>
         public static int Count => values.Count;
 
+        private static bool IsFlag { get; set; }
+
         /// <summary>
         /// Enumerable list of all possible values.
         /// </summary>
         /// <value>The values.</value>
-        public static IEnumerable<TDerived> Values => values.Values;
+        public static List<TDerived> Values => values.Values.ToList();
 
         /// <summary>
         /// Description of enumeration as described in <see cref="DescriptionAttribute" />
@@ -128,8 +133,8 @@ namespace EnhancedEnum
             get
             {
                 EnsureSetup();
-
-                return (TValue)valueAttribute?.Value;
+                var convertedType = TypeConverter(valueAttribute?.Value);
+                return convertedType.Equals(default) ? (TValue)valueAttribute?.Value : convertedType;
             }
         }
 
@@ -142,17 +147,40 @@ namespace EnhancedEnum
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>TDerived.</returns>
-        public static TDerived Convert(string value) => Values.FirstOrDefault(x => x.Name == value);
+        public static TDerived Convert(string value) => Values.FirstOrDefault(x => x.Name == value) ?? GetFlagDefault(value);
 
         /// <summary>
         /// Converts the specified value.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>TDerived.</returns>
-        public static TDerived Convert(TValue value) => Values.FirstOrDefault(x => x.Value.Equals(value));
+        public static TDerived Convert(TValue value) => Values.FirstOrDefault(x => x.Value.Equals(value)) ?? GetFlagDefault(value);
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="System.String" /> to <see cref="EnhancedEnum{TValue, TDerived}" />.
+        /// Determines whether the specified flags has flag.
+        /// </summary>
+        /// <param name="flags">The <see cref="EnhancedEnum{TValue,TDerived}" />.</param>
+        /// <param name="flag">The flag.</param>
+        /// <returns><c>true</c> if the specified flags has flag; otherwise, <c>false</c>.</returns>
+        public static bool HasFlag(int flags, int flag) => IsFlag && ((flags & flag) != 0);
+
+        /// <summary>
+        /// Determines whether the specified flag has flag.
+        /// </summary>
+        /// <param name="flag">The flag.</param>
+        /// <returns><c>true</c> if the specified flag has flag; otherwise, <c>false</c>.</returns>
+        public bool HasFlag(int flag)
+        {
+            if (!IsFlag || !int.TryParse(Value.ToString(), out var flags))
+            {
+                return false;
+            }
+
+            return IsFlag && (((flags & flag) != 0) || flag == 0);
+        }
+
+        /// <summary>
+        /// Performs an implicit conversion from <see cref="string" /> to <see cref="EnhancedEnum{TValue, TDerived}" />.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The result of the conversion.</returns>
@@ -168,7 +196,7 @@ namespace EnhancedEnum
             Values.FirstOrDefault(x => x.Value.Equals(value2));
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="EnhancedEnum{TValue, TDerived}" /> to <see cref="System.String" />.
+        /// Performs an implicit conversion from <see cref="EnhancedEnum{TValue, TDerived}" /> to <see cref="string" />.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The result of the conversion.</returns>
@@ -177,9 +205,9 @@ namespace EnhancedEnum
         /// <summary>
         /// Performs an implicit conversion from <see cref="EnhancedEnum{TValue, TDerived}" /> to <see cref="TValue" />.
         /// </summary>
-        /// <param name="value2">The value2.</param>
+        /// <param name="value">The value2.</param>
         /// <returns>The result of the conversion.</returns>
-        public static implicit operator TValue(EnhancedEnum<TValue, TDerived> value2) => value2.Value;
+        public static implicit operator TValue(EnhancedEnum<TValue, TDerived> value) => value.Value;
 
         /// <summary>
         /// Implements the != operator.
@@ -296,10 +324,10 @@ namespace EnhancedEnum
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="System.Object" /> is equal to this instance.
+        /// Determines whether the specified <see cref="object" /> is equal to this instance.
         /// </summary>
         /// <param name="obj">The object to compare with the current object.</param>
-        /// <returns><c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
+        /// <returns><c>true</c> if the specified <see cref="object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -329,10 +357,17 @@ namespace EnhancedEnum
         public override int GetHashCode() => Name.GetHashCode();
 
         /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
+        /// Returns a <see cref="string" /> that represents this instance.
         /// </summary>
-        /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
+        /// <returns>A <see cref="string" /> that represents this instance.</returns>
         public override string ToString() => Name;
+
+        /// <summary>
+        /// Types the converter.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>TValue.</returns>
+        protected virtual TValue TypeConverter(object value) => default;
 
         /// <summary>
         ///   Ensures the setup.
@@ -344,6 +379,10 @@ namespace EnhancedEnum
             {
                 return;
             }
+
+            IsFlag = typeof(TDerived)
+                     .GetCustomAttribute<FlagAttribute>() !=
+                     null;
 
             var fields = typeof(TDerived)
                          .GetFields(BindingFlags.Static | BindingFlags.GetField | BindingFlags.Public)
@@ -359,19 +398,52 @@ namespace EnhancedEnum
                     continue;
                 }
 
+                if (IsFlag && defaultDerived == null)
+                {
+                    defaultDerived = instance;
+                }
+
                 valCount++;
                 instance.name = field.Name;
                 instance.descriptionAttribute = field.GetCustomAttribute<DescriptionAttribute>();
                 instance.displayNameAttribute = field.GetCustomAttribute<DisplayNameAttribute>();
                 instance.valueAttribute = field.GetCustomAttribute<ValueAttribute>() ?? new ValueAttribute(valCount);
 
-                if (!(instance.valueAttribute?.Value is TValue))
+                var convertedType = instance.TypeConverter(instance.valueAttribute?.Value);
+                var convertedValue = convertedType.Equals(default) ? instance.valueAttribute?.Value : convertedType;
+
+                if (!(convertedValue is TValue))
                 {
                     throw new ArgumentException("Provided value must be of type 'TValue'", nameof(TValue));
                 }
             }
 
             isSetup = true;
+        }
+
+        private static TDerived GetFlagDefault(string value)
+        {
+            if (!IsFlag)
+            {
+                return null;
+            }
+            EnsureSetup();
+            var d = (TDerived)(defaultDerived.MemberwiseClone());
+            d.displayNameAttribute = new DisplayNameAttribute(value);
+
+            return d;
+        }
+        private static TDerived GetFlagDefault(TValue value)
+        {
+            if (!IsFlag)
+            {
+                return null;
+            }
+            EnsureSetup();
+            var d = (TDerived) (defaultDerived.MemberwiseClone());
+            d.valueAttribute = new ValueAttribute(value);
+
+            return d;
         }
 
         #endregion Methods

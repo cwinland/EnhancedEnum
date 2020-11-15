@@ -4,56 +4,63 @@
 // Created          : 11-12-2020
 //
 // Last Modified By : chris
-// Last Modified On : 11-13-2020
+// Last Modified On : 11-15-2020
 // ***********************************************************************
-// <copyright file="StatusTest.cs" company="EnhancedEnum.Tests">
+// <copyright file="NonIntEnum.cs" company="EnhancedEnum.Tests">
 //     Copyright (c) . All rights reserved.
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-namespace EnhancedEnum.Tests
+using EnhancedEnum.Attributes;
+using System;
+
+namespace EnhancedEnum.Tests.Enums
 {
     /// <summary>
-    /// Class StatusTest. This class cannot be inherited. Implements the <see cref="EnhancedEnum.EnhancedEnum{System.Int32,&#xD;&#xA;EnhancedEnum.Tests.StatusTest}" />
+    /// Class NonInt. This class cannot be inherited. Implements the <see cref="EnhancedEnum{TValue,TDerived}" />
     /// </summary>
-    /// <seealso cref="EnhancedEnum.EnhancedEnum{System.Int32, EnhancedEnum.Tests.StatusTest}" />
-    public sealed class StatusTest : EnhancedEnum<int, StatusTest>
+    /// <seealso cref="EnhancedEnum{TValue,TDerived}" />
+    public sealed class NonIntEnum : EnhancedEnum<DateTime, NonIntEnum>
     {
         // DisplayName is 'In Process' (because of the DisplayName attribute). Value is 5 (because of the Value attribute).
         /// <summary>
         /// The running
         /// </summary>
-        [Description("Indicates Running")]
-        [DisplayName("In Process")]
-        [Value(5)]
-        public static readonly StatusTest Running = new StatusTest();
+        [Description("Indicates Month of December")]
+        [DisplayName("December 1st")]
+        [Value("12/1/2020")]
+        public static readonly NonIntEnum December = new NonIntEnum();
 
         // DisplayName is Stopped. Value is 2 (because it is the second one in the list).
         /// <summary>
         /// The stopped
         /// </summary>
-        public static readonly StatusTest Stopped = new StatusTest();
+        [Value("11/1/2020")]
+        public static readonly NonIntEnum November = new NonIntEnum();
 
         // DisplayName is Error. Value is 3 (because it is the third one in the list).
         /// <summary>
         /// The error
         /// </summary>
-        public static readonly StatusTest Error = new StatusTest();
+        [Value("1/1/2020")]
+        public static readonly NonIntEnum January = new NonIntEnum();
 
         // This allows us to assign back to this class.
-
         /// <summary>
-        /// Performs an implicit conversion from <see cref="System.String"/> to <see cref="StatusTest"/>.
+        /// Performs an implicit conversion from <see cref="System.String" /> to <see cref="NonIntEnum" />.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The result of the conversion.</returns>
-        public static implicit operator StatusTest(string value) => Convert(value);
+        public static implicit operator NonIntEnum(string value) => Convert(value);
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="System.Int32" /> to <see cref="StatusTest" />.
+        /// Performs an implicit conversion from <see cref="System.Int32" /> to <see cref="NonIntEnum" />.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The result of the conversion.</returns>
-        public static implicit operator StatusTest(int value) => Convert(value);
+        public static implicit operator NonIntEnum(DateTime value) => Convert(value);
+
+        /// <inheritdoc />
+        protected override DateTime TypeConverter(object value) => DateTime.Parse(value.ToString());
     }
 }

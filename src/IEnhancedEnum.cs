@@ -4,7 +4,7 @@
 // Created          : 11-13-2020
 //
 // Last Modified By : chris Last Modified On : 11-13-2020 ***********************************************************************
-// Last Modified On : 11-13-2020
+// Last Modified On : 11-15-2020
 // ***********************************************************************
 // <copyright file="IEnhancedEnum.cs" company="Microsoft Corporation">
 //     copyright(c) 2020 Christopher Winland
@@ -13,7 +13,7 @@
 // ***********************************************************************
 using System;
 using System.Collections.Generic;
-using System.Text;
+using EnhancedEnum.Attributes;
 
 namespace EnhancedEnum
 {
@@ -27,9 +27,9 @@ namespace EnhancedEnum
     /// <seealso cref="System.IComparable{TDerived}" />
     /// <seealso cref="System.IComparable" />
     /// <seealso cref="System.Collections.Generic.IComparer{TDerived}" />
-    public interface IEnhancedEnum<TValue, TDerived> : IEquatable<TDerived>,
-                                                       IComparable<TDerived>,
-                                                       IComparable, IComparer<TDerived>
+    public interface IEnhancedEnum<out TValue, TDerived> : IEquatable<TDerived>,
+                                                           IComparable<TDerived>,
+                                                           IComparable, IComparer<TDerived>
 
     {
         /// <summary>
@@ -49,5 +49,13 @@ namespace EnhancedEnum
         /// </summary>
         /// <value>The value.</value>
         TValue Value { get; }
+
+        /// <summary>
+        /// Determines whether the specified flag has flag.
+        /// </summary>
+        /// <param name="flag">The flag.</param>
+        /// <returns><c>true</c> if the specified flag has flag; otherwise, <c>false</c>.</returns>
+        bool HasFlag(int flag);
+
     }
 }

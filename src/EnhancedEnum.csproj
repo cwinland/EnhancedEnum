@@ -48,11 +48,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Include="DescriptionAttribute.cs" />
-	  <Compile Include="DisplayNameAttribute.cs" />
+	  <Compile Include="Attributes\DescriptionAttribute.cs" />
+	  <Compile Include="Attributes\DisplayNameAttribute.cs" />
+	  <Compile Include="Attributes\FlagAttribute.cs" />
 	  <Compile Include="EnhancedEnum.cs" />
 	  <Compile Include="IEnhancedEnum.cs" />
-	  <Compile Include="ValueAttribute.cs" />
+	  <Compile Include="Attributes\ValueAttribute.cs" />
 	</ItemGroup>
 	<ItemGroup>
 		<None Include="..\LICENSE">

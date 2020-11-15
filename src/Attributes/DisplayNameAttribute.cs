@@ -4,34 +4,34 @@
 // Created          : 11-13-2020
 //
 // Last Modified By : chris Last Modified On : 11-13-2020 ***********************************************************************
-// Last Modified On : 11-13-2020
+// Last Modified On : 11-14-2020
 // ***********************************************************************
-// <copyright file="ValueAttribute.cs" company="Microsoft Corporation">
+// <copyright file="DisplayNameAttribute.cs" company="Microsoft Corporation">
 //     copyright(c) 2020 Christopher Winland
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
 using System;
 
-namespace EnhancedEnum
+namespace EnhancedEnum.Attributes
 {
     /// <summary>
-    /// Class ValueAttribute. This class cannot be inherited. Implements the <see cref="System.Attribute" />
+    /// Class DisplayNameAttribute. This class cannot be inherited. Implements the <see cref="System.Attribute" />
     /// </summary>
     /// <seealso cref="System.Attribute" />
     [AttributeUsage(AttributeTargets.Field)]
-    public sealed class ValueAttribute : Attribute
+    public sealed class DisplayNameAttribute : Attribute
     {
         /// <summary>
-        /// Gets the value.
+        /// Gets the name.
         /// </summary>
-        /// <value>The value.</value>
-        public object Value { get; }
+        /// <value>The name.</value>
+        public string Name { get; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ValueAttribute" /> class.
+        /// Initializes a new instance of the <see cref="DisplayNameAttribute" /> class.
         /// </summary>
-        /// <param name="value">The value.</param>
-        public ValueAttribute(object value) => Value = value;
+        /// <param name="name">The name.</param>
+        public DisplayNameAttribute(string name) => Name = name;
     }
 }
