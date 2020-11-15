@@ -234,19 +234,19 @@
         </member>
         <member name="M:EnhancedEnum.EnhancedEnum`2.TryConvert(System.String,`1@)">
             <summary>
-            Tries the convert.
+            Tries the convert the string to <see cref="!:TDerived"/>.
             </summary>
             <param name="value">The value.</param>
             <param name="result">The result.</param>
-            <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+            <returns><c>true</c> if <see cref="!:TDerived"/>, <c>false</c> otherwise.</returns>
         </member>
         <member name="M:EnhancedEnum.EnhancedEnum`2.TryConvert(`0,`1@)">
             <summary>
-            Tries the convert.
+            Tries the convert <see cref="!:TValue"/> to <see cref="!:TDerived"/>.
             </summary>
             <param name="value">The value.</param>
             <param name="result">The result.</param>
-            <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+            <returns><c>true</c> if <see cref="!:TDerived"/>, <c>false</c> otherwise.</returns>
         </member>
         <member name="M:EnhancedEnum.EnhancedEnum`2.System#Collections#Generic#IComparer{TDerived}#Compare(`1,`1)">
             <summary>

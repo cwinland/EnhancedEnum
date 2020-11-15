@@ -162,7 +162,7 @@ namespace EnhancedEnum
         /// <param name="flags">The <see cref="EnhancedEnum{TValue,TDerived}" />.</param>
         /// <param name="flag">The flag.</param>
         /// <returns><c>true</c> if the specified flags has flag; otherwise, <c>false</c>.</returns>
-        public static bool HasFlag(int flags, int flag) => IsFlag && ((flags & flag) != 0);
+        public static bool HasFlag(int flags, int flag) => IsFlag && (flags & flag) != 0;
 
         /// <summary>
         /// Determines whether the specified flag has flag.
@@ -176,7 +176,7 @@ namespace EnhancedEnum
                 return false;
             }
 
-            return IsFlag && (((flags & flag) != 0) || flag == 0);
+            return IsFlag && ((flags & flag) != 0 || flag == 0);
         }
 
         /// <summary>
@@ -263,11 +263,11 @@ namespace EnhancedEnum
             left.Value == null ? right.Value == null : left.Value.CompareTo(right.Value) >= 0;
 
         /// <summary>
-        /// Tries the convert.
+        /// Tries the convert the string to <see cref="TDerived"/>.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <param name="result">The result.</param>
-        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <returns><c>true</c> if <see cref="TDerived"/>, <c>false</c> otherwise.</returns>
         public static bool TryConvert(string value, out TDerived result)
         {
             result = Values.FirstOrDefault(x => x.Name == value);
@@ -276,11 +276,11 @@ namespace EnhancedEnum
         }
 
         /// <summary>
-        /// Tries the convert.
+        /// Tries the convert <see cref="TValue"/> to <see cref="TDerived"/>.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <param name="result">The result.</param>
-        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <returns><c>true</c> if <see cref="TDerived"/>, <c>false</c> otherwise.</returns>
         public static bool TryConvert(TValue value, out TDerived result)
         {
             result = Values.FirstOrDefault(x => x.Value.Equals(value));
@@ -428,7 +428,7 @@ namespace EnhancedEnum
                 return null;
             }
             EnsureSetup();
-            var d = (TDerived)(defaultDerived.MemberwiseClone());
+            var d = (TDerived)defaultDerived.MemberwiseClone();
             d.displayNameAttribute = new DisplayNameAttribute(value);
 
             return d;
@@ -440,7 +440,7 @@ namespace EnhancedEnum
                 return null;
             }
             EnsureSetup();
-            var d = (TDerived) (defaultDerived.MemberwiseClone());
+            var d = (TDerived) defaultDerived.MemberwiseClone();
             d.valueAttribute = new ValueAttribute(value);
 
             return d;

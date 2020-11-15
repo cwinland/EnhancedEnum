@@ -22,9 +22,8 @@ namespace EnhancedEnum.Tests.Enums
     /// <seealso cref="EnhancedEnum{TValue,TDerived}" />
     public sealed class NonIntEnum : EnhancedEnum<DateTime, NonIntEnum>
     {
-        // DisplayName is 'In Process' (because of the DisplayName attribute). Value is 5 (because of the Value attribute).
         /// <summary>
-        /// The running
+        /// December
         /// </summary>
         [Description("Indicates Month of December")]
         [DisplayName("December 1st")]
@@ -33,14 +32,13 @@ namespace EnhancedEnum.Tests.Enums
 
         // DisplayName is Stopped. Value is 2 (because it is the second one in the list).
         /// <summary>
-        /// The stopped
+        /// November
         /// </summary>
         [Value("11/1/2020")]
         public static readonly NonIntEnum November = new NonIntEnum();
 
-        // DisplayName is Error. Value is 3 (because it is the third one in the list).
         /// <summary>
-        /// The error
+        /// January
         /// </summary>
         [Value("1/1/2020")]
         public static readonly NonIntEnum January = new NonIntEnum();
