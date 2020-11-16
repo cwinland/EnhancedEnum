@@ -4,13 +4,14 @@
 // Created          : 11-14-2020
 //
 // Last Modified By : chris
-// Last Modified On : 11-15-2020
+// Last Modified On : 11-16-2020
 // ***********************************************************************
 // <copyright file="FlagsTests.cs" company="EnhancedEnum.Tests">
 //     Copyright (c) . All rights reserved.
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+using System;
 using System.Linq;
 using EnhancedEnum.Tests.Enums;
 using FluentAssertions;
@@ -28,7 +29,10 @@ namespace EnhancedEnum.Tests
         /// Initializes this instance.
         /// </summary>
         [TestInitialize]
-        public void Init() { }
+        public void Init()
+        {
+            FlagsEnum.ThrowOnError = false;
+        }
 
         /// <summary>
         /// Defines the test method Test_Errors.
@@ -49,6 +53,10 @@ namespace EnhancedEnum.Tests
             t = t3;
             t.Should()
              .Be(FlagsEnum.None);
+            FlagsEnum.ThrowOnError = true;
+            Action act = () => t = t3;
+            act.Should()
+               .Throw<InvalidOperationException>();
         }
 
         /// <summary>
@@ -63,6 +71,12 @@ namespace EnhancedEnum.Tests
 
             t.Should()
              .Be(0);
+
+            t = FlagsEnum.Four;
+            t.Should()
+             .Be(FlagsEnum.Four);
+            t.Should()
+             .Be(4);
 
             t = "One";
             t.Should()
@@ -79,6 +93,16 @@ namespace EnhancedEnum.Tests
             t = FlagsEnum.One | FlagsEnum.Two;
             t.Should()
              .Be(3);
+
+            string flags = t;
+            flags
+             .Should()
+             .Be("One,Two");
+
+            FlagsEnum stringTest = flags;
+            stringTest.Should()
+                      .Be(t);
+
             FlagsEnum.HasFlag(t, FlagsEnum.Two)
              .Should()
              .BeTrue();
@@ -96,6 +120,9 @@ namespace EnhancedEnum.Tests
              .BeFalse();
         }
 
+        /// <summary>
+        /// Defines the test method Compare_Tests.
+        /// </summary>
         [TestMethod]
         public void Compare_Tests()
         {

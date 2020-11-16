@@ -4,7 +4,7 @@
 // Created          : 11-15-2020
 //
 // Last Modified By : chris
-// Last Modified On : 11-15-2020
+// Last Modified On : 11-16-2020
 // ***********************************************************************
 // <copyright file="FlagsEnum.cs" company="EnhancedEnum.Tests">
 //     Copyright (c) . All rights reserved.
@@ -62,5 +62,8 @@ namespace EnhancedEnum.Tests.Enums
         /// <param name="value">The value.</param>
         /// <returns>The result of the conversion.</returns>
         public static implicit operator FlagsEnum(int value) => Convert(value);
+
+        /// <inheritdoc />
+        protected override FlagsEnum GetValue(int value) => Convert(value);
     }
 }

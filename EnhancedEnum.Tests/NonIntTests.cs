@@ -85,6 +85,9 @@ namespace EnhancedEnum.Tests
                       .BeFalse();
         }
 
+        /// <summary>
+        /// Defines the test method Compare_Tests.
+        /// </summary>
         [TestMethod]
         public void Compare_Tests()
         {

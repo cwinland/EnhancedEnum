@@ -122,6 +122,7 @@ Enumeration that auto converts to string, integer, as well as provides easy loop
         // This allows us to assign back to this class.
         public static implicit operator FlagsEnum(string value) => Convert(value);
         public static implicit operator FlagsEnum(int value) => Convert(value);
+        protected override FlagsEnum GetValue(int value) => Convert(value);
     }
 ```
 

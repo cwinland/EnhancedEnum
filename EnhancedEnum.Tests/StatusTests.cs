@@ -4,7 +4,7 @@
 // Created          : 11-12-2020
 //
 // Last Modified By : chris
-// Last Modified On : 11-15-2020
+// Last Modified On : 11-16-2020
 // ***********************************************************************
 // <copyright file="StatusTests.cs" company="EnhancedEnum.Tests">
 //     Copyright (c) . All rights reserved.

@@ -4,18 +4,18 @@
 // Created          : 11-12-2020
 //
 // Last Modified By : chris
-// Last Modified On : 11-15-2020
+// Last Modified On : 11-16-2020
 // ***********************************************************************
 // <copyright file="EnhancedEnum.cs" company="Microsoft Corporation">
 //     copyright(c) 2020 Christopher Winland
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
+using EnhancedEnum.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using EnhancedEnum.Attributes;
 
 namespace EnhancedEnum
 {
@@ -125,7 +125,12 @@ namespace EnhancedEnum
             get
             {
                 EnsureSetup();
-                return displayNameAttribute?.Name ?? name;
+
+                return IsFlag ? string.Join(",",
+                                            values.Where(x => (int)(x.Value.Value as object) > 0 && HasFlag((int) (x.Value.Value as object)))
+                                                  .Select(x => x.Value.displayNameAttribute?.Name ?? x.Value.name)
+                                                  .ToList())
+                    : displayNameAttribute?.Name ?? name;
             }
         }
 
@@ -153,9 +158,9 @@ namespace EnhancedEnum
         /// <param name="value">The value.</param>
         /// <returns>TDerived.</returns>
         public static TDerived Convert(string value) =>
-            (ThrowOnError)
-                ? Values.First(x => x.Name == value) ?? GetFlagDefault(value)
-                : Values.FirstOrDefault(x => x.Name == value) ?? GetFlagDefault(value);
+            ThrowOnError
+                ? Values.First(x => (x.displayNameAttribute?.Name ?? x.name) == value) ?? GetFlagDefault(value)
+                : Values.FirstOrDefault(x => (x.displayNameAttribute?.Name ?? x.name) == value) ?? GetFlagDefault(value);
 
         /// <summary>
         /// Converts the specified value.
@@ -163,7 +168,7 @@ namespace EnhancedEnum
         /// <param name="value">The value.</param>
         /// <returns>TDerived.</returns>
         public static TDerived Convert(TValue value) =>
-            (ThrowOnError)
+            ThrowOnError
                 ? Values.First(x => x.Value.Equals(value)) ?? GetFlagDefault(value)
                 : Values.FirstOrDefault(x => x.Value.Equals(value)) ?? GetFlagDefault(value);
 
@@ -274,11 +279,11 @@ namespace EnhancedEnum
             left.Value == null ? right.Value == null : left.Value.CompareTo(right.Value) >= 0;
 
         /// <summary>
-        /// Tries the convert the string to <see cref="TDerived"/>.
+        /// Tries the convert the string to <see cref="TDerived" />.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <param name="result">The result.</param>
-        /// <returns><c>true</c> if <see cref="TDerived"/>, <c>false</c> otherwise.</returns>
+        /// <returns><c>true</c> if <see cref="TDerived" />, <c>false</c> otherwise.</returns>
         public static bool TryConvert(string value, out TDerived result)
         {
             result = Values.FirstOrDefault(x => x.Name == value);
@@ -287,11 +292,11 @@ namespace EnhancedEnum
         }
 
         /// <summary>
-        /// Tries the convert <see cref="TValue"/> to <see cref="TDerived"/>.
+        /// Tries the convert <see cref="TValue" /> to <see cref="TDerived" />.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <param name="result">The result.</param>
-        /// <returns><c>true</c> if <see cref="TDerived"/>, <c>false</c> otherwise.</returns>
+        /// <returns><c>true</c> if <see cref="TDerived" />, <c>false</c> otherwise.</returns>
         public static bool TryConvert(TValue value, out TDerived result)
         {
             result = Values.FirstOrDefault(x => x.Value.Equals(value));
@@ -380,6 +385,16 @@ namespace EnhancedEnum
         /// <returns>TValue.</returns>
         protected virtual TValue TypeConverter(object value) => default;
 
+        private static List<TDerived> GetInstances()
+        {
+            var fields = typeof(TDerived)
+                         .GetFields(BindingFlags.Static | BindingFlags.GetField | BindingFlags.Public)
+                         .Where(t => t.FieldType == typeof(TDerived));
+
+            return fields.Select(field => (TDerived) field.GetValue(null))
+                         .ToList();
+        }
+
         /// <summary>
         ///   Ensures the setup.
         /// </summary>
@@ -434,16 +449,40 @@ namespace EnhancedEnum
 
         private static TDerived GetFlagDefault(string value)
         {
-            if (!IsFlag)
+            if (!IsFlag || string.IsNullOrEmpty(value) && ThrowOnError)
             {
                 return null;
             }
-            EnsureSetup();
-            var d = (TDerived)defaultDerived.MemberwiseClone();
-            d.displayNameAttribute = new DisplayNameAttribute(value);
 
-            return d;
+            if (string.IsNullOrEmpty(value))
+            {
+                return GetInstances()
+                       .First()
+                       .GetValue(0);
+            }
+
+            EnsureSetup();
+            var list = new List<TDerived>();
+
+            value.Split(',')
+                 .ToList()
+                 .ForEach(s => list.Add(Convert(s.Trim())));
+
+            var result = 0;
+
+            list.ForEach(x=>result |= (int)(x.Value as object));
+
+            return GetInstances().First().GetValue(result);
         }
+
+        /// <summary>
+        /// Gets the value.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>int.</returns>
+        /// <exception cref="NotImplementedException"></exception>
+        protected virtual TDerived GetValue(int value) => throw new NotImplementedException();
+
         private static TDerived GetFlagDefault(TValue value)
         {
             if (!IsFlag)

@@ -315,6 +315,13 @@
             </summary>
             <exception cref="T:System.ArgumentException">Provided value must be of type 'TValue' - TValue</exception>
         </member>
+        <member name="M:EnhancedEnum.EnhancedEnum`2.GetValue(System.Int32)">
+            <summary>
+            Gets the value.
+            </summary>
+            <param name="value">The value.</param>
+            <returns>int.</returns>
+        </member>
         <member name="T:EnhancedEnum.IEnhancedEnum`2">
             <summary>
             Interface IEnhancedEnum Implements the <see cref="T:System.IEquatable`1" /> Implements the <see cref="T:System.IComparable`1" />
