@@ -11,6 +11,7 @@
 // </copyright>
 // <summary>Tests for EnhancedNum class.</summary>
 // ***********************************************************************
+using System;
 using EnhancedEnum.Tests.Enums;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -31,18 +32,88 @@ namespace EnhancedEnum.Tests
         private StatusEnum t4;
         private StatusEnum t5;
 
+        private RegularEnum regularEnum;
+        private StatusEnum enhancedEnum;
+        private FlagsEnum flagsEnum;
+
         /// <summary>
         /// Initializes this instance.
         /// </summary>
         [TestInitialize]
         public void Init()
         {
+            StatusEnum.ThrowOnError = false;
             t = StatusEnum.Running;
             t2 = StatusEnum.Stopped;
             t3 = StatusEnum.Error;
             vals = StatusEnum.Values;
             t4 = t3;
             t5 = t;
+        }
+
+        /// <summary>
+        /// Defines the test method CompareEnums.
+        /// </summary>
+        [TestMethod]
+        public void CompareEnums()
+        {
+            string sRegular = RegularEnum.Running.ToString();
+            string sEnhanced = StatusEnum.Running;
+            string sFlags = FlagsEnum.Four;
+
+            int iRegular = (int)RegularEnum.Running;
+            int iEnhanced = StatusEnum.Running;
+            int iFlags = FlagsEnum.Four;
+
+            // String to Enum
+            regularEnum = (RegularEnum)Enum.Parse(typeof(RegularEnum), sRegular);
+            regularEnum = Enum.Parse<RegularEnum>(sRegular);
+            enhancedEnum = sEnhanced;
+            flagsEnum = sFlags;
+
+            // Int to Enum
+            regularEnum = (RegularEnum)iRegular;
+            enhancedEnum = iEnhanced;
+            flagsEnum = iFlags;
+
+            // Flag Manipulation
+            regularEnum = RegularEnum.Stopped | RegularEnum.Error;
+            flagsEnum = FlagsEnum.Four | FlagsEnum.Eight;
+            regularEnum.HasFlag(RegularEnum.Stopped);
+            flagsEnum.HasFlag(FlagsEnum.Four);
+            // regularEnum.HasFlag(2); // Compile Error
+            flagsEnum.HasFlag(2); // Valid check
+
+            // Errors on conversion: Configurable to be NULL / throw exception.
+            Func<RegularEnum> regularAct = () => regularEnum = (RegularEnum)55; // Assigns 55
+            regularAct.Should()
+                      .NotThrow();
+            regularEnum.Should()
+                       .Be(55);
+
+            regularAct = () => regularEnum = (RegularEnum)Enum.Parse(typeof(RegularEnum), "Running1"); // throws ArgumentException
+            regularAct.Should()
+                      .Throw<ArgumentException>();
+
+            Func<StatusEnum> enhancedAct = () => enhancedEnum = 55; // returns null;
+            enhancedAct.Should()
+                       .NotThrow();
+            enhancedEnum.Should()
+                        .BeNull();
+
+            enhancedAct = () => enhancedEnum = "Running1"; // returns null;
+            enhancedAct.Should()
+                       .NotThrow();
+            enhancedEnum.Should()
+                        .BeNull();
+
+            StatusEnum.ThrowOnError = true;
+            enhancedAct = () => enhancedEnum = 55; // throws InvalidOperationException
+            enhancedAct.Should()
+                       .Throw<InvalidOperationException>();
+            enhancedAct = () => enhancedEnum = "Running1"; // throws InvalidOperationException
+            enhancedAct.Should()
+                       .Throw<InvalidOperationException>();
         }
 
         /// <summary>

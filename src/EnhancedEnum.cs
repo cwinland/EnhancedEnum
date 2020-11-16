@@ -82,6 +82,11 @@ namespace EnhancedEnum
         #endregion Constructors
 
         #region Properties
+        /// <summary>
+        /// Gets or sets a value indicating whether to throw an Exception (instead of null value) when a conversion error occurs.
+        /// </summary>
+        /// <value><c>true</c> if [throw on error]; otherwise, <c>false</c>.</value>
+        public static bool ThrowOnError { get; set; }
 
         /// <summary>
         /// Gets the count.
@@ -147,14 +152,20 @@ namespace EnhancedEnum
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>TDerived.</returns>
-        public static TDerived Convert(string value) => Values.FirstOrDefault(x => x.Name == value) ?? GetFlagDefault(value);
+        public static TDerived Convert(string value) =>
+            (ThrowOnError)
+                ? Values.First(x => x.Name == value) ?? GetFlagDefault(value)
+                : Values.FirstOrDefault(x => x.Name == value) ?? GetFlagDefault(value);
 
         /// <summary>
         /// Converts the specified value.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>TDerived.</returns>
-        public static TDerived Convert(TValue value) => Values.FirstOrDefault(x => x.Value.Equals(value)) ?? GetFlagDefault(value);
+        public static TDerived Convert(TValue value) =>
+            (ThrowOnError)
+                ? Values.First(x => x.Value.Equals(value)) ?? GetFlagDefault(value)
+                : Values.FirstOrDefault(x => x.Value.Equals(value)) ?? GetFlagDefault(value);
 
         /// <summary>
         /// Determines whether the specified flags has flag.

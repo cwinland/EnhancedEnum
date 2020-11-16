@@ -97,6 +97,12 @@
             </summary>
             <exception cref="T:System.ArgumentException">Value already exists. Value parameter must be unique. - autoValue</exception>
         </member>
+        <member name="P:EnhancedEnum.EnhancedEnum`2.ThrowOnError">
+            <summary>
+            Gets or sets a value indicating whether to throw an Exception (instead of null value) when a conversion error occurs.
+            </summary>
+            <value><c>true</c> if [throw on error]; otherwise, <c>false</c>.</value>
+        </member>
         <member name="P:EnhancedEnum.EnhancedEnum`2.Count">
             <summary>
             Gets the count.
