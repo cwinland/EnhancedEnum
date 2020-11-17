@@ -114,8 +114,28 @@ namespace EnhancedEnum.Tests
             enhancedAct = () => enhancedEnum = "Running1"; // throws InvalidOperationException
             enhancedAct.Should()
                        .Throw<InvalidOperationException>();
+
+            
         }
 
+        /// <summary>
+        /// Defines the test method Hashcode_ShouldBeValue.
+        /// </summary>
+        [TestMethod]
+        public void Hashcode_ShouldBeValue()
+        {
+            StatusEnum.Running.GetHashCode()
+                      .Should()
+                      .Be(5);
+
+            StatusEnum.Stopped.GetHashCode()
+                      .Should()
+                      .Be(2);
+
+            StatusEnum.Error.GetHashCode()
+                      .Should()
+                      .Be(3);
+        }
         /// <summary>
         /// Defines assignment tests.
         /// </summary>

@@ -94,7 +94,14 @@ namespace EnhancedEnum
         /// <value>The count.</value>
         public static int Count => values.Count;
 
-        private static bool IsFlag { get; set; }
+        /// <summary>
+        /// Gets a value indicating whether this instance is flag.
+        /// </summary>
+        /// <value><c>true</c> if this instance is flag; otherwise, <c>false</c>.</value>
+        public static bool IsFlag =>
+            typeof(TDerived)
+                .GetCustomAttribute<FlagAttribute>() !=
+            null;
 
         /// <summary>
         /// Enumerable list of all possible values.
@@ -360,7 +367,7 @@ namespace EnhancedEnum
         }
 
         /// <summary>
-        ///   Indicates whether the current object is equal to another object of the same type.
+        /// Indicates whether the current object is equal to another object of the same type.
         /// </summary>
         /// <param name="other">An object to compare with this object.</param>
         /// <returns>true if the current object is equal to the <paramref name="other">other</paramref> parameter; otherwise, false.</returns>
@@ -370,7 +377,7 @@ namespace EnhancedEnum
         /// Returns a hash code for this instance.
         /// </summary>
         /// <returns>A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.</returns>
-        public override int GetHashCode() => Name.GetHashCode();
+        public override int GetHashCode() => Value.GetHashCode();
 
         /// <summary>
         /// Returns a <see cref="string" /> that represents this instance.
@@ -385,18 +392,18 @@ namespace EnhancedEnum
         /// <returns>TValue.</returns>
         protected virtual TValue TypeConverter(object value) => default;
 
-        private static List<TDerived> GetInstances()
-        {
-            var fields = typeof(TDerived)
-                         .GetFields(BindingFlags.Static | BindingFlags.GetField | BindingFlags.Public)
-                         .Where(t => t.FieldType == typeof(TDerived));
+        private static List<FieldInfo> GetFields() =>
+            typeof(TDerived)
+                .GetFields(BindingFlags.Static | BindingFlags.GetField | BindingFlags.Public)
+                .Where(t => t.FieldType == typeof(TDerived) && (TDerived) t.GetValue(null) != null)
+                .ToList();
 
-            return fields.Select(field => (TDerived) field.GetValue(null))
-                         .ToList();
-        }
+        private static IEnumerable<TDerived> GetInstances() =>
+            GetFields()
+                .Select(field => (TDerived) field.GetValue(null));
 
         /// <summary>
-        ///   Ensures the setup.
+        ///   Ensures the enum is setup.
         /// </summary>
         /// <exception cref="ArgumentException">Provided value must be of type 'TValue' - TValue</exception>
         private static void EnsureSetup()
@@ -406,43 +413,38 @@ namespace EnhancedEnum
                 return;
             }
 
-            IsFlag = typeof(TDerived)
-                     .GetCustomAttribute<FlagAttribute>() !=
-                     null;
+            var valCount = 0; // Count fields
 
-            var fields = typeof(TDerived)
-                         .GetFields(BindingFlags.Static | BindingFlags.GetField | BindingFlags.Public)
-                         .Where(t => t.FieldType == typeof(TDerived));
+            GetFields()
+                .ForEach(
+                    field =>
+                    {
+                        var instance = (TDerived) field.GetValue(null);
 
-            var valCount = 0;
-            foreach (var field in fields)
-            {
-                var instance = (TDerived)field.GetValue(null);
+                        if (IsFlag && defaultDerived == null)
+                        {
+                            defaultDerived = instance;
+                        }
 
-                if (instance == null)
-                {
-                    continue;
-                }
+                        valCount++;
+                        instance.name = field.Name;
+                        instance.descriptionAttribute = field.GetCustomAttribute<DescriptionAttribute>();
+                        instance.displayNameAttribute = field.GetCustomAttribute<DisplayNameAttribute>();
+                        instance.valueAttribute =
+                            field.GetCustomAttribute<ValueAttribute>() ?? new ValueAttribute(valCount);
 
-                if (IsFlag && defaultDerived == null)
-                {
-                    defaultDerived = instance;
-                }
+                        var convertedType = instance.TypeConverter(instance.valueAttribute?.Value);
+                        var convertedValue = convertedType.Equals(default)
+                            ? instance.valueAttribute?.Value
+                            : convertedType;
 
-                valCount++;
-                instance.name = field.Name;
-                instance.descriptionAttribute = field.GetCustomAttribute<DescriptionAttribute>();
-                instance.displayNameAttribute = field.GetCustomAttribute<DisplayNameAttribute>();
-                instance.valueAttribute = field.GetCustomAttribute<ValueAttribute>() ?? new ValueAttribute(valCount);
+                        if (!(convertedValue is TValue))
+                        {
+                            throw new ArgumentException("Provided value must be of type 'TValue'", nameof(TValue));
+                        }
+                    }
+                );
 
-                var convertedType = instance.TypeConverter(instance.valueAttribute?.Value);
-                var convertedValue = convertedType.Equals(default) ? instance.valueAttribute?.Value : convertedType;
-
-                if (!(convertedValue is TValue))
-                {
-                    throw new ArgumentException("Provided value must be of type 'TValue'", nameof(TValue));
-                }
-            }
 
             isSetup = true;
         }
@@ -476,10 +478,11 @@ namespace EnhancedEnum
         }
 
         /// <summary>
-        /// Gets the value.
+        /// Used Internally for Flag implementations to convert an integer to TDerived by the derived class.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>int.</returns>
+        /// <exception cref="System.NotImplementedException"></exception>
         /// <exception cref="NotImplementedException"></exception>
         protected virtual TDerived GetValue(int value) => throw new NotImplementedException();
 

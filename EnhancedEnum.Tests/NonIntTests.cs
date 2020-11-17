@@ -111,5 +111,20 @@ namespace EnhancedEnum.Tests
             string.Compare(dec1, jan1, StringComparison.Ordinal).Should().NotBe(0);
             string.Compare(dec1, dec2, StringComparison.CurrentCultureIgnoreCase).Should().Be(0);
         }
+
+        [TestMethod]
+        public void Hash_ShouldBeValue()
+        {
+            NonIntEnum.December.GetHashCode()
+                     .Should()
+                     .Be(50779532);
+            NonIntEnum.January.GetHashCode()
+                      .Should()
+                      .Be(-2085908915);
+            NonIntEnum.November.GetHashCode()
+                      .Should()
+                      .Be(463584761);
+
+        }
     }
 }

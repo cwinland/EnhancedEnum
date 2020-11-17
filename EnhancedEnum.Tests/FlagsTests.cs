@@ -65,6 +65,9 @@ namespace EnhancedEnum.Tests
         [TestMethod]
         public void Test_Flags()
         {
+            FlagsEnum.IsFlag.Should()
+                     .BeTrue();
+
             var t = FlagsEnum.None;
             t.Should()
              .Be(FlagsEnum.None);
@@ -142,6 +145,27 @@ namespace EnhancedEnum.Tests
             noFlag.HasFlag(0)
                   .Should()
                   .BeTrue();
+        }
+
+        [TestMethod]
+        public void Hash_ShouldBeValue()
+        {
+            var flags = FlagsEnum.One;
+            var flags2 = FlagsEnum.Two;
+            var flags3 = FlagsEnum.Eight;
+            flags.GetHashCode()
+                 .Should()
+                 .Be(1);
+            FlagsEnum.One.GetHashCode()
+                 .Should()
+                 .Be(1);
+            flags2.GetHashCode()
+                  .Should()
+                  .Be(2);
+            flags3.GetHashCode()
+                  .Should()
+                  .Be(8);
+
         }
     }
 }
