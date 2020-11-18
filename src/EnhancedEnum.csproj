@@ -21,9 +21,9 @@
 	</PropertyGroup>
 	<PropertyGroup>
 		<EnableDefaultCompileItems>false</EnableDefaultCompileItems>
-		<AssemblyVersion>1.$([System.DateTime]::Now.ToString("MM.dd.HHmmss"))</AssemblyVersion>
-		<FileVersion>1.$([System.DateTime]::Now.ToString("MM.dd.HHmmss"))</FileVersion>
-		<Version>1.$([System.DateTime]::Now.ToString("MM.dd.HHmmss"))</Version>
+		<AssemblyVersion>1.$([System.DateTime]::Now.ToString("MM.dd.HHmm"))</AssemblyVersion>
+		<FileVersion>1.$([System.DateTime]::Now.ToString("MM.dd.HHmm"))</FileVersion>
+		<Version>1.$([System.DateTime]::Now.ToString("MM.dd.HHmm"))</Version>
 	</PropertyGroup>
 	<PropertyGroup>
 		<GenerateNuspecDependsOn>$(GenerateNuspecDependsOn);SetPackageVersion</GenerateNuspecDependsOn>
@@ -36,7 +36,7 @@
 		<PropertyGroup>
 			<!-- <PackageVersion>$([System.DateTime]::Now.ToString(&quot;yyyy.MM.dd.HHmmss&quot;))</PackageVersion> -->
 			<!-- You can customize the format and the rule about how version increases here. -->
-			<PackageVersion>1.$([System.DateTime]::Now.ToString("MM.dd.HHmmss"))</PackageVersion>
+			<PackageVersion>1.$([System.DateTime]::Now.ToString("MM.dd.HHmm"))</PackageVersion>
 		</PropertyGroup>
 	</Target>
 
