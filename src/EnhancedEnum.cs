@@ -75,7 +75,7 @@ namespace EnhancedEnum
         private static TDerived defaultDerived;
         // ReSharper disable once StaticMemberInGenericType
         private static bool isSetup;
-        private static SortedList<long, TDerived> values;
+        private static SortedList<int, TDerived> values;
         private string name;
         private readonly List<TValue> validationList = new List<TValue>();
 
@@ -90,9 +90,9 @@ namespace EnhancedEnum
         /// <exception cref="ArgumentException">Provided value, '{}' must be unique.</exception>
         protected EnhancedEnum()
         {
-            values ??= new SortedList<long, TDerived>();
+            values ??= new SortedList<int, TDerived>();
             ValidateAttributes();
-            var autoValue = DateTime.Now.Ticks;
+            var autoValue = values.Count + 1;
             values.Add(autoValue, (TDerived)this);
         }
 
