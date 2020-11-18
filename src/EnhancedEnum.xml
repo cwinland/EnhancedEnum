@@ -91,17 +91,27 @@
             }</code>
             </example>
         </member>
+        <member name="F:EnhancedEnum.EnhancedEnum`2.descriptionAttribute">
+            <summary>
+            The description attribute
+            </summary>
+        </member>
+        <member name="F:EnhancedEnum.EnhancedEnum`2.displayNameAttribute">
+            <summary>
+            The display name attribute
+            </summary>
+        </member>
+        <member name="F:EnhancedEnum.EnhancedEnum`2.valueAttribute">
+            <summary>
+            The value attribute
+            </summary>
+        </member>
         <member name="M:EnhancedEnum.EnhancedEnum`2.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:EnhancedEnum.EnhancedEnum`2" /> class.
             </summary>
-            <exception cref="T:System.ArgumentException">Value already exists. Value parameter must be unique. - autoValue</exception>
-        </member>
-        <member name="P:EnhancedEnum.EnhancedEnum`2.ThrowOnError">
-            <summary>
-            Gets or sets a value indicating whether to throw an Exception (instead of null value) when a conversion error occurs.
-            </summary>
-            <value><c>true</c> if [throw on error]; otherwise, <c>false</c>.</value>
+            <exception cref="T:System.ArgumentException">Provided value, '{}' must be of type 'TValue'. Do you need to overload TypeConverter in the derived class?</exception>
+            <exception cref="T:System.ArgumentException">Provided value, '{}' must be unique.</exception>
         </member>
         <member name="P:EnhancedEnum.EnhancedEnum`2.Count">
             <summary>
@@ -114,6 +124,12 @@
             Gets a value indicating whether this instance is flag.
             </summary>
             <value><c>true</c> if this instance is flag; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:EnhancedEnum.EnhancedEnum`2.ThrowOnError">
+            <summary>
+            Gets or sets a value indicating whether to throw an Exception (instead of null value) when a conversion error occurs.
+            </summary>
+            <value><c>true</c> if [throw on error]; otherwise, <c>false</c>.</value>
         </member>
         <member name="P:EnhancedEnum.EnhancedEnum`2.Values">
             <summary>
@@ -137,7 +153,8 @@
             <summary>
             Value of enumeration as described in <see cref="T:EnhancedEnum.Attributes.ValueAttribute" />
             </summary>
-            <value>The value.</value>
+            <value>The <see cref="F:EnhancedEnum.EnhancedEnum`2.valueAttribute" /> or default value.</value>
+            <exception cref="T:System.ArgumentException">Invalid Value. - TValue</exception>
         </member>
         <member name="M:EnhancedEnum.EnhancedEnum`2.Convert(System.String)">
             <summary>
@@ -160,13 +177,6 @@
             <param name="flags">The <see cref="T:EnhancedEnum.EnhancedEnum`2" />.</param>
             <param name="flag">The flag.</param>
             <returns><c>true</c> if the specified flags has flag; otherwise, <c>false</c>.</returns>
-        </member>
-        <member name="M:EnhancedEnum.EnhancedEnum`2.HasFlag(System.Int32)">
-            <summary>
-            Determines whether the specified flag has flag.
-            </summary>
-            <param name="flag">The flag.</param>
-            <returns><c>true</c> if the specified flag has flag; otherwise, <c>false</c>.</returns>
         </member>
         <member name="M:EnhancedEnum.EnhancedEnum`2.op_Implicit(System.String)~EnhancedEnum.EnhancedEnum{`0,`1}">
             <summary>
@@ -261,26 +271,13 @@
             <returns><c>true</c> if <see cref="!:TDerived" />, <c>false</c> otherwise.</returns>
         </member>
         <member name="M:EnhancedEnum.EnhancedEnum`2.System#Collections#Generic#IComparer{TDerived}#Compare(`1,`1)">
-            <summary>
-              Compares the specified x.
-            </summary>
-            <param name="x">The x.</param>
-            <param name="y">The y.</param>
-            <returns>System.Int32.</returns>
+            <inheritdoc />
         </member>
         <member name="M:EnhancedEnum.EnhancedEnum`2.System#IComparable{TDerived}#CompareTo(`1)">
-            <summary>
-              Compares to.
-            </summary>
-            <param name="other">The other.</param>
-            <returns>System.Int32.</returns>
+            <inheritdoc />
         </member>
         <member name="M:EnhancedEnum.EnhancedEnum`2.System#IComparable#CompareTo(System.Object)">
-            <summary>
-              Compares to.
-            </summary>
-            <param name="obj">The object.</param>
-            <returns>System.Int32.</returns>
+            <inheritdoc />
         </member>
         <member name="M:EnhancedEnum.EnhancedEnum`2.Equals(System.Object)">
             <summary>
@@ -302,11 +299,27 @@
             </summary>
             <returns>A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.</returns>
         </member>
+        <member name="M:EnhancedEnum.EnhancedEnum`2.HasFlag(System.Int32)">
+            <summary>
+            Determines whether the specified flag has flag.
+            </summary>
+            <param name="flag">The flag.</param>
+            <returns><c>true</c> if the specified flag has flag; otherwise, <c>false</c>.</returns>
+        </member>
         <member name="M:EnhancedEnum.EnhancedEnum`2.ToString">
             <summary>
             Returns a <see cref="T:System.String" /> that represents this instance.
             </summary>
             <returns>A <see cref="T:System.String" /> that represents this instance.</returns>
+        </member>
+        <member name="M:EnhancedEnum.EnhancedEnum`2.GetValue(System.Int32)">
+            <summary>
+            Used Internally for Flag implementations to convert an integer to TDerived by the derived class.
+            </summary>
+            <param name="value">The value.</param>
+            <returns>int.</returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+            <exception cref="T:System.NotImplementedException"></exception>
         </member>
         <member name="M:EnhancedEnum.EnhancedEnum`2.TypeConverter(System.Object)">
             <summary>
@@ -321,14 +334,12 @@
             </summary>
             <exception cref="T:System.ArgumentException">Provided value must be of type 'TValue' - TValue</exception>
         </member>
-        <member name="M:EnhancedEnum.EnhancedEnum`2.GetValue(System.Int32)">
+        <member name="M:EnhancedEnum.EnhancedEnum`2.GetAttribute``1">
             <summary>
-            Used Internally for Flag implementations to convert an integer to TDerived by the derived class.
+            Designed to get the Attribute fields by Attribute type while ensuring they are populated correctly before accessing.
             </summary>
-            <param name="value">The value.</param>
-            <returns>int.</returns>
-            <exception cref="T:System.NotImplementedException"></exception>
-            <exception cref="T:System.NotImplementedException"></exception>
+            <typeparam name="T"></typeparam>
+            <returns><see cref="T:System.Attribute"/></returns>
         </member>
         <member name="T:EnhancedEnum.IEnhancedEnum`2">
             <summary>

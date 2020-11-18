@@ -112,6 +112,9 @@ namespace EnhancedEnum.Tests
             string.Compare(dec1, dec2, StringComparison.CurrentCultureIgnoreCase).Should().Be(0);
         }
 
+        /// <summary>
+        /// Defines the test method Hash_ShouldBeValue.
+        /// </summary>
         [TestMethod]
         public void Hash_ShouldBeValue()
         {

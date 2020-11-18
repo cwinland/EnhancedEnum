@@ -30,16 +30,20 @@ namespace EnhancedEnum.Tests
         [TestMethod]
         public void Test_BadValue()
         {
-            var t = BadEnum.Wrong;
-            Func<int> act = () => t.Value;
-            Func<string> act2 = () => t.Description;
-            Func<string> act3 = () => t.Name;
+            Func<BadEnum> act = () => BadEnum.Wrong;
             act.Should()
-               .Throw<ArgumentException>();
+               .Throw<TypeInitializationException>()
+               .WithInnerException<ArgumentException>();
+
+            Func<BadEnum> act2 = () => BadEnum.Value1;
             act2.Should()
-               .Throw<ArgumentException>();
+                .Throw<TypeInitializationException>()
+                .WithInnerException<ArgumentException>();
+
+            Func<BadEnum> act3 = () => BadEnum.Value1Duplicate;
             act3.Should()
-                .Throw<ArgumentException>();
+                .Throw<TypeInitializationException>()
+                .WithInnerException<ArgumentException>();
         }
     }
 }

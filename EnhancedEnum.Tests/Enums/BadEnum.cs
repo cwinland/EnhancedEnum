@@ -28,6 +28,12 @@ namespace EnhancedEnum.Tests.Enums
         [Value("WrongValue Type")]
         public static readonly BadEnum Wrong = new BadEnum();
 
+        [Value(1)]
+        public static readonly BadEnum Value1 = new BadEnum();
+
+        [Value(1)]
+        public static readonly BadEnum Value1Duplicate = new BadEnum();
+
         /// <summary>
         /// The test field.
         /// </summary>

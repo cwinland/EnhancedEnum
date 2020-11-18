@@ -4,7 +4,7 @@
 // Created          : 11-12-2020
 //
 // Last Modified By : chris
-// Last Modified On : 11-16-2020
+// Last Modified On : 11-17-2020
 // ***********************************************************************
 // <copyright file="EnhancedEnum.cs" company="Microsoft Corporation">
 //     copyright(c) 2020 Christopher Winland
@@ -51,13 +51,33 @@ namespace EnhancedEnum
 
         #region Fields
 
+        // ReSharper disable once MemberCanBePrivate.Global
+        // ReSharper disable once NotAccessedField.Global
+        /// <summary>
+        /// The description attribute
+        /// </summary>
+        internal DescriptionAttribute descriptionAttribute;
+
+        // ReSharper disable once MemberCanBePrivate.Global
+        // ReSharper disable once NotAccessedField.Global
+        /// <summary>
+        /// The display name attribute
+        /// </summary>
+        internal DisplayNameAttribute displayNameAttribute;
+
+        // ReSharper disable once MemberCanBePrivate.Global
+        // ReSharper disable once NotAccessedField.Global
+        /// <summary>
+        /// The value attribute
+        /// </summary>
+        internal ValueAttribute valueAttribute;
+
         private static TDerived defaultDerived;
+        // ReSharper disable once StaticMemberInGenericType
         private static bool isSetup;
         private static SortedList<long, TDerived> values;
-        private DescriptionAttribute descriptionAttribute;
-        private DisplayNameAttribute displayNameAttribute;
         private string name;
-        private ValueAttribute valueAttribute;
+        private readonly List<TValue> validationList = new List<TValue>();
 
         #endregion Fields
 
@@ -66,27 +86,19 @@ namespace EnhancedEnum
         /// <summary>
         /// Initializes a new instance of the <see cref="EnhancedEnum{TValue, TDerived}" /> class.
         /// </summary>
-        /// <exception cref="ArgumentException">Value already exists. Value parameter must be unique. - autoValue</exception>
+        /// <exception cref="ArgumentException">Provided value, '{}' must be of type 'TValue'. Do you need to overload TypeConverter in the derived class?</exception>
+        /// <exception cref="ArgumentException">Provided value, '{}' must be unique.</exception>
         protected EnhancedEnum()
         {
             values ??= new SortedList<long, TDerived>();
+            ValidateAttributes();
             var autoValue = DateTime.Now.Ticks;
-            if (values.ContainsKey(autoValue))
-            {
-                throw new ArgumentException("Value already exists. Value parameter must be unique.", nameof(autoValue));
-            }
-            //Value = value;
             values.Add(autoValue, (TDerived)this);
         }
 
         #endregion Constructors
 
         #region Properties
-        /// <summary>
-        /// Gets or sets a value indicating whether to throw an Exception (instead of null value) when a conversion error occurs.
-        /// </summary>
-        /// <value><c>true</c> if [throw on error]; otherwise, <c>false</c>.</value>
-        public static bool ThrowOnError { get; set; }
 
         /// <summary>
         /// Gets the count.
@@ -104,6 +116,13 @@ namespace EnhancedEnum
             null;
 
         /// <summary>
+        /// Gets or sets a value indicating whether to throw an Exception (instead of null value) when a conversion error occurs.
+        /// </summary>
+        /// <value><c>true</c> if [throw on error]; otherwise, <c>false</c>.</value>
+        // ReSharper disable once StaticMemberInGenericType
+        public static bool ThrowOnError { get; set; }
+
+        /// <summary>
         /// Enumerable list of all possible values.
         /// </summary>
         /// <value>The values.</value>
@@ -113,15 +132,7 @@ namespace EnhancedEnum
         /// Description of enumeration as described in <see cref="DescriptionAttribute" />
         /// </summary>
         /// <value>The description.</value>
-        public string Description
-        {
-            get
-            {
-                EnsureSetup();
-
-                return descriptionAttribute?.Description ?? Name;
-            }
-        }
+        public string Description => GetAttribute<DescriptionAttribute>()?.Description ?? Name;
 
         /// <summary>
         /// Name of enumeration as described in <see cref="DisplayNameAttribute" />
@@ -131,27 +142,37 @@ namespace EnhancedEnum
         {
             get
             {
-                EnsureSetup();
-
                 return IsFlag ? string.Join(",",
-                                            values.Where(x => (int)(x.Value.Value as object) > 0 && HasFlag((int) (x.Value.Value as object)))
-                                                  .Select(x => x.Value.displayNameAttribute?.Name ?? x.Value.name)
+                                            values.Where(x => (int)(x.Value.Value as object) > 0 && HasFlag((int)(x.Value.Value as object)))
+                                                  .Select(x => x.Value.GetAttribute<DisplayNameAttribute>()?.Name ?? x.Value.name)
                                                   .ToList())
-                    : displayNameAttribute?.Name ?? name;
+                    : GetAttribute<DisplayNameAttribute>()?.Name ?? name;
             }
         }
 
         /// <summary>
         /// Value of enumeration as described in <see cref="ValueAttribute" />
         /// </summary>
-        /// <value>The value.</value>
+        /// <value>The <see cref="valueAttribute" /> or default value.</value>
+        /// <exception cref="ArgumentException">Invalid Value. - TValue</exception>
         public TValue Value
         {
             get
             {
-                EnsureSetup();
-                var convertedType = TypeConverter(valueAttribute?.Value);
-                return convertedType.Equals(default) ? (TValue)valueAttribute?.Value : convertedType;
+                var attributeValue = GetAttribute<ValueAttribute>();
+
+                if (attributeValue is null)
+                {
+                    throw new ArgumentException("Invalid Value.", nameof(TValue));
+                }
+
+                var convertedType = TypeConverter(attributeValue.Value);
+
+                return convertedType.Equals(default)
+                    ? (TValue) attributeValue
+                          .Value ??
+                      default
+                    : convertedType;
             }
         }
 
@@ -164,10 +185,13 @@ namespace EnhancedEnum
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>TDerived.</returns>
-        public static TDerived Convert(string value) =>
-            ThrowOnError
-                ? Values.First(x => (x.displayNameAttribute?.Name ?? x.name) == value) ?? GetFlagDefault(value)
-                : Values.FirstOrDefault(x => (x.displayNameAttribute?.Name ?? x.name) == value) ?? GetFlagDefault(value);
+        public static TDerived Convert(string value)
+        {
+            return ThrowOnError
+                ? Values.First(x => (x.GetAttribute<DisplayNameAttribute>()?.Name ?? x.name) == value) ?? GetFlagDefault(value)
+                : Values.FirstOrDefault(x => (x.GetAttribute<DisplayNameAttribute>()?.Name ?? x.name) == value) ??
+                  GetFlagDefault(value);
+        }
 
         /// <summary>
         /// Converts the specified value.
@@ -186,21 +210,6 @@ namespace EnhancedEnum
         /// <param name="flag">The flag.</param>
         /// <returns><c>true</c> if the specified flags has flag; otherwise, <c>false</c>.</returns>
         public static bool HasFlag(int flags, int flag) => IsFlag && (flags & flag) != 0;
-
-        /// <summary>
-        /// Determines whether the specified flag has flag.
-        /// </summary>
-        /// <param name="flag">The flag.</param>
-        /// <returns><c>true</c> if the specified flag has flag; otherwise, <c>false</c>.</returns>
-        public bool HasFlag(int flag)
-        {
-            if (!IsFlag || !int.TryParse(Value.ToString(), out var flags))
-            {
-                return false;
-            }
-
-            return IsFlag && ((flags & flag) != 0 || flag == 0);
-        }
 
         /// <summary>
         /// Performs an implicit conversion from <see cref="string" /> to <see cref="EnhancedEnum{TValue, TDerived}" />.
@@ -310,12 +319,7 @@ namespace EnhancedEnum
             return result != null;
         }
 
-        /// <summary>
-        ///   Compares the specified x.
-        /// </summary>
-        /// <param name="x">The x.</param>
-        /// <param name="y">The y.</param>
-        /// <returns>System.Int32.</returns>
+        /// <inheritdoc />
         int IComparer<TDerived>.Compare(TDerived x, TDerived y) =>
                             x == null
                 ? -1
@@ -323,18 +327,10 @@ namespace EnhancedEnum
                     ? 1
                     : string.Compare(x.Name, y.Name, StringComparison.Ordinal);
 
-        /// <summary>
-        ///   Compares to.
-        /// </summary>
-        /// <param name="other">The other.</param>
-        /// <returns>System.Int32.</returns>
-        int IComparable<TDerived>.CompareTo(TDerived other) => Value.CompareTo(other.Value);
+        /// <inheritdoc />
+        int IComparable<TDerived>.CompareTo(TDerived other) => other == null ? -1 : Value.CompareTo(other.Value);
 
-        /// <summary>
-        ///   Compares to.
-        /// </summary>
-        /// <param name="obj">The object.</param>
-        /// <returns>System.Int32.</returns>
+        /// <inheritdoc />
         int IComparable.CompareTo(object obj)
         {
             return obj switch
@@ -380,27 +376,41 @@ namespace EnhancedEnum
         public override int GetHashCode() => Value.GetHashCode();
 
         /// <summary>
+        /// Determines whether the specified flag has flag.
+        /// </summary>
+        /// <param name="flag">The flag.</param>
+        /// <returns><c>true</c> if the specified flag has flag; otherwise, <c>false</c>.</returns>
+        public bool HasFlag(int flag)
+        {
+            if (!IsFlag || !int.TryParse(Value.ToString(), out var flags))
+            {
+                return false;
+            }
+
+            return IsFlag && ((flags & flag) != 0 || flag == 0);
+        }
+
+        /// <summary>
         /// Returns a <see cref="string" /> that represents this instance.
         /// </summary>
         /// <returns>A <see cref="string" /> that represents this instance.</returns>
         public override string ToString() => Name;
 
         /// <summary>
+        /// Used Internally for Flag implementations to convert an integer to TDerived by the derived class.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>int.</returns>
+        /// <exception cref="NotImplementedException"></exception>
+        /// <exception cref="System.NotImplementedException"></exception>
+        protected virtual TDerived GetValue(int value) => throw new NotImplementedException();
+
+        /// <summary>
         /// Types the converter.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>TValue.</returns>
-        protected virtual TValue TypeConverter(object value) => default;
-
-        private static List<FieldInfo> GetFields() =>
-            typeof(TDerived)
-                .GetFields(BindingFlags.Static | BindingFlags.GetField | BindingFlags.Public)
-                .Where(t => t.FieldType == typeof(TDerived) && (TDerived) t.GetValue(null) != null)
-                .ToList();
-
-        private static IEnumerable<TDerived> GetInstances() =>
-            GetFields()
-                .Select(field => (TDerived) field.GetValue(null));
+        protected virtual TValue TypeConverter(object value) => (TValue)value;
 
         /// <summary>
         ///   Ensures the enum is setup.
@@ -414,12 +424,14 @@ namespace EnhancedEnum
             }
 
             var valCount = 0; // Count fields
-
-            GetFields()
+            typeof(TDerived)
+                .GetFields(BindingFlags.Static | BindingFlags.GetField | BindingFlags.Public)
+                .Where(t => t.FieldType == typeof(TDerived) && (TDerived)t.GetValue(null) != null)
+                .ToList()
                 .ForEach(
                     field =>
                     {
-                        var instance = (TDerived) field.GetValue(null);
+                        var instance = (TDerived)field.GetValue(null);
 
                         if (IsFlag && defaultDerived == null)
                         {
@@ -444,7 +456,6 @@ namespace EnhancedEnum
                         }
                     }
                 );
-
 
             isSetup = true;
         }
@@ -472,19 +483,10 @@ namespace EnhancedEnum
 
             var result = 0;
 
-            list.ForEach(x=>result |= (int)(x.Value as object));
+            list.ForEach(x => result |= (int)(x.Value as object));
 
             return GetInstances().First().GetValue(result);
         }
-
-        /// <summary>
-        /// Used Internally for Flag implementations to convert an integer to TDerived by the derived class.
-        /// </summary>
-        /// <param name="value">The value.</param>
-        /// <returns>int.</returns>
-        /// <exception cref="System.NotImplementedException"></exception>
-        /// <exception cref="NotImplementedException"></exception>
-        protected virtual TDerived GetValue(int value) => throw new NotImplementedException();
 
         private static TDerived GetFlagDefault(TValue value)
         {
@@ -493,10 +495,85 @@ namespace EnhancedEnum
                 return null;
             }
             EnsureSetup();
-            var d = (TDerived) defaultDerived.MemberwiseClone();
+            var d = (TDerived)defaultDerived.MemberwiseClone();
             d.valueAttribute = new ValueAttribute(value);
 
             return d;
+        }
+
+        private static IEnumerable<TDerived> GetInstances() =>
+            typeof(TDerived)
+                .GetFields(BindingFlags.Static | BindingFlags.GetField | BindingFlags.Public)
+                .Where(t => t.FieldType == typeof(TDerived) && (TDerived)t.GetValue(null) != null)
+                .ToList()
+                .Select(field => (TDerived)field.GetValue(null));
+
+        /// <summary>
+        /// Designed to get the Attribute fields by Attribute type while ensuring they are populated correctly before accessing.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns><see cref="Attribute"/></returns>
+        private T GetAttribute<T>() where T : Attribute
+        {
+            EnsureSetup(); // Must be called before accessing any attribute value.
+
+            var attributes = GetType()
+                .GetFields(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.GetField);
+            var attribute = attributes.First(x => x.FieldType == typeof(T));
+
+            return (T)attribute.GetValue(this);
+        }
+
+        private void ValidateAttributes()
+        {
+            GetType()
+                .GetRuntimeFields()
+                .Where(x => x.GetCustomAttribute<ValueAttribute>() != null)
+                .Select(x => x.GetCustomAttribute<ValueAttribute>())
+                .ToList()
+                .ForEach(
+                    desiredValue =>
+                    {
+                        TValue convertedValue = default;
+
+                        try
+                        {
+                            if (desiredValue != null)
+                            {
+                                convertedValue = TypeConverter(desiredValue.Value);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            throw new ArgumentException(
+                                $"Provided value, '{desiredValue?.Value}' must be of type 'TValue'. Do you need to overload TypeConverter in the derived class?",
+                                nameof(ValueAttribute),
+                                ex
+                            );
+                        }
+
+                        if (desiredValue == null)
+                        {
+                            return;
+                        }
+
+                        if (convertedValue != null &&
+                            !validationList.Contains(convertedValue))
+                        {
+                            validationList.Add(convertedValue);
+                        }
+                        else
+                        {
+                            if (convertedValue != null && !convertedValue.Equals(default))
+                            {
+                                throw new ArgumentException(
+                                    $"Provided value, '{convertedValue}' must be unique.",
+                                    nameof(ValueAttribute)
+                                );
+                            }
+                        }
+                    }
+                );
         }
 
         #endregion Methods
