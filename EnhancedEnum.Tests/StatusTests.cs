@@ -12,10 +12,10 @@
 // <summary>Tests for EnhancedNum class.</summary>
 // ***********************************************************************
 using System;
+using System.Collections.Generic;
 using EnhancedEnum.Tests.Enums;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
 
 namespace EnhancedEnum.Tests
 {
@@ -25,16 +25,20 @@ namespace EnhancedEnum.Tests
     [TestClass]
     public class StatusTests
     {
+        #region Fields
+
+        private StatusEnum enhancedEnum;
+        private FlagsEnum flagsEnum;
+
+        private RegularEnum regularEnum;
         private string t;
         private StatusEnum t2;
         private int t3;
-        private IEnumerable<StatusEnum> vals;
         private StatusEnum t4;
         private StatusEnum t5;
+        private IEnumerable<StatusEnum> vals;
 
-        private RegularEnum regularEnum;
-        private StatusEnum enhancedEnum;
-        private FlagsEnum flagsEnum;
+        #endregion
 
         /// <summary>
         /// Initializes this instance.
@@ -57,11 +61,11 @@ namespace EnhancedEnum.Tests
         [TestMethod]
         public void CompareEnums()
         {
-            string sRegular = RegularEnum.Running.ToString();
+            var sRegular = RegularEnum.Running.ToString();
             string sEnhanced = StatusEnum.Running;
             string sFlags = FlagsEnum.Four;
 
-            int iRegular = (int)RegularEnum.Running;
+            var iRegular = (int)RegularEnum.Running;
             int iEnhanced = StatusEnum.Running;
             int iFlags = FlagsEnum.Four;
 
@@ -81,6 +85,7 @@ namespace EnhancedEnum.Tests
             flagsEnum = FlagsEnum.Four | FlagsEnum.Eight;
             regularEnum.HasFlag(RegularEnum.Stopped);
             flagsEnum.HasFlag(FlagsEnum.Four);
+
             // regularEnum.HasFlag(2); // Compile Error
             flagsEnum.HasFlag(2); // Valid check
 
@@ -91,7 +96,9 @@ namespace EnhancedEnum.Tests
             regularEnum.Should()
                        .Be(55);
 
-            regularAct = () => regularEnum = (RegularEnum)Enum.Parse(typeof(RegularEnum), "Running1"); // throws ArgumentException
+            regularAct =
+                () => regularEnum =
+                    (RegularEnum)Enum.Parse(typeof(RegularEnum), "Running1"); // throws ArgumentException
             regularAct.Should()
                       .Throw<ArgumentException>();
 
@@ -114,8 +121,6 @@ namespace EnhancedEnum.Tests
             enhancedAct = () => enhancedEnum = "Running1"; // throws InvalidOperationException
             enhancedAct.Should()
                        .Throw<InvalidOperationException>();
-
-            
         }
 
         /// <summary>
@@ -136,6 +141,7 @@ namespace EnhancedEnum.Tests
                       .Should()
                       .Be(3);
         }
+
         /// <summary>
         /// Defines assignment tests.
         /// </summary>
@@ -202,7 +208,7 @@ namespace EnhancedEnum.Tests
             (t3 != t4).Should()
                       .BeFalse();
             (t2 == t4).Should()
-                     .BeFalse();
+                      .BeFalse();
             (t2 != t4).Should()
                       .BeTrue();
             (t3 >= t4).Should()
@@ -210,12 +216,13 @@ namespace EnhancedEnum.Tests
             (t2 <= t4).Should()
                       .BeTrue();
             (t2 > t4).Should()
-                      .BeFalse();
+                     .BeFalse();
             (t2 < t4).Should()
                      .BeTrue();
             t.Equals(t5)
              .Should()
              .BeTrue();
+
             // ReSharper disable once SuspiciousTypeConversion.Global
             t5.Equals(t)
               .Should()

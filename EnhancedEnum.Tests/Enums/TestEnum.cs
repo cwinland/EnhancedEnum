@@ -7,6 +7,8 @@ namespace My.TaskManagement.Enums
     /// </summary>
     public sealed class TestEnum : EnhancedEnum<int, TestEnum>
     {
+        #region Fields
+
         /// <summary>
         ///   Created Job.
         /// </summary>
@@ -41,6 +43,8 @@ namespace My.TaskManagement.Enums
         ///   Job Queued and ready to run.
         /// </summary>
         public static readonly TestEnum EnqueuedState = new TestEnum();
+
+        #endregion
 
         /// <summary>
         /// Performs an implicit conversion from <see cref="System.String"/> to <see cref="TestEnum"/>.

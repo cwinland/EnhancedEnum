@@ -21,6 +21,8 @@ namespace EnhancedEnum.Tests.Enums
     /// <seealso cref="EnhancedEnum{TValue,TDerived}" />
     public sealed class StatusEnum : EnhancedEnum<int, StatusEnum>
     {
+        #region Fields
+
         // DisplayName is 'In Process' (because of the DisplayName attribute). Value is 5 (because of the Value attribute).
         /// <summary>
         /// The running
@@ -41,6 +43,8 @@ namespace EnhancedEnum.Tests.Enums
         /// The error
         /// </summary>
         public static readonly StatusEnum Error = new StatusEnum();
+
+        #endregion
 
         // This allows us to assign back to this class.
         /// <summary>

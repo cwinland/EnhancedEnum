@@ -7,7 +7,6 @@ namespace EnhancedEnum.Tests
     [TestClass]
     public class OtherTests
     {
-
         [TestMethod]
         public void Test()
         {
@@ -21,7 +20,6 @@ namespace EnhancedEnum.Tests
                     .NotBe("Created");
             TestEnum.Creating.Should()
                     .NotBe(1);
-
         }
     }
 }

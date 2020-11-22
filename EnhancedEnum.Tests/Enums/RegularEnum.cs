@@ -25,10 +25,12 @@ namespace EnhancedEnum.Tests.Enums
         /// The running
         /// </summary>
         Running = 1,
+
         /// <summary>
         /// The stopped
         /// </summary>
         Stopped = 2,
+
         /// <summary>
         /// The error
         /// </summary>

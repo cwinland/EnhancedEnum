@@ -11,8 +11,8 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-using EnhancedEnum.Attributes;
 using System;
+using EnhancedEnum.Attributes;
 
 namespace EnhancedEnum.Tests.Enums
 {
@@ -22,6 +22,8 @@ namespace EnhancedEnum.Tests.Enums
     /// <seealso cref="EnhancedEnum{TValue,TDerived}" />
     public sealed class NonIntEnum : EnhancedEnum<DateTime, NonIntEnum>
     {
+        #region Fields
+
         /// <summary>
         /// December
         /// </summary>
@@ -42,6 +44,8 @@ namespace EnhancedEnum.Tests.Enums
         /// </summary>
         [Value("1/1/2020")]
         public static readonly NonIntEnum January = new NonIntEnum();
+
+        #endregion
 
         // This allows us to assign back to this class.
         /// <summary>

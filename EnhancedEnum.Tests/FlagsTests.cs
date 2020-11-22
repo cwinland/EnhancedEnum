@@ -29,10 +29,7 @@ namespace EnhancedEnum.Tests
         /// Initializes this instance.
         /// </summary>
         [TestInitialize]
-        public void Init()
-        {
-            FlagsEnum.ThrowOnError = false;
-        }
+        public void Init() => FlagsEnum.ThrowOnError = false;
 
         /// <summary>
         /// Defines the test method Test_Errors.
@@ -99,16 +96,16 @@ namespace EnhancedEnum.Tests
 
             string flags = t;
             flags
-             .Should()
-             .Be("One,Two");
+                .Should()
+                .Be("One,Two");
 
             FlagsEnum stringTest = flags;
             stringTest.Should()
                       .Be(t);
 
             FlagsEnum.HasFlag(t, FlagsEnum.Two)
-             .Should()
-             .BeTrue();
+                     .Should()
+                     .BeTrue();
             FlagsEnum.HasFlag(t, FlagsEnum.One)
                      .Should()
                      .BeTrue();
@@ -157,15 +154,14 @@ namespace EnhancedEnum.Tests
                  .Should()
                  .Be(1);
             FlagsEnum.One.GetHashCode()
-                 .Should()
-                 .Be(1);
+                     .Should()
+                     .Be(1);
             flags2.GetHashCode()
                   .Should()
                   .Be(2);
             flags3.GetHashCode()
                   .Should()
                   .Be(8);
-
         }
     }
 }

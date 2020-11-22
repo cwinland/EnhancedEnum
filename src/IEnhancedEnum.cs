@@ -33,6 +33,13 @@ namespace EnhancedEnum
 
     {
         /// <summary>
+        /// Determines whether the specified flag has flag.
+        /// </summary>
+        /// <param name="flag">The flag.</param>
+        /// <returns><c>true</c> if the specified flag has flag; otherwise, <c>false</c>.</returns>
+        bool HasFlag(int flag);
+
+        /// <summary>
         /// Gets the description using the associated <see cref="DescriptionAttribute" />.
         /// </summary>
         /// <value>The description.</value>
@@ -49,13 +56,5 @@ namespace EnhancedEnum
         /// </summary>
         /// <value>The value.</value>
         TValue Value { get; }
-
-        /// <summary>
-        /// Determines whether the specified flag has flag.
-        /// </summary>
-        /// <param name="flag">The flag.</param>
-        /// <returns><c>true</c> if the specified flag has flag; otherwise, <c>false</c>.</returns>
-        bool HasFlag(int flag);
-
     }
 }

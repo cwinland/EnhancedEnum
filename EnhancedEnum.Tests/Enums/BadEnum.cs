@@ -22,21 +22,23 @@ namespace EnhancedEnum.Tests.Enums
     /// <seealso cref="EnhancedEnum{TValue,TDerived}" />
     public class BadEnum : EnhancedEnum<int, BadEnum>
     {
+        #region Fields
+
         /// <summary>
         /// The wrong.
         /// </summary>
         [Value("WrongValue Type")]
         public static readonly BadEnum Wrong = new BadEnum();
 
-        [Value(1)]
-        public static readonly BadEnum Value1 = new BadEnum();
+        [Value(1)]public static readonly BadEnum Value1 = new BadEnum();
 
-        [Value(1)]
-        public static readonly BadEnum Value1Duplicate = new BadEnum();
+        [Value(1)]public static readonly BadEnum Value1Duplicate = new BadEnum();
 
         /// <summary>
         /// The test field.
         /// </summary>
         public static readonly string TestField = "";
+
+        #endregion
     }
 }

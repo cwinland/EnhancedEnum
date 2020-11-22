@@ -11,12 +11,12 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-using EnhancedEnum.Tests.Enums;
-using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using EnhancedEnum.Tests.Enums;
+using FluentAssertions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace EnhancedEnum.Tests
 {
@@ -31,6 +31,7 @@ namespace EnhancedEnum.Tests
         /// </summary>
         [TestInitialize]
         public void Init() { }
+
         /// <summary>
         /// Defines the test method NonIntEnum_Tests.
         /// </summary>
@@ -97,10 +98,7 @@ namespace EnhancedEnum.Tests
                .Should()
                .BeFalse();
 
-            var vals = new List<NonIntEnum>()
-            {
-                NonIntEnum.December, NonIntEnum.January, NonIntEnum.November,
-            };
+            var vals = new List<NonIntEnum> { NonIntEnum.December, NonIntEnum.January, NonIntEnum.November, };
             vals.OrderBy(x => x.Value).Should().HaveCount(3);
             vals.OrderBy(x => x.Name).Should().HaveCount(3);
 
@@ -119,15 +117,14 @@ namespace EnhancedEnum.Tests
         public void Hash_ShouldBeValue()
         {
             NonIntEnum.December.GetHashCode()
-                     .Should()
-                     .Be(50779532);
+                      .Should()
+                      .Be(50779532);
             NonIntEnum.January.GetHashCode()
                       .Should()
                       .Be(-2085908915);
             NonIntEnum.November.GetHashCode()
                       .Should()
                       .Be(463584761);
-
         }
     }
 }

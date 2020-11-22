@@ -1,382 +1,399 @@
 <?xml version="1.0"?>
+
 <doc>
-    <assembly>
-        <name>EnhancedEnum</name>
-    </assembly>
-    <members>
-        <member name="T:EnhancedEnum.Attributes.DescriptionAttribute">
-            <summary>
-            Class DescriptionAttribute. This class cannot be inherited. Implements the <see cref="T:System.Attribute" />
-            </summary>
-            <seealso cref="T:System.Attribute" />
-        </member>
-        <member name="P:EnhancedEnum.Attributes.DescriptionAttribute.Description">
-            <summary>
-            Gets the description.
-            </summary>
-            <value>The description.</value>
-        </member>
-        <member name="M:EnhancedEnum.Attributes.DescriptionAttribute.#ctor(System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:EnhancedEnum.Attributes.DescriptionAttribute" /> class.
-            </summary>
-            <param name="description">The description.</param>
-        </member>
-        <member name="T:EnhancedEnum.Attributes.DisplayNameAttribute">
-            <summary>
-            Class DisplayNameAttribute. This class cannot be inherited. Implements the <see cref="T:System.Attribute" />
-            </summary>
-            <seealso cref="T:System.Attribute" />
-        </member>
-        <member name="P:EnhancedEnum.Attributes.DisplayNameAttribute.Name">
-            <summary>
-            Gets the name.
-            </summary>
-            <value>The name.</value>
-        </member>
-        <member name="M:EnhancedEnum.Attributes.DisplayNameAttribute.#ctor(System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:EnhancedEnum.Attributes.DisplayNameAttribute" /> class.
-            </summary>
-            <param name="name">The name.</param>
-        </member>
-        <member name="T:EnhancedEnum.Attributes.FlagAttribute">
-            <summary>
-            Class FlagAttribute. This class cannot be inherited.
-            Implements the <see cref="T:System.Attribute" />
-            </summary>
-            <seealso cref="T:System.Attribute" />
-        </member>
-        <member name="T:EnhancedEnum.Attributes.ValueAttribute">
-            <summary>
-            Class ValueAttribute. This class cannot be inherited. Implements the <see cref="T:System.Attribute" />
-            </summary>
-            <seealso cref="T:System.Attribute" />
-        </member>
-        <member name="P:EnhancedEnum.Attributes.ValueAttribute.Value">
-            <summary>
-            Gets the value.
-            </summary>
-            <value>The value.</value>
-        </member>
-        <member name="M:EnhancedEnum.Attributes.ValueAttribute.#ctor(System.Object)">
-            <summary>
-            Initializes a new instance of the <see cref="T:EnhancedEnum.Attributes.ValueAttribute" /> class.
-            </summary>
-            <param name="value">The value.</param>
-        </member>
-        <member name="T:EnhancedEnum.EnhancedEnum`2">
-            <summary>
-            Inherit to enable Enum behavior object with auto string and value conversion.
-            Implements the <see cref="T:EnhancedEnum.IEnhancedEnum`2" />
-            </summary>
-            <typeparam name="TValue">The type of the t value.</typeparam>
-            <typeparam name="TDerived">The type of the t derived.</typeparam>
-            <seealso cref="T:EnhancedEnum.IEnhancedEnum`2" />
-            <example>
-              <code>
-            public sealed class StatusTest : EnhancedEnum&lt;int, StatusTest&gt;
-            {
-            [Description("Indicates Running")] // Description Property.
-            [DisplayName("In Process")]        // Displays this text when converted to a string.
-            [Value(5)]                         // Underlying value.
-            public static readonly StatusTest Running = new StatusTest();
-            // Gets the default value of 1. This can be overridden with the Value Attribute.
-            public static readonly StatusTest Stopped = new StatusTest();
-            // Gets the default value of 2. This can be overridden with the Value Attribute.
-            public static readonly StatusTest Error = new StatusTest();
-            // Operators allow conversion to this class from other values.
-            public static implicit operator StatusTest(string value) =&gt; Convert(value);
-            public static implicit operator StatusTest(int value) =&gt; Convert(value);
-            }</code>
-            </example>
-        </member>
-        <member name="F:EnhancedEnum.EnhancedEnum`2.descriptionAttribute">
-            <summary>
-            The description attribute
-            </summary>
-        </member>
-        <member name="F:EnhancedEnum.EnhancedEnum`2.displayNameAttribute">
-            <summary>
-            The display name attribute
-            </summary>
-        </member>
-        <member name="F:EnhancedEnum.EnhancedEnum`2.valueAttribute">
-            <summary>
-            The value attribute
-            </summary>
-        </member>
-        <member name="M:EnhancedEnum.EnhancedEnum`2.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:EnhancedEnum.EnhancedEnum`2" /> class.
-            </summary>
-            <exception cref="T:System.ArgumentException">Provided value, '{}' must be of type 'TValue'. Do you need to overload TypeConverter in the derived class?</exception>
-            <exception cref="T:System.ArgumentException">Provided value, '{}' must be unique.</exception>
-        </member>
-        <member name="P:EnhancedEnum.EnhancedEnum`2.Count">
-            <summary>
-            Gets the count.
-            </summary>
-            <value>The count.</value>
-        </member>
-        <member name="P:EnhancedEnum.EnhancedEnum`2.IsFlag">
-            <summary>
-            Gets a value indicating whether this instance is flag.
-            </summary>
-            <value><c>true</c> if this instance is flag; otherwise, <c>false</c>.</value>
-        </member>
-        <member name="P:EnhancedEnum.EnhancedEnum`2.ThrowOnError">
-            <summary>
-            Gets or sets a value indicating whether to throw an Exception (instead of null value) when a conversion error occurs.
-            </summary>
-            <value><c>true</c> if [throw on error]; otherwise, <c>false</c>.</value>
-        </member>
-        <member name="P:EnhancedEnum.EnhancedEnum`2.Values">
-            <summary>
-            Enumerable list of all possible values.
-            </summary>
-            <value>The values.</value>
-        </member>
-        <member name="P:EnhancedEnum.EnhancedEnum`2.Description">
-            <summary>
-            Description of enumeration as described in <see cref="T:EnhancedEnum.Attributes.DescriptionAttribute" />
-            </summary>
-            <value>The description.</value>
-        </member>
-        <member name="P:EnhancedEnum.EnhancedEnum`2.Name">
-            <summary>
-            Name of enumeration as described in <see cref="T:EnhancedEnum.Attributes.DisplayNameAttribute" />
-            </summary>
-            <value>The name.</value>
-        </member>
-        <member name="P:EnhancedEnum.EnhancedEnum`2.Value">
-            <summary>
-            Value of enumeration as described in <see cref="T:EnhancedEnum.Attributes.ValueAttribute" />
-            </summary>
-            <value>The <see cref="F:EnhancedEnum.EnhancedEnum`2.valueAttribute" /> or default value.</value>
-            <exception cref="T:System.ArgumentException">Invalid Value. - TValue</exception>
-        </member>
-        <member name="M:EnhancedEnum.EnhancedEnum`2.Convert(System.String)">
-            <summary>
-            Converts the specified value.
-            </summary>
-            <param name="value">The value.</param>
-            <returns>TDerived.</returns>
-        </member>
-        <member name="M:EnhancedEnum.EnhancedEnum`2.Convert(`0)">
-            <summary>
-            Converts the specified value.
-            </summary>
-            <param name="value">The value.</param>
-            <returns>TDerived.</returns>
-        </member>
-        <member name="M:EnhancedEnum.EnhancedEnum`2.HasFlag(System.Int32,System.Int32)">
-            <summary>
-            Determines whether the specified flags has flag.
-            </summary>
-            <param name="flags">The <see cref="T:EnhancedEnum.EnhancedEnum`2" />.</param>
-            <param name="flag">The flag.</param>
-            <returns><c>true</c> if the specified flags has flag; otherwise, <c>false</c>.</returns>
-        </member>
-        <member name="M:EnhancedEnum.EnhancedEnum`2.op_Implicit(System.String)~EnhancedEnum.EnhancedEnum{`0,`1}">
-            <summary>
-            Performs an implicit conversion from <see cref="T:System.String" /> to <see cref="T:EnhancedEnum.EnhancedEnum`2" />.
-            </summary>
-            <param name="value">The value.</param>
-            <returns>The result of the conversion.</returns>
-        </member>
-        <member name="M:EnhancedEnum.EnhancedEnum`2.op_Implicit(`0)~EnhancedEnum.EnhancedEnum{`0,`1}">
-            <summary>
-            Performs an implicit conversion from <see cref="!:TValue" /> to <see cref="T:EnhancedEnum.EnhancedEnum`2" />.
-            </summary>
-            <param name="value2">The value2.</param>
-            <returns>The result of the conversion.</returns>
-        </member>
-        <member name="M:EnhancedEnum.EnhancedEnum`2.op_Implicit(EnhancedEnum.EnhancedEnum{`0,`1})~System.String">
-            <summary>
-            Performs an implicit conversion from <see cref="T:EnhancedEnum.EnhancedEnum`2" /> to <see cref="T:System.String" />.
-            </summary>
-            <param name="value">The value.</param>
-            <returns>The result of the conversion.</returns>
-        </member>
-        <member name="M:EnhancedEnum.EnhancedEnum`2.op_Implicit(EnhancedEnum.EnhancedEnum{`0,`1})~`0">
-            <summary>
-            Performs an implicit conversion from <see cref="T:EnhancedEnum.EnhancedEnum`2" /> to <see cref="!:TValue" />.
-            </summary>
-            <param name="value">The value2.</param>
-            <returns>The result of the conversion.</returns>
-        </member>
-        <member name="M:EnhancedEnum.EnhancedEnum`2.op_Inequality(EnhancedEnum.EnhancedEnum{`0,`1},EnhancedEnum.EnhancedEnum{`0,`1})">
-            <summary>
-            Implements the != operator.
-            </summary>
-            <param name="left">The left.</param>
-            <param name="right">The right.</param>
-            <returns>The result of the operator.</returns>
-        </member>
-        <member name="M:EnhancedEnum.EnhancedEnum`2.op_LessThan(EnhancedEnum.EnhancedEnum{`0,`1},EnhancedEnum.EnhancedEnum{`0,`1})">
-            <summary>
-            Implements the &lt; operator.
-            </summary>
-            <param name="left">The left.</param>
-            <param name="right">The right.</param>
-            <returns>The result of the operator.</returns>
-        </member>
-        <member name="M:EnhancedEnum.EnhancedEnum`2.op_LessThanOrEqual(EnhancedEnum.EnhancedEnum{`0,`1},EnhancedEnum.EnhancedEnum{`0,`1})">
-            <summary>
-            Implements the &lt;= operator.
-            </summary>
-            <param name="left">The left.</param>
-            <param name="right">The right.</param>
-            <returns>The result of the operator.</returns>
-        </member>
-        <member name="M:EnhancedEnum.EnhancedEnum`2.op_Equality(EnhancedEnum.EnhancedEnum{`0,`1},EnhancedEnum.EnhancedEnum{`0,`1})">
-            <summary>
-            Implements the == operator.
-            </summary>
-            <param name="left">The left.</param>
-            <param name="right">The right.</param>
-            <returns>The result of the operator.</returns>
-        </member>
-        <member name="M:EnhancedEnum.EnhancedEnum`2.op_GreaterThan(EnhancedEnum.EnhancedEnum{`0,`1},EnhancedEnum.EnhancedEnum{`0,`1})">
-            <summary>
-            Implements the &gt; operator.
-            </summary>
-            <param name="left">The left.</param>
-            <param name="right">The right.</param>
-            <returns>The result of the operator.</returns>
-        </member>
-        <member name="M:EnhancedEnum.EnhancedEnum`2.op_GreaterThanOrEqual(EnhancedEnum.EnhancedEnum{`0,`1},EnhancedEnum.EnhancedEnum{`0,`1})">
-            <summary>
-            Implements the &gt;= operator.
-            </summary>
-            <param name="left">The left.</param>
-            <param name="right">The right.</param>
-            <returns>The result of the operator.</returns>
-        </member>
-        <member name="M:EnhancedEnum.EnhancedEnum`2.TryConvert(System.String,`1@)">
-            <summary>
-            Tries the convert the string to <see cref="!:TDerived" />.
-            </summary>
-            <param name="value">The value.</param>
-            <param name="result">The result.</param>
-            <returns><c>true</c> if <see cref="!:TDerived" />, <c>false</c> otherwise.</returns>
-        </member>
-        <member name="M:EnhancedEnum.EnhancedEnum`2.TryConvert(`0,`1@)">
-            <summary>
-            Tries the convert <see cref="!:TValue" /> to <see cref="!:TDerived" />.
-            </summary>
-            <param name="value">The value.</param>
-            <param name="result">The result.</param>
-            <returns><c>true</c> if <see cref="!:TDerived" />, <c>false</c> otherwise.</returns>
-        </member>
-        <member name="M:EnhancedEnum.EnhancedEnum`2.System#Collections#Generic#IComparer{TDerived}#Compare(`1,`1)">
-            <inheritdoc />
-        </member>
-        <member name="M:EnhancedEnum.EnhancedEnum`2.System#IComparable{TDerived}#CompareTo(`1)">
-            <inheritdoc />
-        </member>
-        <member name="M:EnhancedEnum.EnhancedEnum`2.System#IComparable#CompareTo(System.Object)">
-            <inheritdoc />
-        </member>
-        <member name="M:EnhancedEnum.EnhancedEnum`2.Equals(System.Object)">
-            <summary>
-            Determines whether the specified <see cref="T:System.Object" /> is equal to this instance.
-            </summary>
-            <param name="obj">The object to compare with the current object.</param>
-            <returns><c>true</c> if the specified <see cref="T:System.Object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
-        </member>
-        <member name="M:EnhancedEnum.EnhancedEnum`2.System#IEquatable{TDerived}#Equals(`1)">
-            <summary>
-            Indicates whether the current object is equal to another object of the same type.
-            </summary>
-            <param name="other">An object to compare with this object.</param>
-            <returns>true if the current object is equal to the <paramref name="other">other</paramref> parameter; otherwise, false.</returns>
-        </member>
-        <member name="M:EnhancedEnum.EnhancedEnum`2.GetHashCode">
-            <summary>
-            Returns a hash code for this instance.
-            </summary>
-            <returns>A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.</returns>
-        </member>
-        <member name="M:EnhancedEnum.EnhancedEnum`2.HasFlag(System.Int32)">
-            <summary>
-            Determines whether the specified flag has flag.
-            </summary>
-            <param name="flag">The flag.</param>
-            <returns><c>true</c> if the specified flag has flag; otherwise, <c>false</c>.</returns>
-        </member>
-        <member name="M:EnhancedEnum.EnhancedEnum`2.ToString">
-            <summary>
-            Returns a <see cref="T:System.String" /> that represents this instance.
-            </summary>
-            <returns>A <see cref="T:System.String" /> that represents this instance.</returns>
-        </member>
-        <member name="M:EnhancedEnum.EnhancedEnum`2.GetValue(System.Int32)">
-            <summary>
-            Used Internally for Flag implementations to convert an integer to TDerived by the derived class.
-            </summary>
-            <param name="value">The value.</param>
-            <returns>int.</returns>
-            <exception cref="T:System.NotImplementedException"></exception>
-            <exception cref="T:System.NotImplementedException"></exception>
-        </member>
-        <member name="M:EnhancedEnum.EnhancedEnum`2.TypeConverter(System.Object)">
-            <summary>
-            Types the converter.
-            </summary>
-            <param name="value">The value.</param>
-            <returns>TValue.</returns>
-        </member>
-        <member name="M:EnhancedEnum.EnhancedEnum`2.EnsureSetup">
-            <summary>
-              Ensures the enum is setup.
-            </summary>
-            <exception cref="T:System.ArgumentException">Provided value must be of type 'TValue' - TValue</exception>
-        </member>
-        <member name="M:EnhancedEnum.EnhancedEnum`2.GetAttribute``1">
-            <summary>
-            Designed to get the Attribute fields by Attribute type while ensuring they are populated correctly before accessing.
-            </summary>
-            <typeparam name="T"></typeparam>
-            <returns><see cref="T:System.Attribute"/></returns>
-        </member>
-        <member name="T:EnhancedEnum.IEnhancedEnum`2">
-            <summary>
-            Interface IEnhancedEnum Implements the <see cref="T:System.IEquatable`1" /> Implements the <see cref="T:System.IComparable`1" />
-            Implements the <see cref="T:System.IComparable" /> Implements the <see cref="T:System.Collections.Generic.IComparer`1" />
-            </summary>
-            <typeparam name="TValue">The type of the t value.</typeparam>
-            <typeparam name="TDerived">The type of the t derived.</typeparam>
-            <seealso cref="T:System.IEquatable`1" />
-            <seealso cref="T:System.IComparable`1" />
-            <seealso cref="T:System.IComparable" />
-            <seealso cref="T:System.Collections.Generic.IComparer`1" />
-        </member>
-        <member name="P:EnhancedEnum.IEnhancedEnum`2.Description">
-            <summary>
-            Gets the description using the associated <see cref="T:EnhancedEnum.Attributes.DescriptionAttribute" />.
-            </summary>
-            <value>The description.</value>
-        </member>
-        <member name="P:EnhancedEnum.IEnhancedEnum`2.Name">
-            <summary>
-            Gets the name using the associated <see cref="T:EnhancedEnum.Attributes.DisplayNameAttribute" />.
-            </summary>
-            <value>The name.</value>
-        </member>
-        <member name="P:EnhancedEnum.IEnhancedEnum`2.Value">
-            <summary>
-            Gets the value using the associated <see cref="T:EnhancedEnum.Attributes.ValueAttribute" />.
-            </summary>
-            <value>The value.</value>
-        </member>
-        <member name="M:EnhancedEnum.IEnhancedEnum`2.HasFlag(System.Int32)">
-            <summary>
-            Determines whether the specified flag has flag.
-            </summary>
-            <param name="flag">The flag.</param>
-            <returns><c>true</c> if the specified flag has flag; otherwise, <c>false</c>.</returns>
-        </member>
-    </members>
+	<assembly>
+		<name>EnhancedEnum</name>
+	</assembly>
+	<members>
+		<member name="T:EnhancedEnum.Attributes.DescriptionAttribute">
+			<summary>
+				Class DescriptionAttribute. This class cannot be inherited. Implements the <see cref="T:System.Attribute" />
+			</summary>
+			<seealso cref="T:System.Attribute" />
+		</member>
+		<member name="P:EnhancedEnum.Attributes.DescriptionAttribute.Description">
+			<summary>
+				Gets the description.
+			</summary>
+			<value>The description.</value>
+		</member>
+		<member name="M:EnhancedEnum.Attributes.DescriptionAttribute.#ctor(System.String)">
+			<summary>
+				Initializes a new instance of the <see cref="T:EnhancedEnum.Attributes.DescriptionAttribute" /> class.
+			</summary>
+			<param name="description">The description.</param>
+		</member>
+		<member name="T:EnhancedEnum.Attributes.DisplayNameAttribute">
+			<summary>
+				Class DisplayNameAttribute. This class cannot be inherited. Implements the <see cref="T:System.Attribute" />
+			</summary>
+			<seealso cref="T:System.Attribute" />
+		</member>
+		<member name="P:EnhancedEnum.Attributes.DisplayNameAttribute.Name">
+			<summary>
+				Gets the name.
+			</summary>
+			<value>The name.</value>
+		</member>
+		<member name="M:EnhancedEnum.Attributes.DisplayNameAttribute.#ctor(System.String)">
+			<summary>
+				Initializes a new instance of the <see cref="T:EnhancedEnum.Attributes.DisplayNameAttribute" /> class.
+			</summary>
+			<param name="name">The name.</param>
+		</member>
+		<member name="T:EnhancedEnum.Attributes.FlagAttribute">
+			<summary>
+				Class FlagAttribute. This class cannot be inherited.
+				Implements the <see cref="T:System.Attribute" />
+			</summary>
+			<seealso cref="T:System.Attribute" />
+		</member>
+		<member name="T:EnhancedEnum.Attributes.ValueAttribute">
+			<summary>
+				Class ValueAttribute. This class cannot be inherited. Implements the <see cref="T:System.Attribute" />
+			</summary>
+			<seealso cref="T:System.Attribute" />
+		</member>
+		<member name="P:EnhancedEnum.Attributes.ValueAttribute.Value">
+			<summary>
+				Gets the value.
+			</summary>
+			<value>The value.</value>
+		</member>
+		<member name="M:EnhancedEnum.Attributes.ValueAttribute.#ctor(System.Object)">
+			<summary>
+				Initializes a new instance of the <see cref="T:EnhancedEnum.Attributes.ValueAttribute" /> class.
+			</summary>
+			<param name="value">The value.</param>
+		</member>
+		<member name="T:EnhancedEnum.EnhancedEnum`2">
+			<summary>
+				Inherit to enable Enum behavior object with auto string and value conversion.
+				Implements the <see cref="T:EnhancedEnum.IEnhancedEnum`2" />
+			</summary>
+			<typeparam name="TValue">The type of the t value.</typeparam>
+			<typeparam name="TDerived">The type of the t derived.</typeparam>
+			<seealso cref="T:EnhancedEnum.IEnhancedEnum`2" />
+			<example>
+				<code>
+					public sealed class StatusTest : EnhancedEnum&lt;int, StatusTest&gt;
+					{
+					[Description("Indicates Running")] // Description Property.
+					[DisplayName("In Process")]        // Displays this text when converted to a string.
+					[Value(5)]                         // Underlying value.
+					public static readonly StatusTest Running = new StatusTest();
+					// Gets the default value of 1. This can be overridden with the Value Attribute.
+					public static readonly StatusTest Stopped = new StatusTest();
+					// Gets the default value of 2. This can be overridden with the Value Attribute.
+					public static readonly StatusTest Error = new StatusTest();
+					// Operators allow conversion to this class from other values.
+					public static implicit operator StatusTest(string value) =&gt; Convert(value);
+					public static implicit operator StatusTest(int value) =&gt; Convert(value);
+					}
+				</code>
+			</example>
+		</member>
+		<member name="F:EnhancedEnum.EnhancedEnum`2.descriptionAttribute">
+			<summary>
+				The description attribute
+			</summary>
+		</member>
+		<member name="F:EnhancedEnum.EnhancedEnum`2.displayNameAttribute">
+			<summary>
+				The display name attribute
+			</summary>
+		</member>
+		<member name="F:EnhancedEnum.EnhancedEnum`2.valueAttribute">
+			<summary>
+				The value attribute
+			</summary>
+		</member>
+		<member name="M:EnhancedEnum.EnhancedEnum`2.#ctor">
+			<summary>
+				Initializes a new instance of the <see cref="T:EnhancedEnum.EnhancedEnum`2" /> class.
+			</summary>
+			<exception cref="T:System.ArgumentException">Provided value, '{}' must be of type 'TValue'. Do you need to overload TypeConverter in the derived class?</exception>
+			<exception cref="T:System.ArgumentException">Provided value, '{}' must be unique.</exception>
+		</member>
+		<member name="P:EnhancedEnum.EnhancedEnum`2.Count">
+			<summary>
+				Gets the count.
+			</summary>
+			<value>The count.</value>
+		</member>
+		<member name="P:EnhancedEnum.EnhancedEnum`2.IsFlag">
+			<summary>
+				Gets a value indicating whether this instance is flag.
+			</summary>
+			<value><c>true</c> if this instance is flag; otherwise, <c>false</c>.</value>
+		</member>
+		<member name="P:EnhancedEnum.EnhancedEnum`2.ThrowOnError">
+			<summary>
+				Gets or sets a value indicating whether to throw an Exception (instead of null value) when a conversion error occurs.
+			</summary>
+			<value><c>true</c> if [throw on error]; otherwise, <c>false</c>.</value>
+		</member>
+		<member name="P:EnhancedEnum.EnhancedEnum`2.Values">
+			<summary>
+				Enumerable list of all possible values.
+			</summary>
+			<value>The values.</value>
+		</member>
+		<member name="P:EnhancedEnum.EnhancedEnum`2.Description">
+			<summary>
+				Description of enumeration as described in <see cref="T:EnhancedEnum.Attributes.DescriptionAttribute" />
+			</summary>
+			<value>The description.</value>
+		</member>
+		<member name="P:EnhancedEnum.EnhancedEnum`2.Name">
+			<summary>
+				Name of enumeration as described in <see cref="T:EnhancedEnum.Attributes.DisplayNameAttribute" />
+			</summary>
+			<value>The name.</value>
+		</member>
+		<member name="P:EnhancedEnum.EnhancedEnum`2.Value">
+			<summary>
+				Value of enumeration as described in <see cref="T:EnhancedEnum.Attributes.ValueAttribute" />
+			</summary>
+			<value>The <see cref="F:EnhancedEnum.EnhancedEnum`2.valueAttribute" /> or default value.</value>
+			<exception cref="T:System.ArgumentException">Invalid Value. - TValue</exception>
+		</member>
+		<member name="M:EnhancedEnum.EnhancedEnum`2.Convert(System.String)">
+			<summary>
+				Converts the specified value.
+			</summary>
+			<param name="value">The value.</param>
+			<returns>TDerived.</returns>
+		</member>
+		<member name="M:EnhancedEnum.EnhancedEnum`2.Convert(`0)">
+			<summary>
+				Converts the specified value.
+			</summary>
+			<param name="value">The value.</param>
+			<returns>TDerived.</returns>
+		</member>
+		<member name="M:EnhancedEnum.EnhancedEnum`2.HasFlag(System.Int32,System.Int32)">
+			<summary>
+				Determines whether the specified flags has flag.
+			</summary>
+			<param name="flags">The <see cref="T:EnhancedEnum.EnhancedEnum`2" />.</param>
+			<param name="flag">The flag.</param>
+			<returns><c>true</c> if the specified flags has flag; otherwise, <c>false</c>.</returns>
+		</member>
+		<member name="M:EnhancedEnum.EnhancedEnum`2.op_Implicit(System.String)~EnhancedEnum.EnhancedEnum{`0,`1}">
+			<summary>
+				Performs an implicit conversion from <see cref="T:System.String" /> to <see cref="T:EnhancedEnum.EnhancedEnum`2" />
+				.
+			</summary>
+			<param name="value">The value.</param>
+			<returns>The result of the conversion.</returns>
+		</member>
+		<member name="M:EnhancedEnum.EnhancedEnum`2.op_Implicit(`0)~EnhancedEnum.EnhancedEnum{`0,`1}">
+			<summary>
+				Performs an implicit conversion from <see cref="!:TValue" /> to <see cref="T:EnhancedEnum.EnhancedEnum`2" />.
+			</summary>
+			<param name="value2">The value2.</param>
+			<returns>The result of the conversion.</returns>
+		</member>
+		<member name="M:EnhancedEnum.EnhancedEnum`2.op_Implicit(EnhancedEnum.EnhancedEnum{`0,`1})~System.String">
+			<summary>
+				Performs an implicit conversion from <see cref="T:EnhancedEnum.EnhancedEnum`2" /> to <see cref="T:System.String" />
+				.
+			</summary>
+			<param name="value">The value.</param>
+			<returns>The result of the conversion.</returns>
+		</member>
+		<member name="M:EnhancedEnum.EnhancedEnum`2.op_Implicit(EnhancedEnum.EnhancedEnum{`0,`1})~`0">
+			<summary>
+				Performs an implicit conversion from <see cref="T:EnhancedEnum.EnhancedEnum`2" /> to <see cref="!:TValue" />.
+			</summary>
+			<param name="value">The value2.</param>
+			<returns>The result of the conversion.</returns>
+		</member>
+		<member
+			name="M:EnhancedEnum.EnhancedEnum`2.op_Inequality(EnhancedEnum.EnhancedEnum{`0,`1},EnhancedEnum.EnhancedEnum{`0,`1})">
+			<summary>
+				Implements the != operator.
+			</summary>
+			<param name="left">The left.</param>
+			<param name="right">The right.</param>
+			<returns>The result of the operator.</returns>
+		</member>
+		<member
+			name="M:EnhancedEnum.EnhancedEnum`2.op_LessThan(EnhancedEnum.EnhancedEnum{`0,`1},EnhancedEnum.EnhancedEnum{`0,`1})">
+			<summary>
+				Implements the &lt; operator.
+			</summary>
+			<param name="left">The left.</param>
+			<param name="right">The right.</param>
+			<returns>The result of the operator.</returns>
+		</member>
+		<member
+			name="M:EnhancedEnum.EnhancedEnum`2.op_LessThanOrEqual(EnhancedEnum.EnhancedEnum{`0,`1},EnhancedEnum.EnhancedEnum{`0,`1})">
+			<summary>
+				Implements the &lt;= operator.
+			</summary>
+			<param name="left">The left.</param>
+			<param name="right">The right.</param>
+			<returns>The result of the operator.</returns>
+		</member>
+		<member
+			name="M:EnhancedEnum.EnhancedEnum`2.op_Equality(EnhancedEnum.EnhancedEnum{`0,`1},EnhancedEnum.EnhancedEnum{`0,`1})">
+			<summary>
+				Implements the == operator.
+			</summary>
+			<param name="left">The left.</param>
+			<param name="right">The right.</param>
+			<returns>The result of the operator.</returns>
+		</member>
+		<member
+			name="M:EnhancedEnum.EnhancedEnum`2.op_GreaterThan(EnhancedEnum.EnhancedEnum{`0,`1},EnhancedEnum.EnhancedEnum{`0,`1})">
+			<summary>
+				Implements the &gt; operator.
+			</summary>
+			<param name="left">The left.</param>
+			<param name="right">The right.</param>
+			<returns>The result of the operator.</returns>
+		</member>
+		<member
+			name="M:EnhancedEnum.EnhancedEnum`2.op_GreaterThanOrEqual(EnhancedEnum.EnhancedEnum{`0,`1},EnhancedEnum.EnhancedEnum{`0,`1})">
+			<summary>
+				Implements the &gt;= operator.
+			</summary>
+			<param name="left">The left.</param>
+			<param name="right">The right.</param>
+			<returns>The result of the operator.</returns>
+		</member>
+		<member name="M:EnhancedEnum.EnhancedEnum`2.TryConvert(System.String,`1@)">
+			<summary>
+				Tries the convert the string to <see cref="!:TDerived" />.
+			</summary>
+			<param name="value">The value.</param>
+			<param name="result">The result.</param>
+			<returns><c>true</c> if <see cref="!:TDerived" />, <c>false</c> otherwise.</returns>
+		</member>
+		<member name="M:EnhancedEnum.EnhancedEnum`2.TryConvert(`0,`1@)">
+			<summary>
+				Tries the convert <see cref="!:TValue" /> to <see cref="!:TDerived" />.
+			</summary>
+			<param name="value">The value.</param>
+			<param name="result">The result.</param>
+			<returns><c>true</c> if <see cref="!:TDerived" />, <c>false</c> otherwise.</returns>
+		</member>
+		<member name="M:EnhancedEnum.EnhancedEnum`2.System#Collections#Generic#IComparer{TDerived}#Compare(`1,`1)">
+			<inheritdoc />
+		</member>
+		<member name="M:EnhancedEnum.EnhancedEnum`2.System#IComparable{TDerived}#CompareTo(`1)">
+			<inheritdoc />
+		</member>
+		<member name="M:EnhancedEnum.EnhancedEnum`2.System#IComparable#CompareTo(System.Object)">
+			<inheritdoc />
+		</member>
+		<member name="M:EnhancedEnum.EnhancedEnum`2.Equals(System.Object)">
+			<summary>
+				Determines whether the specified <see cref="T:System.Object" /> is equal to this instance.
+			</summary>
+			<param name="obj">The object to compare with the current object.</param>
+			<returns>
+				<c>true</c> if the specified <see cref="T:System.Object" /> is equal to this instance; otherwise,
+				<c>false</c>.
+			</returns>
+		</member>
+		<member name="M:EnhancedEnum.EnhancedEnum`2.System#IEquatable{TDerived}#Equals(`1)">
+			<summary>
+				Indicates whether the current object is equal to another object of the same type.
+			</summary>
+			<param name="other">An object to compare with this object.</param>
+			<returns>true if the current object is equal to the <paramref name="other">other</paramref> parameter; otherwise, false.</returns>
+		</member>
+		<member name="M:EnhancedEnum.EnhancedEnum`2.GetHashCode">
+			<summary>
+				Returns a hash code for this instance.
+			</summary>
+			<returns>A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.</returns>
+		</member>
+		<member name="M:EnhancedEnum.EnhancedEnum`2.HasFlag(System.Int32)">
+			<summary>
+				Determines whether the specified flag has flag.
+			</summary>
+			<param name="flag">The flag.</param>
+			<returns><c>true</c> if the specified flag has flag; otherwise, <c>false</c>.</returns>
+		</member>
+		<member name="M:EnhancedEnum.EnhancedEnum`2.ToString">
+			<summary>
+				Returns a <see cref="T:System.String" /> that represents this instance.
+			</summary>
+			<returns>A <see cref="T:System.String" /> that represents this instance.</returns>
+		</member>
+		<member name="M:EnhancedEnum.EnhancedEnum`2.GetValue(System.Int32)">
+			<summary>
+				Used Internally for Flag implementations to convert an integer to TDerived by the derived class.
+			</summary>
+			<param name="value">The value.</param>
+			<returns>int.</returns>
+			<exception cref="T:System.NotImplementedException"></exception>
+			<exception cref="T:System.NotImplementedException"></exception>
+		</member>
+		<member name="M:EnhancedEnum.EnhancedEnum`2.TypeConverter(System.Object)">
+			<summary>
+				Types the converter.
+			</summary>
+			<param name="value">The value.</param>
+			<returns>TValue.</returns>
+		</member>
+		<member name="M:EnhancedEnum.EnhancedEnum`2.EnsureSetup">
+			<summary>
+				Ensures the enum is setup.
+			</summary>
+			<exception cref="T:System.ArgumentException">Provided value must be of type 'TValue' - TValue</exception>
+		</member>
+		<member name="M:EnhancedEnum.EnhancedEnum`2.GetAttribute``1">
+			<summary>
+				Designed to get the Attribute fields by Attribute type while ensuring they are populated correctly before accessing.
+			</summary>
+			<typeparam name="T"></typeparam>
+			<returns>
+				<see cref="T:System.Attribute" />
+			</returns>
+		</member>
+		<member name="T:EnhancedEnum.IEnhancedEnum`2">
+			<summary>
+				Interface IEnhancedEnum Implements the <see cref="T:System.IEquatable`1" /> Implements the
+				<see cref="T:System.IComparable`1" />
+				Implements the <see cref="T:System.IComparable" /> Implements the
+				<see cref="T:System.Collections.Generic.IComparer`1" />
+			</summary>
+			<typeparam name="TValue">The type of the t value.</typeparam>
+			<typeparam name="TDerived">The type of the t derived.</typeparam>
+			<seealso cref="T:System.IEquatable`1" />
+			<seealso cref="T:System.IComparable`1" />
+			<seealso cref="T:System.IComparable" />
+			<seealso cref="T:System.Collections.Generic.IComparer`1" />
+		</member>
+		<member name="P:EnhancedEnum.IEnhancedEnum`2.Description">
+			<summary>
+				Gets the description using the associated <see cref="T:EnhancedEnum.Attributes.DescriptionAttribute" />.
+			</summary>
+			<value>The description.</value>
+		</member>
+		<member name="P:EnhancedEnum.IEnhancedEnum`2.Name">
+			<summary>
+				Gets the name using the associated <see cref="T:EnhancedEnum.Attributes.DisplayNameAttribute" />.
+			</summary>
+			<value>The name.</value>
+		</member>
+		<member name="P:EnhancedEnum.IEnhancedEnum`2.Value">
+			<summary>
+				Gets the value using the associated <see cref="T:EnhancedEnum.Attributes.ValueAttribute" />.
+			</summary>
+			<value>The value.</value>
+		</member>
+		<member name="M:EnhancedEnum.IEnhancedEnum`2.HasFlag(System.Int32)">
+			<summary>
+				Determines whether the specified flag has flag.
+			</summary>
+			<param name="flag">The flag.</param>
+			<returns><c>true</c> if the specified flag has flag; otherwise, <c>false</c>.</returns>
+		</member>
+	</members>
 </doc>

@@ -20,7 +20,5 @@ namespace EnhancedEnum.Attributes
     /// Implements the <see cref="System.Attribute" />
     /// </summary>
     /// <seealso cref="System.Attribute" />
-    public sealed class FlagAttribute : Attribute
-    {
-    }
+    public sealed class FlagAttribute : Attribute { }
 }
