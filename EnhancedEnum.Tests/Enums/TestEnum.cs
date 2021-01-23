@@ -1,6 +1,4 @@
-﻿using EnhancedEnum;
-
-namespace My.TaskManagement.Enums
+﻿namespace EnhancedEnum.Tests.Enums
 {
     /// <summary>
     ///   Phyr Event Type.

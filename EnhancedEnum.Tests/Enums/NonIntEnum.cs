@@ -63,6 +63,6 @@ namespace EnhancedEnum.Tests.Enums
         public static implicit operator NonIntEnum(DateTime value) => Convert(value);
 
         /// <inheritdoc />
-        protected override DateTime TypeConverter(object value) => DateTime.Parse(value.ToString());
+        protected override DateTime TypeConverter(object value) => DateTime.Parse(value?.ToString());
     }
 }

@@ -54,7 +54,8 @@ namespace EnhancedEnum
 
         // ReSharper disable once StaticMemberInGenericType
         private static bool isSetup;
-        private static SortedList<int, TDerived> values;
+        private static bool isSetting;
+        private static SortedList<int, TDerived> values = new SortedList<int, TDerived>();
         private readonly List<TValue> validationList = new List<TValue>();
 
         // ReSharper disable once MemberCanBePrivate.Global
@@ -62,23 +63,23 @@ namespace EnhancedEnum
         /// <summary>
         /// The description attribute
         /// </summary>
-        internal DescriptionAttribute descriptionAttribute;
+        internal DescriptionAttribute descriptionAttribute = new DescriptionAttribute("");
 
         // ReSharper disable once MemberCanBePrivate.Global
         // ReSharper disable once NotAccessedField.Global
         /// <summary>
         /// The display name attribute
         /// </summary>
-        internal DisplayNameAttribute displayNameAttribute;
+        internal DisplayNameAttribute displayNameAttribute = new DisplayNameAttribute("");
 
-        private string name;
+        private string name = "";
 
         // ReSharper disable once MemberCanBePrivate.Global
         // ReSharper disable once NotAccessedField.Global
         /// <summary>
         /// The value attribute
         /// </summary>
-        internal ValueAttribute valueAttribute;
+        internal ValueAttribute valueAttribute = new ValueAttribute(null);
 
         #endregion
 
@@ -135,13 +136,21 @@ namespace EnhancedEnum
         /// Name of enumeration as described in <see cref="DisplayNameAttribute" />
         /// </summary>
         /// <value>The name.</value>
-        public string Name => IsFlag
-            ? string.Join(",",
-                          values.Where(x => (int)(x.Value.Value as object) > 0 &&
-                                            HasFlag((int)(x.Value.Value as object)))
-                                .Select(x => x.Value.GetAttribute<DisplayNameAttribute>()?.Name ?? x.Value.name)
-                                .ToList())
-            : GetAttribute<DisplayNameAttribute>()?.Name ?? name;
+        public string Name
+        {
+            get
+            {
+                EnsureSetup();
+
+                return IsFlag
+                    ? string.Join(",",
+                                  values.Where(x => (int)(x.Value.Value as object) > 0 &&
+                                                    HasFlag((int)(x.Value.Value as object)))
+                                        .Select(x => x.Value.GetAttribute<DisplayNameAttribute>()?.Name ?? x.Value.name)
+                                        .ToList())
+                    : GetAttribute<DisplayNameAttribute>()?.Name ?? name;
+            }
+        }
 
         /// <summary>
         /// Value of enumeration as described in <see cref="ValueAttribute" />
@@ -152,6 +161,7 @@ namespace EnhancedEnum
         {
             get
             {
+                EnsureSetup();
                 var attributeValue = GetAttribute<ValueAttribute>();
 
                 if (attributeValue is null)
@@ -159,13 +169,7 @@ namespace EnhancedEnum
                     throw new ArgumentException("Invalid Value.", nameof(TValue));
                 }
 
-                var convertedType = TypeConverter(attributeValue.Value);
-
-                return convertedType.Equals(default)
-                    ? (TValue)attributeValue
-                          .Value ??
-                      default
-                    : convertedType;
+                return TypeConverter(attributeValue.Value ?? default(TValue));
             }
         }
 
@@ -337,6 +341,7 @@ namespace EnhancedEnum
         /// <returns><c>true</c> if <see cref="TDerived" />, <c>false</c> otherwise.</returns>
         public static bool TryConvert(string value, out TDerived result)
         {
+            EnsureSetup();
             result = Values.FirstOrDefault(x => x.Name == value);
 
             return result != null;
@@ -350,6 +355,7 @@ namespace EnhancedEnum
         /// <returns><c>true</c> if <see cref="TDerived" />, <c>false</c> otherwise.</returns>
         public static bool TryConvert(TValue value, out TDerived result)
         {
+            EnsureSetup();
             result = Values.FirstOrDefault(x => x.Value.Equals(value));
 
             return result != null;
@@ -362,6 +368,8 @@ namespace EnhancedEnum
         /// <returns><c>true</c> if the specified <see cref="object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
         public override bool Equals(object obj)
         {
+            EnsureSetup();
+
             if (obj == null)
             {
                 return false;
@@ -403,22 +411,33 @@ namespace EnhancedEnum
         /// <returns>TValue.</returns>
         protected virtual TValue TypeConverter(object value) => (TValue)value;
 
+        private static bool IsCheckType(FieldInfo t)
+        {
+            var result = t.FieldType == typeof(TDerived);
+            var obj = result ? (TDerived)t.GetValue(null) : null;
+
+            return result && obj != null;
+        }
+
+        private static List<FieldInfo> EnumFields => typeof(TDerived)
+                                                     .GetRuntimeFields()
+                                                     .Where(IsCheckType)
+                                                     .ToList();
+
         /// <summary>
         ///   Ensures the enum is setup.
         /// </summary>
         /// <exception cref="ArgumentException">Provided value must be of type 'TValue' - TValue</exception>
         private static void EnsureSetup()
         {
-            if (isSetup)
+            if (isSetup || isSetting)
             {
                 return;
             }
 
+            isSetting = true;
             var valCount = 0; // Count fields
-            typeof(TDerived)
-                .GetFields(BindingFlags.Static | BindingFlags.GetField | BindingFlags.Public)
-                .Where(t => t.FieldType == typeof(TDerived) && (TDerived)t.GetValue(null) != null)
-                .ToList()
+            EnumFields
                 .ForEach(field =>
                          {
                              var instance = (TDerived)field.GetValue(null);
@@ -446,6 +465,7 @@ namespace EnhancedEnum
                              }
                          });
 
+            isSetting = false;
             isSetup = true;
         }
 

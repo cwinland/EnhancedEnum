@@ -1,6 +1,6 @@
-﻿using FluentAssertions;
+﻿using EnhancedEnum.Tests.Enums;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using My.TaskManagement.Enums;
 
 namespace EnhancedEnum.Tests
 {

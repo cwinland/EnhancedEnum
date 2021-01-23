@@ -15,6 +15,10 @@ using System;
 using System.Collections.Generic;
 using EnhancedEnum.Attributes;
 
+// ReSharper disable UnusedMemberInSuper.Global
+
+// ReSharper disable UnusedMember.Global
+
 namespace EnhancedEnum
 {
     /// <summary>
