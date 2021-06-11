@@ -3,11 +3,11 @@
 	<PropertyGroup>
 		<TargetFramework>netstandard2.0</TargetFramework>
 		<LangVersion>8.0</LangVersion>
-		<SignAssembly>true</SignAssembly>
+		<SignAssembly>false</SignAssembly>
 		<AssemblyOriginatorKeyFile>EnhancedEnum.snk</AssemblyOriginatorKeyFile>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-		<PackageId>EnhancedEnum-StrongNamed</PackageId>
+		<PackageId>EnhancedEnum</PackageId>
 		<Authors>Christopher Winland</Authors>
 		<Company>Microsoft Corporation</Company>
 		<Product>EnhancedEnum-StrongNamed</Product>
